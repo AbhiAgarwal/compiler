@@ -1,0 +1,181 @@
+<!-- CRS Rules for HACS module "edu.nyu.cs.cc.JST".
+@version $Id: CookCRS.crs,v 1.43 2014/01/06 03:11:34 krisrose Exp $
+-->
+JST[(
+
+<!-- Our syntax. -->
+$CheckGrammar["edu.nyu.cs.cc.JSTParser"];
+
+<!-- Syntax and sorts of text (for printing). -->
+$CheckGrammar["net.sf.crsx.text.Text"];
+$Use["net/sf/crsx/text/Text.crs"];
+
+<!-- Allow inference of options. -->
+$Lax;
+
+<!-- User's variable names are safe. -->
+$Set["trust-generated-variable-names"];
+
+<!-- Some utility functions. -->
+$Use["net/sf/crsx/hacs/Prelude.crs"];
+
+∀ a . LineNumber[a] :: $String ;
+LineNumber[{#L}#] → UnSTRING[$[{#L}Get[$String], "$LineNumber", STRING["0"]]] ;
+
+$StringEntrySort ::=( STRING[$String]; );
+UnSTRING[$StringEntrySort] :: $String ;
+UnSTRING[STRING[#]] → # ;
+
+$Meta[(
+<!-- "Blast" inherited attributes onto all function symbols in subterm. -->
+-[Data[###]]: {###Inherited}_SprayInherited[###] → $[{###Inherited}Inherit, ###] ;
+
+<!-- Create variant of construction. -->
+_Alternate[###Extra, {###Env}$[C, ###C, ###Args]] → {###Env}$[C, $[:,###C,###Extra], ###Args] ;
+
+<!-- Add free variables in a term as extra arguments to a construction. -->
+{###Inherited}_FreeVariableArguments[###term, $[C, ###C, ###Args]] → {###Inherited}_FreeVariableArguments1[###Args, ###C, $[FreeVariables,###term], rest.rest]; 
+{###Inherited}_FreeVariableArguments1[(), ###C, ###FreeVars, rest.###[rest]] → {###Inherited}_FreeVariableArguments2[$[C, ###C, ###[###FreeVars]]]; 
+{###Inherited}_FreeVariableArguments1[(###Arg1; ###Args), ###C, ###FreeVars, rest.###[rest]] → {###Inherited}_FreeVariableArguments1[###Args, ###C, ###FreeVars, rest.###[(###Arg1; rest)]]; 
+{###Inherited}_FreeVariableArguments2[###] → {###Inherited}### ;
+
+<!-- Initialize containers for all inherited map attributes. --> 
+_InitInheritedMaps[###] → ### ;
+
+<!-- Sort-specific macros. -->
+
+
+
+$PrecWrap-Type[#Prec, #InnerPrec, #] → # ;
+
+
+
+)];
+
+
+<!-- DECLARATIONS -->
+
+
+<!-- All declarations for Identifier token sort. -->
+$Drop-Identifier[Identifier] :: Text ;
+$Print-Identifier[Identifier] :: Text ;
+$PrintP-Identifier[Identifier, $Numeric] :: Text ;
+
+
+
+<!-- All declarations for Decimal token sort. -->
+$Drop-Decimal[Decimal] :: Text ;
+$Print-Decimal[Decimal] :: Text ;
+$PrintP-Decimal[Decimal, $Numeric] :: Text ;
+
+
+
+<!-- All declarations for String token sort. -->
+$Drop-String[String] :: Text ;
+$Print-String[String] :: Text ;
+$PrintP-String[String, $Numeric] :: Text ;
+
+
+
+<!-- All declarations for Type sort. -->
+$Drop-Type[Type] :: Text ;
+
+$Print-Type[Type] :: Text ;
+$PrintP-Type[Type, $Numeric] :: Text ; <!--per data form-->
+
+
+
+
+
+<!-- Shared derived repeating declarations. -->
+
+
+<!-- Inherited attribute propagation declarations. -->
+
+
+<!-- Synthesized attribute propagation declarations. -->
+
+
+
+<!-- RULES -->
+
+
+<!-- All declarations for Identifier token sort. -->
+$Drop-Identifier[Identifier] :: Text ;
+$Drop-Identifier[#] → $TextCons[$TextChars[#], $TextNil] ;
+
+$Print-Identifier[Identifier] :: Text ;
+-[Data[#]]: $Print-Identifier[#] → $PrintP-Identifier[#, 0] ;
+
+$PrintP-Identifier[Identifier, $Numeric] :: Text ;
+$PrintP-Identifier[#, #Prec] → $TextCons[$TextChars[#], $TextNil] ;
+
+
+
+
+<!-- All declarations for Decimal token sort. -->
+$Drop-Decimal[Decimal] :: Text ;
+$Drop-Decimal[#] → $TextCons[$TextChars[#], $TextNil] ;
+
+$Print-Decimal[Decimal] :: Text ;
+-[Data[#]]: $Print-Decimal[#] → $PrintP-Decimal[#, 0] ;
+
+$PrintP-Decimal[Decimal, $Numeric] :: Text ;
+$PrintP-Decimal[#, #Prec] → $TextCons[$TextChars[#], $TextNil] ;
+
+
+
+
+<!-- All declarations for String token sort. -->
+$Drop-String[String] :: Text ;
+$Drop-String[#] → $TextCons[$TextChars[#], $TextNil] ;
+
+$Print-String[String] :: Text ;
+-[Data[#]]: $Print-String[#] → $PrintP-String[#, 0] ;
+
+$PrintP-String[String, $Numeric] :: Text ;
+$PrintP-String[#, #Prec] → $TextCons[$TextChars[#], $TextNil] ;
+
+
+
+
+<!-- All rules for Type sort. -->
+$Drop-Type[#] → $TextCons[$TextChars["OK"], $TextNil] ;
+-[Data[#]]: $Print-Type[#] → $PrintP-Type[#, 0] ;
+$PrintP-Type[v, #Prec] → $TextCons[$TextEmbed[v], $TextNil] ;
+
+<!--Precedence wrappers.-->
+
+<!--Defined synthetic.-->
+
+<!--Contained Rules.-->
+$PrintP-Type[%jstType⟪ Identifier ⟫, #Prec] → %n⟪ Identifier ⟫;
+
+
+$PrintP-Type[%jstType⟪ boolean ⟫, #Prec] → %n⟪ boolean ⟫;
+
+
+$PrintP-Type[%jstType⟪ int ⟫, #Prec] → %n⟪ int ⟫;
+
+
+$PrintP-Type[%jstType⟪ string ⟫, #Prec] → %n⟪ string ⟫;
+
+
+$PrintP-Type[%jstType⟪ void ⟫, #Prec] → %n⟪ void ⟫;
+
+
+
+
+
+
+<!-- Shared derived repeating rules. -->
+
+
+<!-- Inherited attribute propagation rules. -->
+
+
+<!-- Synthesized attribute propagation rules. -->
+
+
+)]
+

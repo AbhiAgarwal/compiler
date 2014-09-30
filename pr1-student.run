@@ -1,0 +1,1 @@
+exec env JAVA='java' JAVAC='javac' CRSXJAR='/home/abhi/Desktop/pr1-student/hacs/crsx.jar' HACSBUILD='/home/abhi/Desktop/pr1-student/build' HACSPARSERCLASS='edu.nyu.cs.cc.JSTParser' HACSRULES='/home/abhi/Desktop/pr1-student/build/edu/nyu/cs/cc/JSTRules.crs' HACSPREFIX='jst' /home/abhi/Desktop/pr1-student/hacs/run-hacs.sh "$@"

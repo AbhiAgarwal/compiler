@@ -1,0 +1,87 @@
+/** PG Grammar for HACS module edu.nyu.cs.cc.JST.
+ * @version $Id: CookPG.crs,v 1.48 2014/01/26 21:14:39 krisrose Exp $
+ */
+
+class edu.nyu.cs.cc.JSTParser : <Identifier>,<Decimal>,<String>,<Type>
+prefix jst
+declarations
+%{
+static String unmeta(String s, int i) {String inner = s.substring(1, s.length()-1).trim(); return (inner.length() > i ? inner.substring(i) : inner).trim();}
+%}
+
+/* GRAMMAR. */
+
+/* Productions for Identifier token. */
+<Identifier> ::=  meta1_T_M_IDENTIFIER$$:%{unmeta(#,0)%} | meta2_T_M_IDENTIFIER$$:%{unmeta(#,10)%}
+| T_M_IDENTIFIER$ .
+
+%{
+TOKEN : { < T_meta1_T_M_IDENTIFIER : ("⟨" (" ")* "Identifier" (" ")* "⟩") > }
+MORE : { < "⟨" (" ")* "Identifier" (" ")* ~["⟩"] > { nested_counter = 0; } : IN_META_T_M_IDENTIFIER}
+<IN_META_T_M_IDENTIFIER,IN_NESTED_META_T_M_IDENTIFIER> MORE : { "⟨" { nested_counter++; } : IN_NESTED_META_T_M_IDENTIFIER }
+<IN_NESTED_META_T_M_IDENTIFIER> MORE : { "⟩" { if (--nested_counter <= 0) SwitchTo(IN_META_T_M_IDENTIFIER); } }
+<IN_META_T_M_IDENTIFIER> TOKEN : { < T_meta2_T_M_IDENTIFIER : "⟩" > : DEFAULT }
+<IN_META_T_M_IDENTIFIER,IN_NESTED_META_T_M_IDENTIFIER> MORE : { < ~[] > }
+%}
+
+/* Productions for Decimal token. */
+<Decimal> ::=  meta1_T_M_DECIMAL$$:%{unmeta(#,0)%} | meta2_T_M_DECIMAL$$:%{unmeta(#,7)%}
+| T_M_DECIMAL$ .
+
+%{
+TOKEN : { < T_meta1_T_M_DECIMAL : ("⟨" (" ")* "Decimal" (" ")* "⟩") > }
+MORE : { < "⟨" (" ")* "Decimal" (" ")* ~["⟩"] > { nested_counter = 0; } : IN_META_T_M_DECIMAL}
+<IN_META_T_M_DECIMAL,IN_NESTED_META_T_M_DECIMAL> MORE : { "⟨" { nested_counter++; } : IN_NESTED_META_T_M_DECIMAL }
+<IN_NESTED_META_T_M_DECIMAL> MORE : { "⟩" { if (--nested_counter <= 0) SwitchTo(IN_META_T_M_DECIMAL); } }
+<IN_META_T_M_DECIMAL> TOKEN : { < T_meta2_T_M_DECIMAL : "⟩" > : DEFAULT }
+<IN_META_T_M_DECIMAL,IN_NESTED_META_T_M_DECIMAL> MORE : { < ~[] > }
+%}
+
+/* Productions for String token. */
+<String> ::=  meta1_T_M_STRING$$:%{unmeta(#,0)%} | meta2_T_M_STRING$$:%{unmeta(#,6)%}
+| T_M_STRING$ .
+
+%{
+TOKEN : { < T_meta1_T_M_STRING : ("⟨" (" ")* "String" (" ")* "⟩") > }
+MORE : { < "⟨" (" ")* "String" (" ")* ~["⟩"] > { nested_counter = 0; } : IN_META_T_M_STRING}
+<IN_META_T_M_STRING,IN_NESTED_META_T_M_STRING> MORE : { "⟨" { nested_counter++; } : IN_NESTED_META_T_M_STRING }
+<IN_NESTED_META_T_M_STRING> MORE : { "⟩" { if (--nested_counter <= 0) SwitchTo(IN_META_T_M_STRING); } }
+<IN_META_T_M_STRING> TOKEN : { < T_meta2_T_M_STRING : "⟩" > : DEFAULT }
+<IN_META_T_M_STRING,IN_NESTED_META_T_M_STRING> MORE : { < ~[] > }
+%}
+
+/* Productions for Type sort with (highest) precedence 0. */
+
+<Type> ::=  meta1_T_M_TYPE$$:%{unmeta(#,0)%} | meta2_T_M_TYPE$$:%{unmeta(#,4)%}
+| ("Identifier" {{Type__M_Identifier}}
+| ("boolean" {{Type__M_boolean}}
+| ("int" {{Type__M_int}}
+| ("string" {{Type__M_string}}
+| "void" {{Type__M_void}})))) . 
+
+%{
+TOKEN : { < T_meta1_T_M_TYPE : ("⟨" (" ")* "Type" (" ")* "⟩") > }
+MORE : { < "⟨" (" ")* "Type" (" ")* ~["⟩"] > { nested_counter = 0; } : IN_META_T_M_TYPE}
+<IN_META_T_M_TYPE,IN_NESTED_META_T_M_TYPE> MORE : { "⟨" { nested_counter++; } : IN_NESTED_META_T_M_TYPE }
+<IN_NESTED_META_T_M_TYPE> MORE : { "⟩" { if (--nested_counter <= 0) SwitchTo(IN_META_T_M_TYPE); } }
+<IN_META_T_M_TYPE> TOKEN : { < T_meta2_T_M_TYPE : "⟩" > : DEFAULT }
+<IN_META_T_M_TYPE,IN_NESTED_META_T_M_TYPE> MORE : { < ~[] > }
+%}
+
+
+
+/* TOKENS. */
+
+%{
+TOKEN_MGR_DECLS : { int nested_counter; } /* Used by all nesting constructs. */
+%}
+
+token fragment T_M_LETTER ::= ['A'-'Z','a'-'z']   . 
+token fragment T_M_OTHERLETTER ::= "Letter"  | ['$','_']   . 
+token fragment T_M_DIGIT ::= ['0'-'9']   . 
+token T_M_IDENTIFIER ::= T_M_OTHERLETTER ( ( T_M_OTHERLETTER  | T_M_DIGIT   ) )*   .
+token T_M_DECIMAL ::= ( T_M_DIGIT )+ ( '.' )+ ( T_M_DIGIT )+   .
+token T_M_STRING ::= ["'"] ( T_M_LETTER )+ ["'"]  | ['"'] ( T_M_LETTER )+ ['"']   .
+skip ::= " " .
+
+
