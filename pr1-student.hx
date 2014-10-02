@@ -5,13 +5,16 @@
 	* Keywords:
 		- ⟦ ⟧ @ ⟨ ⟩ # → ( ) | & ! ;
 	* Statues:
-		- 2.1, 2.3, 2.6: Done
-		- 2.2: None
-		- 2.4: Statement 4
+		- 2.1, 2.3, 2.6, 2.4: Done
+		- 2.2: None Done
 		- 2.5: ArgumentSignature left
 */
 
 module "edu.nyu.cs.cc.JST" {
+
+	// Comments of two forms are ignored - referencing number 11 of HX2 Handout
+	space [ \t\f\r\n] | nested "/*" "*/" | "//" .* ;
+
 	/*
 		* 2.1: Lexial grammar of JST 
 		* Tokens -> Letter: A-Z or a-z, 
@@ -47,7 +50,8 @@ module "edu.nyu.cs.cc.JST" {
 		| ⟨Digit⟩+ ;
 
 	// 2.1.3: String: sequences of characters enclosed in either ’ (single quote) or " (double quote), empty string possible
-	// Does not: quote used for closing, ' or ", or backslash \, or newline. 
+	// Any character but: quote used for closing, ' or ", or backslash \, or newline. 
+	// If the first character is ^ then the character class is negated
 	token String
 		| ['] ([^ '' \\ \n] | \\ ⟨Escapes⟩)* [']
 		| ["] ([^ "" \\ \n] | \\ ⟨Escapes⟩)* ["] ;
@@ -55,6 +59,7 @@ module "edu.nyu.cs.cc.JST" {
 	// 2.2:: Expression: non-terminal of JST is either a Literal or an Operation.
 	sort Expression
 
+	// Literal: 
 	sort Literal
 
 	// 2.3:: Type: captures the notation for structural types.
@@ -74,11 +79,12 @@ module "edu.nyu.cs.cc.JST" {
 	// 5. while Expression -> Statement
 	// 6. return Expression and return together by optional +
 	sort Statement
-		| ⟦ ⟨Statement*⟩ ; ⟧
+		| ⟦ { ⟨Statement*⟩ } ⟧
 		| ⟦ var ⟨Type⟩ ⟨Identifier⟩ ; ⟧
 		| ⟦ ⟨Expression?⟩ ; ⟧
-		| ⟦ if ( ⟨Expression⟩ ) (Statement) ; ⟧
-		| ⟦ while ( ⟨Expression⟩ ) (Statement) ; ⟧
+		| ⟦ if ( ⟨Expression⟩ ) ⟨Statement⟩ else ⟨Statement⟩ ; ⟧
+		| ⟦ if ( ⟨Expression⟩ ) ⟨Statement⟩ ; ⟧
+		| ⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ; ⟧
 		| ⟦ return ⟨Expression?⟩ ; ⟧ ;
 
 	// 2.5:: Decleration: ClassDeclaration or a FunctionDeclaration.
@@ -89,9 +95,9 @@ module "edu.nyu.cs.cc.JST" {
 
 	// Argument Signature:
 	sort ArgumentSignature
-		| ;
+		| ⟦ (⟨Type⟩ ⟨Identifier⟩)* ⟧ ;
 
-	// Class Decleration and Function Decleration
+	// Decleration: Class Decleration or Function Decleration
 	sort Decleration
 		| ⟦ class ⟨Identifier⟩ { ⟨Member*⟩ } ; ⟧
 		| ⟦ function ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statement*⟩ } ; ⟧ ;
