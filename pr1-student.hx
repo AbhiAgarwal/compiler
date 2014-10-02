@@ -56,11 +56,12 @@ module "edu.nyu.cs.cc.JST" {
 		| ['] ([^ '' \\ \n] | \\ ⟨Escapes⟩)* [']
 		| ["] ([^ "" \\ \n] | \\ ⟨Escapes⟩)* ["] ;
 
-	// 2.2:: Expression: non-terminal of JST is either a Literal or an Operation.
-	sort Expression
-
+	// 2.2
 	// Literal: 
 	sort Literal
+
+	// Expression: non-terminal of JST is either a Literal or an Operation.
+	sort Expression
 
 	// 2.3:: Type: captures the notation for structural types.
 	// Types are: boolean, int, string, void or Identifier
@@ -88,14 +89,14 @@ module "edu.nyu.cs.cc.JST" {
 		| ⟦ return ⟨Expression?⟩ ; ⟧ ;
 
 	// 2.5:: Decleration: ClassDeclaration or a FunctionDeclaration.
+	// Argument Signature:
+	sort ArgumentSignature
+		| ⟦ (⟨Type⟩ ⟨Identifier⟩)* ⟧ ;
+
 	// Member form:
 	sort Member
 		| ⟦ ⟨Type⟩ ⟨Identifier⟩ ; ⟧
 		| ⟦ ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statement*⟩ } ; ⟧ ;
-
-	// Argument Signature:
-	sort ArgumentSignature
-		| ⟦ (⟨Type⟩ ⟨Identifier⟩)* ⟧ ;
 
 	// Decleration: Class Decleration or Function Decleration
 	sort Decleration
