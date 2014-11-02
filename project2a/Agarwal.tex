@@ -4,6 +4,7 @@
 \usepackage{graphicx}				
 \usepackage{amssymb}
 \usepackage{listings}
+\usepackage{tabularx}
 
 \parindent=0pt
 
@@ -38,24 +39,105 @@
 
 \subsection*{object}
 \par \textbf{Definition}: object literal \{$k_1$:Literal1,... ,$k_n$:Literaln\} for n $\geq$ 1 with each key $k_i$ an Identifier (also called ``field name").
-\par \textbf{Scope}: Here we've to create a new scope as we enter a new block denoted by the curly braces (\{\}).
+\par \textbf{Scope}: Here we've to create a new nested scope as we enter a new block denoted by the curly braces (\{\}).
 \par \textbf{Analysis}: We must check if $m_k$ for each $k$ to see if it is not already within the current scope, and if it is then we have to generate an error as they must be distinct.
 \par We also have to check from the scope of the class to make sure the $m_k$ exists in the class type.
 \par We also have to check for the type of $l_k$, for a given $k$, and if it has a type which is assignment compatible to the type declared for the member then it's been validated.
 
 \section*{2.3 - l-value}
-\par 
+\par \textbf{Definition}: What is allowed to have a left side of assignments. Any Expression that has an equal symbol, or is being set to something, has to have one of these forms on the left side of the assignment: an Identifier or a member access form (i.e.: $e.m$)
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: We have to check whether the lexeme on the left site is either an Identifier or an instance of a class variable for which the element it is trying to access exists, and if either of these conditions are not present then we return an error.
 
 \section*{2.4 - Expressions}
-\par
+
+\subsection*{1. this}
+\par \textbf{Definition}: Referencing a variable defined locally within the scope of a class, and therefore this may only be used within the block of a class.
+\par \textbf{Scope}: The current scope has to be within the global scope of a class declaration.
+\par \textbf{Analysis}: 
+
+\subsection*{2. Referencing members within the type class}
+\par \textbf{Definition}: For $E.m$ with m a member name, E must be of a declared class type C that has the member m;
+\par \textbf{Scope}: Here we're looking at values within the current scope, but we're also looking at the scope variables of the class.
+\par \textbf{Analysis}: 
+
+\subsection*{3. Function calls}
+\par \textbf{Definition}: 
+\par \textbf{Scope}: 
+\par \textbf{Analysis}: 
+
+\subsection*{4. $!E$ and $E$}
+\par \textbf{Definition}: The operations listed above must be of type boolean as is the result.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{5, 6. $E$, $-E$, $+E$, $E_1$*$E_2$, $E_1$/$E_2$, $E_1$\%$E_2$, and $E_1$-$E_2$}
+\par \textbf{Definition}: The operations listed above must have type int as does the result.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{7. $E_1$+$E_2$}
+\par \textbf{Definition}: The operations listed above must have type int or string; the result is type int if both have type int and string otherwise.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{8. $E_1 < E_2$, $E_1 \leq E_2$, $E_1 > E_2$, and $E_1 \geq E_2$}
+\par \textbf{Definition}: The operations listed above must have the same type, which should be either int or string; the result is of type boolean.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{9. $E_1==E_2$ and $E_1!=E_2$}
+\par \textbf{Definition}: The operations listed above must have the same type; the result is of type boolean.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{10. $E_1\&\&E_2$ and $E_1||E_2$}
+\par \textbf{Definition}: The operations listed above must have type boolean as will the result
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}:
+
+\subsection*{11. $E_1=E_2$}
+\par \textbf{Definition}: $E_1$ must be an l-value such that the type of $E_2$ is assignment compatible
+to the type of $E_1$; the result type is the type of $E_2$.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{12. $E_1+=E_2$}
+\par \textbf{Definition}: $E_1$ must be an l-value (Rule 11) of either type int or string (Rule 7).
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
+
+\subsection*{13. $E_1,E_2$}
+\par \textbf{Definition}: The operations listed above must be inside function call argument lists.
+\par \textbf{Scope}: Here we're looking at values within the current scope.
+\par \textbf{Analysis}: 
 
 \section*{2.5 - Statements}
-\par
+
+\subsection*{1. Block statement scope}
+
+\subsection*{2. New variable declaration}
+
+\subsection*{3. Tests on while and if statements}
 
 \section*{2.6 - Class}
-\par
 
-\section*{2.7 - Function decleration}
+\subsection*{1. Scope}
+\par \textbf{Definition}: Class declaration class C \{$m_1$...$m_k$\} declares C as a type in the top scope.
+\par \textbf{Scope}: Here we're looking at values within the top scope.
+\par \textbf{Analysis}: 
+
+\subsection*{2. Field member declaration}
+\par \textbf{Definition}: 
+\par \textbf{Scope}: 
+\par \textbf{Analysis}: 
+
+\subsection*{3. Method member declaration}
+\par \textbf{Definition}: 
+\par \textbf{Scope}: 
+\par \textbf{Analysis}: 
+
+\section*{2.7 - Function declaration}
 \par
 
 \section*{2.8 - Deceleration precedence}
@@ -68,13 +150,21 @@
 \par
 
 \section*{Syntax Directed Definition Table}
-\par
+
+\begin{tabularx}{\textwidth}{ |X|X| }
+  \hline
+  \textbf{Production} & \textbf{Semantic Rules} \\
+  \hline
+  item 1  & item 2 \\
+  \hline
+\end{tabularx}
 
 \section*{Definitions}
 \par Skip over this section, but here I've defined some things I think are important, and I wanted to have the definitions here to reduce ambiguity and misunderstandings. 
 \par \textbf{Scope}: Tied to program ``blocks" (lexical) vs runtime stack.
 \par \textbf{Global scope}: Scope that surrounds a block where the block can be a function, variable, object, or class.
+\par \textbf{Top scope}: The scope of the whole program that includes all declarations of classes, functions, and global variables that are declared in the main script.
 \par \textbf{Current scope}: For a given block we're currently in, all the local functions/variables/classes we've encountered.
-\par \textbf{New scope}: We're going into a new program block, and therefore we declare a new scope with a with inherited values from the global scope.
+\par \textbf{New scope}: We're going into a new program block, and therefore we declare a new nested scope including values from the global scope.
 
 \end{document}  
