@@ -1,9 +1,10 @@
 \documentclass[11pt, oneside]{article}   	
 \usepackage{geometry}                		
-\geometry{letterpaper}                   		
+\geometry{a4paper, total={7in, 9in}, margin=0.4in}                   		
 \usepackage{graphicx}				
 \usepackage{amssymb}
 \usepackage{listings}
+\usepackage{longtable}
 \usepackage{tabularx}
 
 \parindent=0pt
@@ -15,149 +16,137 @@
 \begin{document}
 \maketitle
 
-\par My project two documentation is organized in a way where I break down the details I'm going to present and explain them in detail, and then I construct the table. I have also attached definitions of word I'm using at the bottom to reduce ambiguity and misunderstandings.
+\textwidth = 540pt
 
-\section*{2.1 - Assignment compatible}
-\par \textbf{Definition}: Assignment compatible applies to us here because we know that: one type of a value ($T_1$) is assignment compatible with a second type of a value ($T_2$) if the value of the first type can be assigned to the value of the second type (if $type_2$ $T_2$ = $T_1$ is possible). 
-\par \textbf{Analysis}: To me (my assumption is that) \texttt{any} means that we're able to convert between types very explicitly without using a cast, and we're able to assign certain values regardless of the type. Moreover, the every type is assignment compatible with itself is fairly straight forward, and the standard case. 
-
-\section*{2.2 - Literals}
-\subsection*{Identifier}
-\par \textbf{Definition}: Identifier are tokens that start with a letter, \$, or \_, followed by more of the same as well as digits, except that keywords (literal tokens used by the grammar) are not permitted as identifiers. 
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: Identifier literals must exist within the scope where it is declared, and has to have the correct type. We have to do a type check to see if the assignment is the same as the type it was declared as.
-
-\subsection*{Integer}
-\par \textbf{Definition}: Integer tokens are sequences of digits.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: We've to check if they've the type int to classify them as Integers. This is just mechanical as we've to simply check if their type matches the type \texttt{int}.
-
-\subsection*{String}
-\par \textbf{Definition}: String tokens are sequences of characters enclosed in either ' (single quote) or " (double quote).
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: We've to check if they've the type string to classify them as  \texttt{string}.
-
-\subsection*{object}
-\par \textbf{Definition}: object literal \{$k_1$:Literal1,... ,$k_n$:Literaln\} for n $\geq$ 1 with each key $k_i$ an Identifier (also called ``field name").
-\par \textbf{Scope}: Here we've to create a new nested scope as we enter a new block denoted by the curly braces (\{\}).
-\par \textbf{Analysis}: We must check if $m_k$ for each $k$ to see if it is not already within the current scope, and if it is then we have to generate an error as they must be distinct.
-\par We also have to check from the scope of the class to make sure the $m_k$ exists in the class type.
-\par We also have to check for the type of $l_k$, for a given $k$, and if it has a type which is assignment compatible to the type declared for the member then it's been validated.
-
-\section*{2.3 - l-value}
-\par \textbf{Definition}: What is allowed to have a left side of assignments. Any Expression that has an equal symbol, or is being set to something, has to have one of these forms on the left side of the assignment: an Identifier or a member access form (i.e.: $e.m$)
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: We have to check whether the lexeme on the left site is either an Identifier or an instance of a class variable for which the element it is trying to access exists, and if either of these conditions are not present then we return an error.
-
-\section*{2.4 - Expressions}
-
-\subsection*{1. this}
-\par \textbf{Definition}: Referencing a variable defined locally within the scope of a class, and therefore this may only be used within the block of a class.
-\par \textbf{Scope}: The current scope has to be within the global scope of a class declaration.
-\par \textbf{Analysis}: 
-
-\subsection*{2. Referencing members within the type class}
-\par \textbf{Definition}: For $E.m$ with m a member name, E must be of a declared class type C that has the member m;
-\par \textbf{Scope}: Here we're looking at values within the current scope, but we're also looking at the scope variables of the class.
-\par \textbf{Analysis}: 
-
-\subsection*{3. Function calls}
-\par \textbf{Definition}: 
-\par \textbf{Scope}: 
-\par \textbf{Analysis}: 
-
-\subsection*{4. $!E$ and $E$}
-\par \textbf{Definition}: The operations listed above must be of type boolean as is the result.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{5, 6. $E$, $-E$, $+E$, $E_1$*$E_2$, $E_1$/$E_2$, $E_1$\%$E_2$, and $E_1$-$E_2$}
-\par \textbf{Definition}: The operations listed above must have type int as does the result.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{7. $E_1$+$E_2$}
-\par \textbf{Definition}: The operations listed above must have type int or string; the result is type int if both have type int and string otherwise.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{8. $E_1 < E_2$, $E_1 \leq E_2$, $E_1 > E_2$, and $E_1 \geq E_2$}
-\par \textbf{Definition}: The operations listed above must have the same type, which should be either int or string; the result is of type boolean.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{9. $E_1==E_2$ and $E_1!=E_2$}
-\par \textbf{Definition}: The operations listed above must have the same type; the result is of type boolean.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{10. $E_1\&\&E_2$ and $E_1||E_2$}
-\par \textbf{Definition}: The operations listed above must have type boolean as will the result
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}:
-
-\subsection*{11. $E_1=E_2$}
-\par \textbf{Definition}: $E_1$ must be an l-value such that the type of $E_2$ is assignment compatible
-to the type of $E_1$; the result type is the type of $E_2$.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{12. $E_1+=E_2$}
-\par \textbf{Definition}: $E_1$ must be an l-value (Rule 11) of either type int or string (Rule 7).
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\subsection*{13. $E_1,E_2$}
-\par \textbf{Definition}: The operations listed above must be inside function call argument lists.
-\par \textbf{Scope}: Here we're looking at values within the current scope.
-\par \textbf{Analysis}: 
-
-\section*{2.5 - Statements}
-
-\subsection*{1. Block statement scope}
-
-\subsection*{2. New variable declaration}
-
-\subsection*{3. Tests on while and if statements}
-
-\section*{2.6 - Class}
-
-\subsection*{1. Scope}
-\par \textbf{Definition}: Class declaration class C \{$m_1$...$m_k$\} declares C as a type in the top scope.
-\par \textbf{Scope}: Here we're looking at values within the top scope.
-\par \textbf{Analysis}: 
-
-\subsection*{2. Field member declaration}
-\par \textbf{Definition}: 
-\par \textbf{Scope}: 
-\par \textbf{Analysis}: 
-
-\subsection*{3. Method member declaration}
-\par \textbf{Definition}: 
-\par \textbf{Scope}: 
-\par \textbf{Analysis}: 
-
-\section*{2.7 - Function declaration}
-\par
-
-\section*{2.8 - Deceleration precedence}
-\par
-
-\section*{2.8 - Deceleration precedence}
-\par
-
-\section*{2.9 - Operations on strings}
-\par
+\par My project two documentation is organized in a way where I construct the table in the beginning, and then break down the details I'm going to present and explain them in detail (for documentation and understanding). I have also attached definitions of word I'm using at the bottom to reduce ambiguity and misunderstandings. I tried to simplify my table by using function calls to test the different types, and that's something I think is a limitation of my Syntax Directed Definition, but I think it was important for me to do that. I have an understanding of how to implement these functions in Hacs.
 
 \section*{Syntax Directed Definition Table}
 
 \begin{tabularx}{\textwidth}{ |X|X| }
-  \hline
-  \textbf{Production} & \textbf{Semantic Rules} \\
-  \hline
-  item 1  & item 2 \\
-  \hline
+\hline
+\textbf{Production} & \textbf{Semantic Rules} \\
+  
+% A Program declaration
+\hline $AProg \rightarrow ABlock_1$  &  ABlock.inScope = top; $ABlock_1.s$ = \{\}; \\
+
+% A Block declaration:: Can be either a class, function or variable
+\hline $ABlock \rightarrow C_1; \, ABlock_1$  &  $C_1.s = ABlock.s; ABlock_1.s = C_1.s$ \\
+	   $| \, F_1; \, ABlock_1$ & $F_1.s = ABlock.s; ABlock_1.s = F_1.s$ \\
+	   $| \, \epsilon$ & \\
+	   
+% A Class declaration
+\hline $C \rightarrow class \, id \, \{CS_1\} $ & $ C.s \, $=$ \, Extend(C.s, id.sym, class); \newline C.inScope = class; CS_1.s = C.s; $ \\
+
+% A Function declaration
+\hline $F \rightarrow function \, T_1 \, id(P_2) \, \{S_3\}$ & $F.s \, $=$ \, Extend(F.s, id.sym, function); \newline F.inScope = function; S_3.s = F.s; $ \\
+
+% A Method Member declaration
+\hline $M \rightarrow T_1 \, id(P_2) \, \{S_3\} $ & $ M.s \, $=$ \, Extend(M.s, id.sym, method); \newline M.inScope = method; S_3.s = M.s; $\\
+
+% A Class Statement declaration
+\hline $CS \rightarrow S_1; CS_2 $ & $ S_1.s = CS.s; CS_2.s = S_1.s $\\
+	   $| \, M_1; CS_2$ & $ M_1.s = CS.s; CS_2.s = M_1.s $ \\
+	   $| \, \epsilon$ & \\
+
+% Statement declarations:: var x; if; while;
+\hline $S \rightarrow T_1 \, id; $ & $T_1.s \, $=$ \, S.s; \, S.s \, $=$ \, Extend(S.s, id.sym, T_1.type)$ \\
+	   $| \, if(E_1) \, \{S_2\} $ & $ E_1.s = S.s; \, $checkIfBoolean$ \, (E_1.type);  S_2.s = S.s $ \\
+	   $| \, while(E_1) \, \{S_2\} $ & $ E_1.s = S.s; \, $checkIfBoolean$ \, (E_1.type);  S_2.s = S.s $ \\
+
+% Parameter Check declaration
+\hline $P \rightarrow T_1 \, id,; P_2; $ & $T_1.s \, $=$ \, P.s; \, P.s \, $=$ \, Extend(P.s, id.sym, T_1.type); \newline P_2.s = P.s; $ \\
+          $| \,  T_1 \, id; $ & $T_1.s \, $=$ \, P.s; \, P.s \, $=$ \, Extend(P.s, id.sym, T_1.type) $ \\
+	   
+% Expression declaration
+\hline $E \rightarrow this.E_1; $ & $ classScope(E.inScope); E_1.s = E.s $ \\
+
+	   $| \, E_1.m $ & $ E_1.s = E.s; checkIfObject(E_1.type); $ \\
+	   
+	   $| \, !E_1 $ & $ E_1.s\,$=$\,E.s; checkIfBoolean(E_1.type); \newline E.type\,$=$\,E_1.type; $ \\
+	   
+	   $| \, -E_1 $ & $ E_1.s = E.s; checkIfInt(E_1.type); E.type = E_1.type; $ \\
+	   $| \, +E_1 $ & $ E_1.s = E.s; checkIfInt(E_1.type); E.type = E_1.type; $ \\
+	   $| \, -E_1 $ & $ E_1.s = E.s; checkIfInt(E_1.type); E.type = E_1.type; $ \\
+	   
+	   $| \, E_1*E_2 $ & $ E_1.s = E.s; E_2.s = E.s; \newline checkIfInt(E_1.type, E_2.type); E.type = E_1.type; $ \\	   
+	   $| \, E_1/E_2 $ & $ E_1.s = E.s; E_2.s = E.s; \newline checkIfInt(E_1.type, E_2.type); E.type = E_1.type; $ \\	
+	   $| \, E_1-E_2 $ & $ E_1.s = E.s; E_2.s = E.s; \newline checkIfInt(E_1.type, E_2.type); E.type = E_1.type; $ \\
+	   $| \, E_1\%E_2 $ & $ E_1.s = E.s; E_2.s = E.s; \newline checkIfInt(E_1.type, E_2.type); E.type = E_1.type; $ \\ 
+	   
+	   % Return is int or string
+	   $| \, E_1+E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); E.type = E_1.type; $ \\	
+	   % Return is boolean and same type
+	   $| \, E_1<E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); \newline checkIntOrString(E_1.type, E_2.type); E.type\,$=$\,boolean; $ \\
+	   $| \, E_1<=E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); \newline checkIntOrString(E_1.type, E_2.type); E.type\,$=$\,boolean; $ \\
+	   $| \, E_1>E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); \newline checkIntOrString(E_1.type, E_2.type); E.type\,$=$\,boolean; $ \\
+	   $| \, E_1>=E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); \newline checkIntOrString(E_1.type, E_2.type); E.type\,$=$\,boolean; $ \\
+	   	   
+\hline
+\end{tabularx}	   
+	   
+\begin{tabularx}{\textwidth}{ |X|X| }
+\hline
+\textbf{Production} & \textbf{Semantic Rules} \\
+	   
+\hline
+	   
+	   $| \, E_1==E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); E.type = boolean; $ \\
+          $| \, E_1!=E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkSameType(E_1.type, E_2.type); E.type = boolean; $ \\
+	   $| \, E_1\&\&E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkifBoolean(E_1.type, E_2.type); E.type = boolean; $ \\
+	   $| \, E_1 \| E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkifBoolean(E_1.type, E_2.type); E.type = boolean; $ \\
+	   
+	   $| \, LValue_1 += E_2 $ & $ E_1 = E.s; E_2.s = E.s;  $ \\
+	   
+	   $| \, E_1.length $ & $ E_1.s = E.s; checkIfString(E_1.type); \newline E.type = E_1.type $ \\
+	   $| \, E_1.charCodeAt(T_2 id) $ & $ E_1.s = E.s; checkIfString(E_1.type); T_2.s = E_1.s; \newline checkIfInt(T_2.type); E.type = E_1.type $ \\
+	   $| \, E_1.charCodeAt(T_2 id, T_3 id) $ & $ E_1.s = E.s; checkIfString(E_1.type); \newline T_2.s = E_1.s; T_3 = E_1.s; \newline checkIfInt(T_2.type, T_3.type); E.type = E_1.type $ \\
+	   
+	  % Generic return
+	   $| \, L_1 $ & $ L_1.s = E.s; L.type = L_1.type; $ \\	  	   
+	   
+% Object Literal decleration
+\hline $OL \rightarrow id:L $ & $ $ \\
+
+% Literal declaration
+\hline $L \rightarrow id$ & $L.type = Lookup(L.s, id.sym)$ \\
+	   $| \, Integer$ & $L.type = int$ \\
+	   $| \, String$ & $L.type = string$ \\
+	   $| \, Object$ & $L.type = object$ \\
+
+% Types
+\hline $T \rightarrow integer$ & $T.type = int$ \\
+  	   $| \, string$ & $T.type = string$ \\  
+
+\hline
 \end{tabularx}
+
+\section*{1 - Limitations and Decisions}
+\begin{enumerate}
+\item Inherited Attributes: s, Synthesized Attributes: inScope, Functions: checkifBoolean, Extend, Lookup, classScope, checkIfInt, checkIfIntOrBoolean, checkSameType
+\item Declarations: \textbf{AProg} is the beginning of the program, \textbf{ABlock} is a block (either a function or a class), \textbf{C} is a class, \textbf{F} is a function, \textbf{M} is a member function, \textbf{CS} is a class statement (either a statement or a member function), \textbf{S} is a statement, \textbf{E} is an expression, \textbf{L} is a literal, \textbf{T} is a type, \textbf{OL} is an object literal definition, and \textbf{P} is a parameter check.
+\item My way around knowing the scope 
+\item The block is each module of the particular program where module could be function, or a class.
+\item For this particular implementation there is no support for global variables, but I have thought about it. It would be a part of the modules that I have described above, and I would extend the modules to be: function, class, or global variables.
+\item  For an object declaration \texttt{var} is necessary as suggested in the example.
+\item Two passes through the code: first to declare and get all the information, and second to validate it.
+\item Declaration of many functions to check if they are the correct type. They are straight forward, and do what the function names are. They are very similar to the safeCast() function we created for HW6. For example: checkIfBoolean(...) checks if a particular type is boolean - if it is then return Error();
+\item My implementation I extend a class declaration into the Class scope. This is because I'm now able to check if I'm inside a class or not by looking through the immediate scoped variables.
+\item My implementation of the string and its additional operators are included within the Expressions (E).
+
+\section*{2 - Extra notes}
+
+\item To me (my assumption is that) \texttt{any} means that we're able to convert between types very explicitly without using a cast, and we're able to assign certain values regardless of the type. Moreover, the every type is assignment compatible with itself is fairly straight forward, and the standard case. 
+\item Identifier literals: must exist within the scope where it is declared, and has to have the correct type. We have to do a type check to see if the assignment is the same as the type it was declared as.
+\item Int literals: We've to check if they've the type int to classify them as Integers. This is just mechanical as we've to simply check if their type matches the type \texttt{int}.
+\item Object literals: String literals: We've to check if they've the type string to classify them as  \texttt{string}.
+\item Object literals: We must check if $m_k$ for each $k$ to see if it is not already within the current scope, and if it is then we have to generate an error as they must be distinct.
+\item Object literals: We also have to check from the scope of the class to make sure the $m_k$ exists in the class type.
+\item l-value: We also have to check for the type of $l_k$, for a given $k$, and if it has a type which is assignment compatible to the type declared for the member then it's been validated.
+\item l-value: We have to check whether the lexeme on the left site is either an Identifier or an instance of a class variable for which the element it is trying to access exists, and if either of these conditions are not present then we return an error.
+\item l-value: We have to check whether the lexeme on the left site is either an Identifier or an instance of a class variable for which the element it is trying to access exists, and if either of these conditions are not present then we return an error.
+\item Expressions: We have to check if the scope we're in is in fact a class block, and if it is then we have to check if the variable has been defined in the local nested scope. If the variable hasn't been defined then we throw an error because it can't be referenced.
+\item this: We have to check if the scope we're in is in fact a class block, and if it is then we have to check if the variable has been defined in the local nested scope. If the variable hasn't been defined then we throw an error because it can't be referenced.
+\end{enumerate}
 
 \section*{Definitions}
 \par Skip over this section, but here I've defined some things I think are important, and I wanted to have the definitions here to reduce ambiguity and misunderstandings. 
