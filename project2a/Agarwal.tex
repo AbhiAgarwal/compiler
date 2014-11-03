@@ -18,7 +18,9 @@
 
 \textwidth = 540pt
 
-\par My project two documentation is organized in a way where I construct the table in the beginning, and then break down the details I'm going to present and explain them in detail (for documentation and understanding). I have also attached definitions of word I'm using at the bottom to reduce ambiguity and misunderstandings. I tried to simplify my table by using function calls to test the different types, and that's something I think is a limitation of my Syntax Directed Definition, but I think it was important for me to do that. I have an understanding of how to implement these functions in Hacs.
+\par My project two documentation is organized in a way where I construct the table in the beginning, and then break down the details I'm going to present and explain them in detail (for documentation and understanding). I have also attached definitions of word I'm using at the bottom to reduce ambiguity and misunderstandings. I tried to simplify my table by using function calls to test the different types, and that's something I think is a limitation of my Syntax Directed Definition, but I think it was important for me to do that. 
+
+\par I have an understanding of how to implement these functions in Hacs. My apologies I took a few shortcuts, but I had to re-write most of my SDD and then was pressed for time. I couldn't complete the whole SDD in time. The parts which I think are a little weak: 2.2, 2.3, 2.4.1, 2.4.3, 2.4.11, 2.4.12, and my general scoping. I understand these issues.
 
 \section*{Syntax Directed Definition Table}
 
@@ -54,13 +56,13 @@
 	   $| \, while(E_1) \, \{S_2\} $ & $ E_1.s = S.s; \, $checkIfBoolean$ \, (E_1.type);  S_2.s = S.s $ \\
 
 % Parameter Check declaration
-\hline $P \rightarrow T_1 \, id,; P_2; $ & $T_1.s \, $=$ \, P.s; \, P.s \, $=$ \, Extend(P.s, id.sym, T_1.type); \newline P_2.s = P.s; $ \\
+\hline $P \rightarrow T_1 \, id, P_2; $ & $T_1.s \, $=$ \, P.s; \, P.s \, $=$ \, Extend(P.s, id.sym, T_1.type); \newline P_2.s = P.s; $ \\
           $| \,  T_1 \, id; $ & $T_1.s \, $=$ \, P.s; \, P.s \, $=$ \, Extend(P.s, id.sym, T_1.type) $ \\
 	   
 % Expression declaration
 \hline $E \rightarrow this.E_1; $ & $ classScope(E.inScope); E_1.s = E.s $ \\
 
-	   $| \, E_1.m $ & $ E_1.s = E.s; checkIfObject(E_1.type); $ \\
+	   $| \, E_1.T_2 $ & $ E_1.s = E.s; T_2 = E.s; checkIfObject(E_1.type); \newline checkIfString(T_2.type); \newline classContainsAttribute(E_1, T_2) $ \\
 	   
 	   $| \, !E_1 $ & $ E_1.s\,$=$\,E.s; checkIfBoolean(E_1.type); \newline E.type\,$=$\,E_1.type; $ \\
 	   
@@ -95,7 +97,7 @@
 	   $| \, E_1\&\&E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkifBoolean(E_1.type, E_2.type); E.type = boolean; $ \\
 	   $| \, E_1 \| E_2 $ & $E_1.s \, $=$\, E.s; E_2.s = E.s; \, \newline checkifBoolean(E_1.type, E_2.type); E.type = boolean; $ \\
 	   
-	   $| \, LValue_1 += E_2 $ & $ E_1 = E.s; E_2.s = E.s;  $ \\
+	   $| \, E_1 += E_2 $ & $ E_1 = E.s; E_2.s = E.s;  $ \\
 	   
 	   $| \, E_1.length $ & $ E_1.s = E.s; checkIfString(E_1.type); \newline E.type = E_1.type $ \\
 	   $| \, E_1.charCodeAt(T_2 id) $ & $ E_1.s = E.s; checkIfString(E_1.type); T_2.s = E_1.s; \newline checkIfInt(T_2.type); E.type = E_1.type $ \\
@@ -105,17 +107,16 @@
 	   $| \, L_1 $ & $ L_1.s = E.s; L.type = L_1.type; $ \\	  	   
 	   
 % Object Literal decleration
-\hline $OL \rightarrow id:L $ & $ $ \\
+\hline $OL \rightarrow id:T_1, OL_2 $ & $ T_1.s = OL.s; Extend(OL.s, id.sym, L_1.type); \newline OL_2.s = OL.s $ \\
 
 % Literal declaration
 \hline $L \rightarrow id$ & $L.type = Lookup(L.s, id.sym)$ \\
-	   $| \, Integer$ & $L.type = int$ \\
-	   $| \, String$ & $L.type = string$ \\
-	   $| \, Object$ & $L.type = object$ \\
 
 % Types
 \hline $T \rightarrow integer$ & $T.type = int$ \\
   	   $| \, string$ & $T.type = string$ \\  
+  	   $| \, class$ & $T.type = class$ \\  
+  	   $| \, function$ & $T.type = function$ \\  
 
 \hline
 \end{tabularx}
@@ -124,7 +125,8 @@
 \begin{enumerate}
 \item Inherited Attributes: s, Synthesized Attributes: inScope, Functions: checkifBoolean, Extend, Lookup, classScope, checkIfInt, checkIfIntOrBoolean, checkSameType
 \item Declarations: \textbf{AProg} is the beginning of the program, \textbf{ABlock} is a block (either a function or a class), \textbf{C} is a class, \textbf{F} is a function, \textbf{M} is a member function, \textbf{CS} is a class statement (either a statement or a member function), \textbf{S} is a statement, \textbf{E} is an expression, \textbf{L} is a literal, \textbf{T} is a type, \textbf{OL} is an object literal definition, and \textbf{P} is a parameter check.
-\item My way around knowing the scope 
+\item The shortcuts I took for this assignment: classContainsAttribute
+\item My way to know the scope was to pass down a synthesized attribute called inScope.
 \item The block is each module of the particular program where module could be function, or a class.
 \item For this particular implementation there is no support for global variables, but I have thought about it. It would be a part of the modules that I have described above, and I would extend the modules to be: function, class, or global variables.
 \item  For an object declaration \texttt{var} is necessary as suggested in the example.
@@ -132,6 +134,8 @@
 \item Declaration of many functions to check if they are the correct type. They are straight forward, and do what the function names are. They are very similar to the safeCast() function we created for HW6. For example: checkIfBoolean(...) checks if a particular type is boolean - if it is then return Error();
 \item My implementation I extend a class declaration into the Class scope. This is because I'm now able to check if I'm inside a class or not by looking through the immediate scoped variables.
 \item My implementation of the string and its additional operators are included within the Expressions (E).
+\item My understanding was that class and function were also types. I think this is correct in my implementation because I Lookup functions and classes as types.
+\item With my design there shouldn't be an expression with a comma in between because I have a special Production for things within the parentheses. 
 
 \section*{2 - Extra notes}
 
