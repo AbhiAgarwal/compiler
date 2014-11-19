@@ -5,7 +5,7 @@
 // All references are to the problem text,
 // http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr2/pr2.pdf
 
-module edu.nyu.csci.cc.fall14.Pr2Base {
+module edu.nyu.csci.cc.fall14.pr2bAbhi {
 
 // PROGRAM
 
