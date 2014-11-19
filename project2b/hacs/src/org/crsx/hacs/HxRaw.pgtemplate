@@ -1,0 +1,105 @@
+//// HxRaw.pg: GRAMMAR FOR .hx RAW HACS FILES.
+//// Copyright © 2012,2014 Kristoffer H. Rose <krisrose@crsx.org>
+
+class org.crsx.hacs.HxRaw :
+%%%HXNONTERMINALS%%%
+<HxTopTerm>, <HxTopPattern>, <HxAttributes>, <HxSortName>, <HxConstructor>, 
+<HxTerms>, <HxTerm>, <HxVariables>, <HxAttribute>, <HxAttributeValue>, <HxScopes>, <HxScope>, <HxConcrete>, <HxConcreteText>
+
+prefix "raw"
+
+declarations
+%{
+static String hx(String s) {return "Hx_"+s;} // prefix for constructors
+%%%HXDECLARATIONS%%%
+%}
+
+
+//// HACS-INTERNAL META RAW SYNTAX.
+
+// Guillemets ("French quotes") used for embedded  CRSX terms (for sort hacks???).
+<HxEmbedded> (*) ::= HX_EMBEDDED$$:unwrap .
+token HX_EMBEDDED (*) ::= '«' (~['«','»'])* '»' .
+
+// Meta-variables #SortN# can be used in hx syntax. 
+meta[<HxSortParam>] ::=  '#<PRODUCTION_NAME>' ( [0-9]* | '_' [A-Za-z0-9]* ) '#' , '⦃', '⦄', '∥' .
+inject[<HxEmbedded>] ::=  '%<PRODUCTION_NAME>', '', '' .
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+%%%HXPREPRODUCTIONS%%%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//// INTERFACE TO METAPARSER FRAMEWORK.
+
+<HxTopTerm> ::= <HxTerm> .
+<HxTopPattern> ::= <HxPattern> .
+<HxAttributes> ::= ( {$Cons} <HxAttribute> <HxAttributes> | {$Nil} ).
+<HxSortName> ::= HX_CONSTRUCTOR$ .
+<HxConstructor> ::= HX_CONSTRUCTOR$ .
+
+//// TERMS.
+
+<HxTerm> ::=
+  <HxVariable>!!!:#v ( {Special}:hx {{#v}} <HxConcreteText> <HxAttributes> | {VariableUse}:hx {{#v}} <HxAttributes>)
+| <HxConstructor>:#C
+  <HxRepeat>:#R
+  ( {UnparsedSorted}:hx {{#C}} {{#R}} <HxConcrete> <HxAttributes>
+  | {MetaApplicationSorted}:hx {{#C}} {{#R}} <HxMetaVariable> ( HX_LBRACKET (<HxTerms> | {$Nil}) HX_RBRACKET | {$Nil} ) <HxAttributes>
+  | {ConstructionSorted}:hx {{#C}} {{#R}} <HxConstructor> ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  | {VariableUseSorted}:hx {{#C}} {{#R}} <HxVariable>!!! <HxAttributes>
+  | {LiteralSorted}:hx {{#C}} {{#R}} <HxLiteral> <HxAttributes>
+  | {Construction}:hx {{#C}} ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  )
+| {Literal}:hx <HxLiteral> <HxAttributes>
+| {Unparsed}:hx <HxConcrete> <HxAttributes>
+| {MetaApplication}:hx <HxMetaVariable> ( HX_LBRACKET (<HxTerms> | {$Nil}) HX_RBRACKET | {$Nil} ) <HxAttributes>
+.
+
+<HxPattern> ::=
+  <HxConstructor>:#C
+  <HxRepeat>:#R
+  ( {UnparsedSorted}:hx {{#C}} {{#R}} <HxConcrete> <HxAttributes>
+  | {ConstructionSorted}:hx {{#C}} {{#R}} <HxConstructor> ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  | {LiteralSorted}:hx {{#C}} {{#R}} <HxLiteral> <HxAttributes>
+  | {Construction}:hx {{#C}} ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  )
+| {Literal}:hx <HxLiteral> <HxAttributes>
+| {Unparsed}:hx <HxConcrete> <HxAttributes>
+.
+
+<HxScopes> ::= {$Cons} <HxScope> (HX_COMMA <HxScopes> | {$Nil}) .
+<HxScope> ::= {Scope}:hx (HX_LBRACKET (<HxVariableList> | {$Nil}) HX_RBRACKET | {$Nil}) <HxTerm> .
+
+<HxVariables> ::= {$Cons} <HxVariable>!!! <HxVariables> | {$Nil} .
+<HxVariableList> ::= {$Cons} <HxVariable>!!! ( HX_COMMA <HxVariableList> | {$Nil} ) .
+
+<HxTerms> ::= {$Cons} <HxTerm> (HX_COMMA <HxTerms> | {$Nil}) .
+
+<HxAttribute> ::= <HxAttributeKind>:#kind ( {Attribute}:hx {{#kind}} <HxAttributeName> <HxAttributeValue> | {CatchAllAttributes}:hx {{#kind}} <HxMetaVariable> | <HxSystemAttribute> ) .
+
+<HxSystemAttribute> ::= {SystemAttribute}:hx HX_DOT <HxVariable> HX_LPAREN <HxTopPattern> HX_RPAREN .
+
+<HxAttributeValue> ::= 
+  {AttributeValue}:hx HX_LPAREN <HxTerm> HX_RPAREN
+| HX_LBRACE
+    ( ( <HxTerm>:# ( {AttributeKeyValue}:hx {{#}} HX_COLON <HxTerm> | {AttributeKey}:hx {{#}} ) )
+    | {AttributeCatchAll}:hx HX_COLON <HxMetaVariable>
+    | {AttributeNotKey}:hx HX_NOT <HxTerm> )
+  HX_RBRACE
+.
+
+// Use of embedded concrete text.
+
+<HxConcrete> ::= HX_CONCRETE$:unwrap .
+<HxConcreteText> ::= HX_CONCRETE$$:unwrap:{n} .
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+%%%HXPOSTPRODUCTIONS%%%
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Unconstrainedconstructors.
+
+token HX_CONSTRUCTOR ::= [A-Z$] [A-Za-z0-9_$]* .

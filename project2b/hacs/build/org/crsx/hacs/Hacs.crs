@@ -1,0 +1,23 @@
+// Main.crs: MAIN PROGRAM FOR HACS GENERATION.
+// Copyright © 2014 Kristoffer H. Rose <krisrose@crsx.org>
+
+Main[(
+
+// Simple main rule system that establishes all needed parsers and sorts
+// and load all HACS modules.
+
+// Rules file syntax.
+$AddGrammar["org.crsx.hacs.HxRaw"];
+$AddGrammar["net.sf.crsx.text.Text"];
+
+// Sorts.
+$Use["org/crsx/hacs/HxRaw.crs"];
+$Use["net/sf/crsx/text/Text.crs"];
+$Sortify;
+
+// Modules.
+$Use["org/crsx/hacs/Prep.crs"];
+$Use["org/crsx/hacs/Cook.crs"];
+$Use["org/crsx/hacs/MakeRun.crs"];
+
+)] //Main

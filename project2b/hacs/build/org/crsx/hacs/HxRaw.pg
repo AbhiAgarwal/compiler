@@ -1,0 +1,496 @@
+//// HxRaw.pg: GRAMMAR FOR .hx RAW HACS FILES.
+//// Copyright © 2012,2014 Kristoffer H. Rose <krisrose@crsx.org>
+
+class org.crsx.hacs.HxRaw :
+<HxModule>, <HxModuleName>, <HxEmbeddedModule>,
+<HxDeclaration>, <HxDeclarations>, <HxSortAbstraction>,<HxMainKind>, <HxRule>, <HxRulePrefix>, <HxRulePriority>, <HxRuleOptions>,
+<HxSort>, <HxSortParam>, <HxSortNames>, <HxSimpleSort>, <HxSimpleSorts>, <HxSubstituteSorts>, <HxSubstituteSort>,
+<HxSortAlternative>, <HxSortAlternatives>, <HxForm>, <HxFormPrec>, <HxParsedForm>,
+<HxInheritedRefs>, <HxInheritedRef>, <HxAttributeKind>, <HxAttributeForm>,
+<HxBindersScopeSorts>, <HxBindersScopeSort>, <HxScopeSort>, <HxRepeat>,
+<HxTokenName>, <HxFragmentRef>,
+<HxRegExp>, <HxRegExpChoice>, <HxRegExpUnits>, <HxRegExpUnit>, <HxRegExpSimple>, <HxRegExpSub>, <HxSeparator>, <HxRegExpWord>,
+<HxLiteral>, <HxMetaVariable>, <HxMetaVariables>, <HxVariable>, <HxAttributeName>,
+<HxRegExpClass>, <HxCC>, <HxCC_RangesTop>, <HxCC_Ranges>, <HxCC_FirstRangeStartChar>, <HxCC_NonDashRangeStartChar>, <HxCC_RangeChar>,
+<HxPP>, <HxPPConcreteSpace>, <HxPPConcreteSpace>, <HxPPConcreteWord>, <HxPPUnconcrete>, <HxScopeSortPrec>,
+<HxTopTerm>, <HxTopPattern>, <HxAttributes>, <HxSortName>, <HxConstructor>, 
+<HxTerms>, <HxTerm>, <HxVariables>, <HxAttribute>, <HxAttributeValue>, <HxScopes>, <HxScope>, <HxConcrete>, <HxConcreteText>
+
+prefix "raw"
+
+declarations
+%{
+static String hx(String s) {return "Hx_"+s;} // prefix for constructors
+static String unwrap(String s) {return s.substring(1, s.length()-1);}
+static String checkModuleString(String s) throws ParseException {if (java.util.regex.Pattern.matches("[\"]([a-z0-9]+[.])*[A-Z][A-Za-z0-9]*[\"]", s)) return s; else throw new ParseException("Illegal module name "+s);}
+private String storedSort = "";
+%}
+
+
+//// HACS-INTERNAL META RAW SYNTAX.
+
+// Guillemets ("French quotes") used for embedded  CRSX terms (for sort hacks???).
+<HxEmbedded> (*) ::= HX_EMBEDDED$$:unwrap .
+token HX_EMBEDDED (*) ::= '«' (~['«','»'])* '»' .
+
+// Meta-variables #SortN# can be used in hx syntax. 
+meta[<HxSortParam>] ::=  '#<PRODUCTION_NAME>' ( [0-9]* | '_' [A-Za-z0-9]* ) '#' , '⦃', '⦄', '∥' .
+inject[<HxEmbedded>] ::=  '%<PRODUCTION_NAME>', '', '' .
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// Hx.pgpre: HX PARSER PRE TERM PRODUCTIONS.
+//// Copyright © 2012,2014 Kristoffer H. Rose <krisrose@rcsx.org>
+
+
+//// STRUCTURE.
+
+<HxModule> ::= {top-module}:hx <HxEmbeddedModule> .
+
+<HxEmbeddedModule> ::= HX_MODULE:hx <HxModuleName> HX_LBRACE <Restoring_HxDeclarations> HX_RBRACE .
+
+<HxDeclarations> ::= ( {$Cons} <HxDeclaration> <HxDeclarations> | {$Nil} ).
+//<HxDeclarations> ::= ( {$Cons} <HxDeclaration> ( LOOKAHEAD( {getToken(1).image!=null && !getToken(1).image.equals("}")} ) <HxDeclarations> | {$Nil} ) | {$Nil} ).
+
+<HxDeclaration> ::=
+  {embedded-module}:hx <HxEmbeddedModule> HX_SEMI
+| HX_IMPORT:hx <HxModuleName> HX_SEMI
+
+| HX_SPACE:hx <HxRegExp> HX_SEMI
+| HX_TOKEN ( {'token'}:hx <HxTokenName> HX_BAR <HxRegExp> | HX_FRAGMENT:hx <HxTokenName> HX_BAR <HxRegExp> ) HX_SEMI
+| HX_FRAGMENT:hx <HxTokenName> HX_BAR <HxRegExp> HX_SEMI
+
+| HX_ATTRIBUTE:hx <HxAttributeKind> <HxAttributeName> <HxAttributeForm> HX_SEMI
+
+| {sort}:hx <HxMainKind> HX_SORT <Store_HxSortName> <HxRepeat> <HxSortAbstraction> HX_SEMI
+| {anonymous}:hx <HxSortAlternatives> HX_SEMI
+| (HX_RULE)? {rule}:hx <HxRule> HX_SEMI
+| {nestedDeclarations}:hx HX_LBRACE <HxDeclarations> HX_RBRACE
+.
+
+<HxMainKind> ::= ( HX_MAIN:hx | {no-main}:hx ).
+<HxAttributeKind> ::= ( {AttributeKindUp}:hx HX_UP | {AttributeKindDown}:hx HX_DOWN ).
+
+
+//// TOKEN DECLARATIONS.
+
+<HxRegExp> (HX_RE) ::= {$Cons} <HxRegExpChoice> ( HX_BAR <HxRegExp> | {$Nil} ) .
+
+<HxRegExpChoice> (HX_RE) ::=
+  HX_NESTED:hx <HxRegExpSimple> <HxRegExpSimple>
+| {RegExpConcat}:hx <HxRegExpUnits>
+.
+
+<HxRegExpUnits> (HX_RE) ::= {$Cons} <HxRegExpUnit> <HxRegExpUnits> | {$Nil} .
+
+<HxRegExpUnit> (HX_RE) ::= {RegExpUnit}:hx <HxRegExpSimple> <HxRepeat> .
+
+<HxRepeat> (DEFAULT,HX_RE) ::=
+  HX_PLUS ( {RepeatSomeSep}:hx HX_SUB <HxRegExpSub> | {RepeatSome}:hx )
+| {RepeatMaybeSome}:hx HX_STAR
+| {RepeatMaybe}:hx HX_QUEST
+| {RepeatSingle}:hx
+.
+
+<HxRegExpSimple> (HX_RE) ::=
+  {RegExpRef}:hx <HxFragmentRef>
+| {RegExpClass}:hx <HxRegExpClass>
+| {RegExpAny}:hx HX_DOT
+| {RegExpClass}:hx {RegExpClassChar}:hx (HX_ESCAPEDCHAR$) {RegExpClassDone}:hx
+| {RegExpNest}:hx HX_LPAREN <HxRegExp> HX_RPAREN
+| {RegExpString}:hx <HxString>
+| {RegExpWord}:hx <HxRegExpWord>
+.
+
+<HxRegExpSub> (DEFAULT,HX_RE) ::=
+  {RegExpString}:hx <HxString>
+| {RegExpWord}:hx <HxSeparator>
+.
+
+
+//// ATTRIBUTE DECLARATIONS
+
+<HxAttributeForm> ::=
+  {AttributeFormSimple}:hx HX_LPAREN <HxSort> HX_RPAREN
+| HX_LBRACE <HxSort>:# ( {AttributeFormMap}:hx {{#}} HX_COLON <HxSort> HX_RBRACE
+                       | {AttributeFormSet}:hx {{#}} HX_RBRACE )
+.
+
+//// SORT PRODUCTION DECLARATIONS 
+
+<HxSortNames> ::= {$Cons} <HxSortName> (HX_COMMA <HxSortNames> | {$Nil}) . 
+
+<HxSortAbstraction> ::=
+  {SortAbstractionParam}:hx <HxVariable>^a <HxSortAbstraction>[a]
+| {SortAbstractionBody}:hx <HxSortAlternatives>
+.
+
+<HxSortAlternatives> ::= {$Cons} <HxSortAlternative> <HxSortAlternatives> | {$Nil} .
+
+<HxSortAlternative> ::= HX_BAR (
+  HX_SCHEME:hx <HxForm>
+| {SynthesizedRef}:hx HX_UP <HxAttributeName> 
+| HX_SUGAR:hx <HxForm> HX_ARROW <HxTopTerm>
+| HX_SYMBOL:hx <HxForm>
+| HX_STATIC:hx (HX_SYMBOL)? <HxForm>
+| {data}:hx (HX_DATA)? <HxForm>
+).
+
+<HxForm> ::=
+  {FormParsed}:hx <HxParsedForm> <HxFormPrec> <HxInheritedRefs>
+| {FormConstruction}:hx <HxConstructor> ( HX_LPAREN (<HxBindersScopeSorts> | {$Nil}) HX_RPAREN | {$Nil} ) <HxInheritedRefs>
+.
+
+<HxBindersScopeSorts> ::= {$Cons} <HxBindersScopeSort> (HX_COMMA <HxBindersScopeSorts> | {$Nil}) .
+
+<HxBindersScopeSort> ::= HX_LBRACKET <HxBindersScopeSortInside> | <HxScopeSort> .
+<HxBindersScopeSortInside> ::= <HxSort>:#Sort HX_BINDS:hx {{#Sort}} <HxVariable>!!! <HxBindersScopeSortInsideTail> .
+<HxBindersScopeSortInsideTail> ::= HX_COMMA <HxBindersScopeSortInside> | HX_RBRACKET <HxBindersScopeSort> .
+
+<HxScopeSort> ::= {ScopeSort}:hx <HxSort> <HxRepeat> (HX_LBRACKET <HxSubstituteSorts> HX_RBRACKET | {$Nil}) .
+
+<HxSubstituteSorts> ::= {$Cons} <HxSubstituteSort> ( HX_COMMA <HxSubstituteSorts> | {$Nil} ) | {$Nil}  . 
+<HxSubstituteSort> ::= <HxVariable>!!!:#v ( {SubstituteSort}:hx {{#v}} HX_AS <HxSort> | {SubstituteNoSort}:hx {{#v}} ) .
+
+<HxSort> ::= {Sort}:hx <HxSimpleSort> <HxSimpleSorts> .
+
+<HxSimpleSorts> ::= HX_LPAREN ( {$Cons} <HxSimpleSort> <HxSimpleSortTail> | {$Nil} ) HX_RPAREN | {$Nil} .
+<HxSimpleSortTail> ::= HX_COMMA {$Cons} <HxSimpleSort> <HxSimpleSortTail> | {$Nil} .
+
+<HxSimpleSort> ::=
+  {SortName}:hx <HxSortName> <HxMetaVariables>
+| {SortParam}:hx <HxSortParam>
+.
+<HxMetaVariables> ::= {$Cons} <HxMetaVariable> {$Nil} | {$Nil} .
+<HxSortParam> ::= <HxVariable>! .
+
+<HxFormPrec> ::= ( HX_AT <HxNatural> | {"0"} ) .
+
+<HxInheritedRefs> ::=( {$Cons} <HxInheritedRef> <HxInheritedRefs> | {$Nil} ).
+<HxInheritedRef> ::= HX_DOWN <HxAttributeName> . 
+
+
+//// RULES.
+
+<HxRule> ::= {Rule}:hx <HxRulePrefix> <HxTopPattern> ( HX_ARROW <HxTopTerm> | {NullTerm}:hx ) .
+
+<HxRulePrefix> ::= {RulePrefix}:hx <HxRulePriority> ( HX_LBRACKET (<HxRuleOptions> | {$Nil}) HX_RBRACKET | {$Nil} ) .
+
+<HxRulePriority> ::=( HX_DEFAULT:hx | HX_PRIORITY:hx | {Normal}:hx ).
+
+<HxRuleOptions> ::= {$Cons} <HxTopPattern> ( HX_COMMA <HxRuleOptions> | {$Nil} ) .
+
+
+//// SORT NAME STORE HACK.
+
+%{
+/* "Last top level sort name" hack. */
+
+net.sf.crsx.Sink N_Store_HxSortName(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.util.Buffer b = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	N_HxSortName(b.sink(), env)
+	{
+		net.sf.crsx.Term term = b.term(false);
+		storedSort = net.sf.crsx.util.Util.symbol(term);
+		return term.copy(sink, true, net.sf.crsx.util.LinkedExtensibleMap.EMPTY_RENAMING);
+	}
+}
+
+net.sf.crsx.Sink N_Restoring_HxDeclarations(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	String savedStoredSort = storedSort;
+}
+{
+	sink=N_HxDeclarations(sink, env)
+	{
+		storedSort = savedStoredSort;
+		return sink;
+	}
+}
+
+// Shared nesting state.
+
+TOKEN_MGR_DECLS : { int nesting ; int nestedState; }
+%}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//// INTERFACE TO METAPARSER FRAMEWORK.
+
+<HxTopTerm> ::= <HxTerm> .
+<HxTopPattern> ::= <HxPattern> .
+<HxAttributes> ::= ( {$Cons} <HxAttribute> <HxAttributes> | {$Nil} ).
+<HxSortName> ::= HX_CONSTRUCTOR$ .
+<HxConstructor> ::= HX_CONSTRUCTOR$ .
+
+//// TERMS.
+
+<HxTerm> ::=
+  <HxVariable>!!!:#v ( {Special}:hx {{#v}} <HxConcreteText> <HxAttributes> | {VariableUse}:hx {{#v}} <HxAttributes>)
+| <HxConstructor>:#C
+  <HxRepeat>:#R
+  ( {UnparsedSorted}:hx {{#C}} {{#R}} <HxConcrete> <HxAttributes>
+  | {MetaApplicationSorted}:hx {{#C}} {{#R}} <HxMetaVariable> ( HX_LBRACKET (<HxTerms> | {$Nil}) HX_RBRACKET | {$Nil} ) <HxAttributes>
+  | {ConstructionSorted}:hx {{#C}} {{#R}} <HxConstructor> ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  | {VariableUseSorted}:hx {{#C}} {{#R}} <HxVariable>!!! <HxAttributes>
+  | {LiteralSorted}:hx {{#C}} {{#R}} <HxLiteral> <HxAttributes>
+  | {Construction}:hx {{#C}} ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  )
+| {Literal}:hx <HxLiteral> <HxAttributes>
+| {Unparsed}:hx <HxConcrete> <HxAttributes>
+| {MetaApplication}:hx <HxMetaVariable> ( HX_LBRACKET (<HxTerms> | {$Nil}) HX_RBRACKET | {$Nil} ) <HxAttributes>
+.
+
+<HxPattern> ::=
+  <HxConstructor>:#C
+  <HxRepeat>:#R
+  ( {UnparsedSorted}:hx {{#C}} {{#R}} <HxConcrete> <HxAttributes>
+  | {ConstructionSorted}:hx {{#C}} {{#R}} <HxConstructor> ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  | {LiteralSorted}:hx {{#C}} {{#R}} <HxLiteral> <HxAttributes>
+  | {Construction}:hx {{#C}} ( HX_LPAREN (<HxScopes> | {$Nil}) HX_RPAREN | {$Nil} ) <HxAttributes>
+  )
+| {Literal}:hx <HxLiteral> <HxAttributes>
+| {Unparsed}:hx <HxConcrete> <HxAttributes>
+.
+
+<HxScopes> ::= {$Cons} <HxScope> (HX_COMMA <HxScopes> | {$Nil}) .
+<HxScope> ::= {Scope}:hx (HX_LBRACKET (<HxVariableList> | {$Nil}) HX_RBRACKET | {$Nil}) <HxTerm> .
+
+<HxVariables> ::= {$Cons} <HxVariable>!!! <HxVariables> | {$Nil} .
+<HxVariableList> ::= {$Cons} <HxVariable>!!! ( HX_COMMA <HxVariableList> | {$Nil} ) .
+
+<HxTerms> ::= {$Cons} <HxTerm> (HX_COMMA <HxTerms> | {$Nil}) .
+
+<HxAttribute> ::= <HxAttributeKind>:#kind ( {Attribute}:hx {{#kind}} <HxAttributeName> <HxAttributeValue> | {CatchAllAttributes}:hx {{#kind}} <HxMetaVariable> | <HxSystemAttribute> ) .
+
+<HxSystemAttribute> ::= {SystemAttribute}:hx HX_DOT <HxVariable> HX_LPAREN <HxTopPattern> HX_RPAREN .
+
+<HxAttributeValue> ::= 
+  {AttributeValue}:hx HX_LPAREN <HxTerm> HX_RPAREN
+| HX_LBRACE
+    ( ( <HxTerm>:# ( {AttributeKeyValue}:hx {{#}} HX_COLON <HxTerm> | {AttributeKey}:hx {{#}} ) )
+    | {AttributeCatchAll}:hx HX_COLON <HxMetaVariable>
+    | {AttributeNotKey}:hx HX_NOT <HxTerm> )
+  HX_RBRACE
+.
+
+// Use of embedded concrete text.
+
+<HxConcrete> ::= HX_CONCRETE$:unwrap .
+<HxConcreteText> ::= HX_CONCRETE$$:unwrap:{n} .
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// Hx.pgpost: HX PARSER POST TERM PRODUCTIONS.
+//// Copyright © 2012,2014 Kristoffer H. Rose <krisrose@rcsx.org>
+
+
+//// TOKENS.
+
+// Special syntactic token for concrete syntax.
+
+%{
+// Nested concrete token ⟦...⟧. 
+<DEFAULT,HX_RE> MORE : { "\u27e6" { nesting = 0; nestedState = curLexState; } : HX_IN_CONCRETE }
+<HX_IN_CONCRETE> MORE : { "\u27e6" { nesting = 1; } : HX_IN_NESTED_CONCRETE }
+<HX_IN_NESTED_CONCRETE> MORE : { "\u27e6" { nesting++; } }
+<HX_IN_NESTED_CONCRETE> MORE : { "\u27e7" { if (--nesting <= 0) SwitchTo(HX_IN_CONCRETE); } }
+<HX_IN_CONCRETE> TOKEN : { <T_HX_CONCRETE : "\u27e7"> { SwitchTo(nestedState); } }
+<HX_IN_CONCRETE,HX_IN_NESTED_CONCRETE> MORE : { < ~[] > }
+%}
+
+// Tokens for terms.
+
+skip (DEFAULT,HX_RE) ::= ' ' | \r | \t | \n | '//' ~[\n\r]* | \u1 .
+%{
+// Nested comments JavaCC hack...
+<DEFAULT,HX_RE> SKIP : { "/*" { nesting = 1; nestedState = curLexState; } : HX_NESTED_COMMENT }
+<HX_NESTED_COMMENT> SKIP : { "/*" { nesting += 1; } }
+<HX_NESTED_COMMENT> SKIP : { "*/" { nesting -= 1; if (nesting<=0) SwitchTo(nestedState); } }
+<HX_NESTED_COMMENT> SKIP : { < ~[] > }
+%}
+
+// Combinations.
+<HxModuleName> ::= ( <HxString>:checkModuleString | HX_DOTTEDNAME$ ).
+<HxVariable> ::=  HX_VAR$ .
+<HxMetaVariable> ::= HX_META$ .
+<HxAttributeName> ::= HX_VAR$ .
+<HxSeparator> ::= ( HX_BAR$ | HX_SEMI$ | HX_COMMA$ | HX_COLON$ | HX_STAR$ | HX_DOT$ ).
+<HxTokenName> (HX_RE) ::= HX_RE_NAME$ .
+<HxFragmentRef> (HX_RE) ::= HX_FRAGMENT_REF$:unwrap .
+<HxRegExpWord> (HX_RE) ::= ( HX_RE_NAME$ | HX_RE_WORD$ ).
+
+// Single character tokens.
+
+// Common to regular expressions.
+token HX_SEMI (DEFAULT,HX_RE : DEFAULT) ::= ";" .
+token HX_BAR (DEFAULT,HX_RE) ::= "|" .
+token HX_LPAREN (DEFAULT,HX_RE) ::= "(" .
+token HX_RPAREN (DEFAULT,HX_RE) ::= ")" .
+token HX_STAR (DEFAULT,HX_RE) ::= "*" .
+token HX_PLUS (DEFAULT,HX_RE) ::= "+" .
+token HX_QUEST (DEFAULT,HX_RE) ::= "?" .
+token HX_SUB (DEFAULT,HX_RE) ::= "_" .
+token HX_DOT (DEFAULT,HX_RE) ::= "." .
+token HX_COLON (DEFAULT,HX_RE) ::= ":" .
+
+// Exclusive to default mode.
+token HX_LBRACE ::= "{" .
+token HX_RBRACE ::= "}" .
+token HX_LBRACKET ::= "[" .
+token HX_RBRACKET ::= "]" .
+token HX_COMMA ::= "," .
+token HX_FORALL ::= \u2200 . // ∀
+token HX_ARROW ::= \u2192 . // →
+token HX_UP ::= \u2191 . // ↑
+token HX_DOWN ::= \u2193 . // ↓
+token HX_NOT ::= \u00ac . // ¬
+token HX_AT ::= "@" .
+
+token HX_DOTTEDNAME ::= ( [a-z] [A-Za-z0-9_$]* HX_DOT )+ [A-Z] [A-Za-z0-9_$]* .
+
+// Normal keywords.
+token HX_MODULE ::= "module" .
+token HX_SORT ::= "sort" .
+token HX_MAIN ::= "main" .
+token HX_DATA ::= "data" .
+token HX_SCHEME ::= "scheme" .
+token HX_AUTOMATIC ::= "automatic" .
+token HX_SYMBOL ::= "symbol" .
+token HX_STATIC ::= "static" .
+token HX_ATTRIBUTE ::= "attribute" .
+token HX_COMPOSE ::= "compose" .
+token HX_SUGAR ::= "sugar" .
+token HX_RULE ::= "rule" .
+token HX_PRIORITY ::= "priority" .
+token HX_DEFAULT ::= "default" .
+token HX_IMPORT ::= "import" .
+token HX_TAG ::= "tag" .
+token HX_BINDS ::= "binds" .
+token HX_AS ::= "as" .
+
+// Regular Expression introduction keywords.
+token HX_SPACE (DEFAULT : HX_RE) ::= "space" .
+token HX_TOKEN (DEFAULT : HX_RE) ::= "token" .
+token HX_FRAGMENT (DEFAULT,HX_RE : HX_RE) ::= "fragment" .
+token HX_NESTED (HX_RE) ::= "nested" .
+
+// Regular Expression specific tokens.
+token HX_FRAGMENT_REF (HX_RE) ::= \u27e8 HX_RE_NAME \u27e9 .
+token HX_RE_NAME (HX_RE) ::= [A-Z] [A-Za-z0-9_$]* .
+token HX_RE_WORD (HX_RE) ::= ~['⟨','⟩','⟦','⟧','(',')','[',']','.','*','+','?',';','"',"'",',',':','«','»',' ',\t,\\,\n]+ .
+
+// The basic identifier forms.
+token HX_META ::= ['#'] [A-Za-z0-9_$]* .
+token HX_VAR ::= [a-z] [A-Za-z0-9_$]* .
+
+// Constant values.
+<HxLiteral> ::= ( <HxString> | <HxNumber> ).
+
+// Numbers.
+<HxNumber> ::= ( <HxNatural> | HX_UNNATURAL$ ).
+<HxNatural> ::= HX_NATURAL$ .
+token HX_NATURAL ::= [0-9]+ .
+token fragment HX_INTEGER ::= [-+]* HX_NATURAL .
+token HX_UNNATURAL ::= (HX_INTEGER? "." HX_NATURAL) ( [Ee] HX_INTEGER )? | HX_INTEGER [Ee] HX_INTEGER .
+
+// COMMON TOKENS.
+
+// Strings (in hx uninterpreted form).
+<HxString> (DEFAULT,HX_RE) ::= HX_STRING$ .
+token HX_STRING (DEFAULT,HX_RE) ::= ( "'" HX_STRING1CHAR* "'" | '"' HX_STRING2CHAR* '"' ).
+token fragment HX_STRING1CHAR ::= ( ~[\\'\n] | HX_ESCAPEDCHAR ).
+token fragment HX_STRING2CHAR ::= ( ~[\\"\n] | HX_ESCAPEDCHAR ).
+
+// Escaped characters...TODO: many more to add!
+token HX_ESCAPEDCHAR (DEFAULT,HX_RE) ::=
+  [\\] ~[0-9ux]
+| [\\] [0-3]? [0-7]? [0-7]
+| [\\] [u] HX_HEX? HX_HEX? HX_HEX? HX_HEX
+| [\\] [x] (HX_HEX HX_HEX | '{' HX_HEX+ '}')
+.
+token fragment HX_HEX ::= [0-9A-Fa-f] .
+
+
+//// CC SUBPARSER FOR REGULAR EXPRESSION CHARACTER CLASSES.
+
+// Tokenizer for *entire* character class expression.
+<HxRegExpClass> (HX_RE) ::= HX_CHAR_CLASS$$:unwrap:{rawHxCC} .
+token HX_CHAR_CLASS (HX_RE) ::= '[' ('^')? (']')? (~[']',\\,\n] | HX_ESCAPEDCHAR)* ']' .
+
+// (Re)Parser to parse the actual regular expression.
+<HxCC> (HX_CC) ::= <HxCC_RangesTop> .
+
+// All tokens are in CC mode.
+token HX_CC_NOT (HX_CC) ::= "^" .
+token HX_CC_RBRACKET (HX_CC) ::= "]" .
+token HX_CC_DASH (HX_CC) ::= "-" .
+token HX_CC_OTHER (HX_CC) ::= ~['^',']','-',\\,\n,\u1] | HX_ESCAPEDCHAR .
+token HX_CC_SKIP (HX_CC) ::= \u1 .
+
+<HxCC_RangesTop> (HX_CC) ::=
+  {RegExpClassNot}:hx HX_CC_NOT <HxCC_FirstRangeStartChar>:#lo <HxCC_RangeTail #lo>
+| <HxCC_FirstRangeStartChar>:#lo <HxCC_RangeTail #lo>
+| HX_CC_SKIP <HxCC_RangesTop>
+.
+
+<HxCC_Ranges> (HX_CC) ::=
+  <HxCC_RangeChar>:#lo <HxCC_RangeTail #lo>
+| HX_CC_SKIP <HxCC_Ranges>
+| {RegExpClassDone}:hx
+.
+
+<HxCC_RangeTail #lo> (HX_CC) ::=
+  HX_CC_DASH ( {RegExpClassRange}:hx {{#lo}} <HxCC_RangeChar> <HxCC_Ranges> | {RegExpClassChar}:hx {{#lo}} {RegExpClassDone}:hx )
+| {RegExpClassChar}:hx {{#lo}} <HxCC_NonDashRangeStartChar>:#lo2 <HxCC_RangeTail #lo2>
+| HX_CC_SKIP  <HxCC_RangeTail #lo>
+| {RegExpClassChar}:hx {{#lo}} {RegExpClassDone}:hx
+.
+
+<HxCC_FirstRangeStartChar> (HX_CC) ::= (HX_CC_RBRACKET$ | HX_CC_DASH$ | HX_CC_OTHER$) .
+<HxCC_NonDashRangeStartChar> (HX_CC) ::= (HX_CC_NOT$ | HX_CC_OTHER$) .
+<HxCC_RangeChar> (HX_CC) ::= (HX_CC_NOT$ | HX_CC_DASH$ | HX_CC_OTHER$) .
+
+
+//// PP SUBPARSER FOR PARSED FORMS.
+
+<HxParsedForm> ::= HX_CONCRETE$$:unwrap:{rawHxPP} .
+
+<HxPP> (HX_PP) ::=
+  {ParsedFormSpace}:hx <HxPPConcreteSpace> <HxPP>
+| {ParsedFormWord}:hx <HxPPConcreteWord> <HxPP>
+| {ParsedFormTerm}:hx <HxPPUnconcrete> <HxPP>
+| {ParsedFormDone}:hx
+.
+
+<HxPPConcreteSpace> (HX_PP) ::= HX_PP_CONCRETE_SPACE$ .
+<HxPPConcreteWord> (HX_PP) ::= HX_PP_CONCRETE_WORD$ .
+<HxPPUnconcrete> (HX_PP) ::= HX_PP_UNCONCRETE$$:unwrap:{rawHxScopeSortPrec} .
+
+// Standard parser additional top symbol for use from within PP.
+<HxScopeSortPrec> ::=
+  <HxScopeSort>:#S
+  ( {ScopeSortPrecBind}:hx HX_BINDS {{#S}} <HxVariable>!!!
+  | {ScopeSortPrec}:hx {{#S}} <HxFormPrec>
+  )
+.
+
+token HX_PP_CONCRETE_SPACE (HX_PP) ::= [' ',\t\r\n,\ub6]+ . // no comments but include special spacing marks
+token HX_PP_CONCRETE_WORD (HX_PP) ::= ~[' ',\t\r\n\ub6\u27e6\u27e7\u27e8\u27e9]+ .
+%{
+// Nested unconcrete token ⟨...⟩ inside PP.
+<HX_PP> MORE : { "\u27e8" { nesting = 0; nestedState = curLexState; } : IN_PP_UNCONCRETE }
+<IN_PP_UNCONCRETE> MORE : { "\u27e8" { nesting = 1; } : IN_PP_NESTED_UNCONCRETE }
+<IN_PP_NESTED_UNCONCRETE> MORE : { "\u27e8" { nesting++; } }
+<IN_PP_NESTED_UNCONCRETE> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_PP_UNCONCRETE); } }
+<IN_PP_UNCONCRETE> TOKEN : { <T_HX_PP_UNCONCRETE : "\u27e9"> { SwitchTo(nestedState); } }
+<IN_PP_UNCONCRETE,IN_PP_NESTED_UNCONCRETE> MORE : { < ~[] > }
+%}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// Unconstrainedconstructors.
+
+token HX_CONSTRUCTOR ::= [A-Z$] [A-Za-z0-9_$]* .
