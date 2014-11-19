@@ -1,4 +1,4 @@
-module edu.nyu.csci.cc.fall14.pr2bListExample {
+module edu.nyu.csci.cc.fall14.Words {
 
 	// Simple word membership query.
 	main sort Query 
@@ -20,7 +20,7 @@ module edu.nyu.csci.cc.fall14.pr2bListExample {
 	attribute ↑z(Words);
 	sort List
 		| ↑z;
-	⟦ ⟨WORD#w⟩, ⟨List#w ↑z(#zs)⟩ ⟧↑z(MoreWords(#w, #zs));
+	⟦ ⟨WORD#w⟩, ⟨List#ws ↑z(#zs)⟩ ⟧↑z(MoreWords(#w, #zs));
 	⟦ ⟨WORD#w⟩ ⟧↑z(MoreWords(#w, NoWords));
 
 	// We'll provide the answer in clear text
@@ -33,7 +33,7 @@ module edu.nyu.csci.cc.fall14.pr2bListExample {
 		| scheme CheckMember(WORD, Words) ;
 
 	// If the word and the first member of the list are the same, then we succeed!
-	CheckMember(#w, MoreWords(#w, #zs)) → ⟦Yes, the list contains ⟨WORD#w⟩.⟧
+	CheckMember(#w, MoreWords(#w, #zs)) → ⟦Yes, the list contains ⟨WORD#w⟩.⟧;
 
 	// If the word was not the same, fall back to a default recursive case
 	default CheckMember(#w, MoreWords(#z, #zs)) → CheckMember(#w, #zs) ;
