@@ -1,0 +1,4 @@
+// This is a comment /*
+which is opened incorrectly
+*/
+function string main() { return ""; }

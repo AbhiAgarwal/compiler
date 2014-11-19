@@ -1,0 +1,913 @@
+ // CRSX RULES FOR edu.nyu.csci.cc.fall14.Pr2Base.
+
+Pr2Base[(
+
+// Print uses text.
+  $CheckGrammar["net.sf.crsx.text.Text"];
+  $Use["net/sf/crsx/text/Text.crs"];
+
+// Standard functions.
+  $Use["org/crsx/hacs/Prelude.crs"];
+
+// Infer options.
+  $Lax;
+
+/////////////////////////////////////////////////////////////////////////////
+// DECLARATIONS AND OUTPUT.
+
+
+
+'$Print-Pr2Base$Program' [$Pr2Base$Program] :: Text ;
+'$Print-Pr2Base$Program' [#] → '$Print2-Pr2Base$Program' [#, 0] ;
+
+
+'$Print-Pr2Base$Literal' [$Pr2Base$Literal] :: Text ;
+'$Print-Pr2Base$Literal' [#] → '$Print2-Pr2Base$Literal' [#, 0] ;
+
+
+'$Print-Pr2Base$KeyValue' [$Pr2Base$KeyValue] :: Text ;
+'$Print-Pr2Base$KeyValue' [#] → '$Print2-Pr2Base$KeyValue' [#, 0] ;
+
+
+'$Print-Pr2Base$Members' [$Pr2Base$Members] :: Text ;
+'$Print-Pr2Base$Members' [#] → '$Print2-Pr2Base$Members' [#, 0] ;
+
+
+'$Print-Pr2Base$ArgumentSignature' [$Pr2Base$ArgumentSignature] :: Text ;
+'$Print-Pr2Base$ArgumentSignature' [#] → '$Print2-Pr2Base$ArgumentSignature' [#, 0] ;
+
+
+'$Print-Pr2Base$TypeIdentifierTail' [$Pr2Base$TypeIdentifierTail] :: Text ;
+'$Print-Pr2Base$TypeIdentifierTail' [#] → '$Print2-Pr2Base$TypeIdentifierTail' [#, 0] ;
+
+
+'$Print-Pr2Base$KeyValueTail' [$Pr2Base$KeyValueTail] :: Text ;
+'$Print-Pr2Base$KeyValueTail' [#] → '$Print2-Pr2Base$KeyValueTail' [#, 0] ;
+
+
+'$Print-Pr2Base$Declarations' [$Pr2Base$Declarations] :: Text ;
+'$Print-Pr2Base$Declarations' [#] → '$Print2-Pr2Base$Declarations' [#, 0] ;
+
+
+'$Print-Pr2Base$Declaration' [$Pr2Base$Declaration] :: Text ;
+'$Print-Pr2Base$Declaration' [#] → '$Print2-Pr2Base$Declaration' [#, 0] ;
+
+
+'$Print-Pr2Base$Member' [$Pr2Base$Member] :: Text ;
+'$Print-Pr2Base$Member' [#] → '$Print2-Pr2Base$Member' [#, 0] ;
+
+
+'$Print-Pr2Base$IfTail' [$Pr2Base$IfTail] :: Text ;
+'$Print-Pr2Base$IfTail' [#] → '$Print2-Pr2Base$IfTail' [#, 0] ;
+
+
+'$Print-Pr2Base$Expression' [$Pr2Base$Expression] :: Text ;
+'$Print-Pr2Base$Expression' [#] → '$Print2-Pr2Base$Expression' [#, 0] ;
+
+
+'$Print-Pr2Base$Statements' [$Pr2Base$Statements] :: Text ;
+'$Print-Pr2Base$Statements' [#] → '$Print2-Pr2Base$Statements' [#, 0] ;
+
+
+'$Print-Pr2Base$Statement' [$Pr2Base$Statement] :: Text ;
+'$Print-Pr2Base$Statement' [#] → '$Print2-Pr2Base$Statement' [#, 0] ;
+
+
+'$Print-Pr2Base$SimpleLiteral' [$Pr2Base$SimpleLiteral] :: Text ;
+'$Print-Pr2Base$SimpleLiteral' [#] → '$Print2-Pr2Base$SimpleLiteral' [#, 0] ;
+
+
+'$Print-Pr2Base$Type' [$Pr2Base$Type] :: Text ;
+'$Print-Pr2Base$Type' [#] → '$Print2-Pr2Base$Type' [#, 0] ;
+
+
+'$Print-Pr2Base$ObjectLiteral' [$Pr2Base$ObjectLiteral] :: Text ;
+'$Print-Pr2Base$ObjectLiteral' [#] → '$Print2-Pr2Base$ObjectLiteral' [#, 0] ;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Program' [ 'Pr2Base$Program__Declarations_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Declarations' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Declarations' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Declarations' [ 'Pr2Base$Declarations__Declaration__Declarations_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Declaration' [#1, 0] › ‹ '$Print2-Pr2Base$Declarations' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Declaration' [#1, 0] › ‹ '$Print2-Pr2Base$Declarations' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Declarations' [ 'Pr2Base$Declarations_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪()⟫,
+  %n⟪⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Declaration' [ 'Pr2Base$Declaration_class_Identifier_{_Members_}' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( class ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › { ‹ '$Print2-Pr2Base$Members' [#2, 0] › } )⟫,
+  %n⟪ class ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › { ‹ '$Print2-Pr2Base$Members' [#2, 0] › } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Declaration' [ 'Pr2Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [#1, #2, #3, #4], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( function ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr2Base$Statements' [#4, 0] › } )⟫,
+  %n⟪ function ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr2Base$Statements' [#4, 0] › } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Members' [ 'Pr2Base$Members__Member__Members_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Member' [#1, 0] › ‹ '$Print2-Pr2Base$Members' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Member' [#1, 0] › ‹ '$Print2-Pr2Base$Members' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Members' [ 'Pr2Base$Members_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪()⟫,
+  %n⟪⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Member' [ 'Pr2Base$Member__Type__Identifier_;' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ; )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Member' [ 'Pr2Base$Member__Type__Identifier__ArgumentSignature_{_Statements_}' [#1, #2, #3, #4], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr2Base$Statements' [#4, 0] › } )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr2Base$Statements' [#4, 0] › } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$ArgumentSignature' [ 'Pr2Base$ArgumentSignature_()' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ( ) )⟫,
+  %n⟪ ( ) ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$ArgumentSignature' [ 'Pr2Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [#1, #2, #3], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ( ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$TypeIdentifierTail' [#3, 0] › ) )⟫,
+  %n⟪ ( ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$TypeIdentifierTail' [#3, 0] › ) ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$TypeIdentifierTail' [ 'Pr2Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [#1, #2, #3], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( , ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$TypeIdentifierTail' [#3, 0] › )⟫,
+  %n⟪ , ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ‹ '$Print2-Pr2Base$TypeIdentifierTail' [#3, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$TypeIdentifierTail' [ 'Pr2Base$TypeIdentifierTail_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( )⟫,
+  %n⟪ ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statements' [ 'Pr2Base$Statements__Statement__Statements_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Statement' [#1, 0] › ‹ '$Print2-Pr2Base$Statements' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Statement' [#1, 0] › ‹ '$Print2-Pr2Base$Statements' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statements' [ 'Pr2Base$Statements_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪()⟫,
+  %n⟪⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_{_Statements_}' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( { ‹ '$Print2-Pr2Base$Statements' [#1, 0] › } )⟫,
+  %n⟪ { ‹ '$Print2-Pr2Base$Statements' [#1, 0] › } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_var_Type__Identifier_;' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( var ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ; )⟫,
+  %n⟪ var ‹ '$Print2-Pr2Base$Type' [#1, 0] › ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_;' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ; )⟫,
+  %n⟪ ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement__Expression_;' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ; )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_if(_Expression_)_IfTail_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( if ( ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr2Base$IfTail' [#2, 0] › )⟫,
+  %n⟪ if ( ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr2Base$IfTail' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_while(_Expression_)_Statement_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( while ( ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr2Base$Statement' [#2, 0] › )⟫,
+  %n⟪ while ( ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr2Base$Statement' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_return_Expression_;' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( return ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ; )⟫,
+  %n⟪ return ‹ '$Print2-Pr2Base$Expression' [#1, 0] › ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Statement' [ 'Pr2Base$Statement_return;' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( return ; )⟫,
+  %n⟪ return ; ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$IfTail' [ 'Pr2Base$IfTail__Statement_else_Statement_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Statement' [#1, 0] › else ‹ '$Print2-Pr2Base$Statement' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Statement' [#1, 0] › else ‹ '$Print2-Pr2Base$Statement' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$IfTail' [ 'Pr2Base$IfTail__Statement_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Statement' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Statement' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Type' [ 'Pr2Base$Type_boolean' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( boolean )⟫,
+  %n⟪ boolean ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Type' [ 'Pr2Base$Type_int' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( int )⟫,
+  %n⟪ int ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Type' [ 'Pr2Base$Type_string' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( string )⟫,
+  %n⟪ string ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Type' [ 'Pr2Base$Type_void' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( void )⟫,
+  %n⟪ void ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Type' [ 'Pr2Base$Type__Identifier_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__SimpleLiteral_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 10],
+  %n⟪( ‹ '$Print2-Pr2Base$SimpleLiteral' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$SimpleLiteral' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Identifier_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 10],
+  %n⟪( ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression_this' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 10],
+  %n⟪( this )⟫,
+  %n⟪ this ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_(_Expression_)' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 9],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr2Base$Expression' [#2, 0] › ) )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr2Base$Expression' [#2, 0] › ) ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_()' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 9],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 9] › ( ) )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 9] › ( ) ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_._Identifier_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 9],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 9] › . ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 9] › . ‹ '$Print2-Pr2Base$Identifier' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression_!_Expression_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 8],
+  %n⟪( ! ‹ '$Print2-Pr2Base$Expression' [#1, 8] › )⟫,
+  %n⟪ ! ‹ '$Print2-Pr2Base$Expression' [#1, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression_-_Expression_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 8],
+  %n⟪( - ‹ '$Print2-Pr2Base$Expression' [#1, 8] › )⟫,
+  %n⟪ - ‹ '$Print2-Pr2Base$Expression' [#1, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression_+_Expression_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 8],
+  %n⟪( + ‹ '$Print2-Pr2Base$Expression' [#1, 8] › )⟫,
+  %n⟪ + ‹ '$Print2-Pr2Base$Expression' [#1, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_*_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 7],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 7] › * ‹ '$Print2-Pr2Base$Expression' [#2, 8] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 7] › * ‹ '$Print2-Pr2Base$Expression' [#2, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_/_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 7],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 7] › / ‹ '$Print2-Pr2Base$Expression' [#2, 8] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 7] › / ‹ '$Print2-Pr2Base$Expression' [#2, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_%_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 7],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 7] › % ‹ '$Print2-Pr2Base$Expression' [#2, 8] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 7] › % ‹ '$Print2-Pr2Base$Expression' [#2, 8] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_+_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 6],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › + ‹ '$Print2-Pr2Base$Expression' [#2, 7] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › + ‹ '$Print2-Pr2Base$Expression' [#2, 7] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_-_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 6],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › - ‹ '$Print2-Pr2Base$Expression' [#2, 7] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › - ‹ '$Print2-Pr2Base$Expression' [#2, 7] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_<_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 5],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › < ‹ '$Print2-Pr2Base$Expression' [#2, 6] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › < ‹ '$Print2-Pr2Base$Expression' [#2, 6] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_>_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 5],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › > ‹ '$Print2-Pr2Base$Expression' [#2, 6] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › > ‹ '$Print2-Pr2Base$Expression' [#2, 6] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_<=_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 5],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr2Base$Expression' [#2, 6] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr2Base$Expression' [#2, 6] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_>=_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 5],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr2Base$Expression' [#2, 6] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr2Base$Expression' [#2, 6] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_==_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 4],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 5] › == ‹ '$Print2-Pr2Base$Expression' [#2, 5] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 5] › == ‹ '$Print2-Pr2Base$Expression' [#2, 5] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_!=_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 4],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 5] › != ‹ '$Print2-Pr2Base$Expression' [#2, 5] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 5] › != ‹ '$Print2-Pr2Base$Expression' [#2, 5] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_&&_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 3],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 3] › && ‹ '$Print2-Pr2Base$Expression' [#2, 4] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 3] › && ‹ '$Print2-Pr2Base$Expression' [#2, 4] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_||_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 2],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 2] › || ‹ '$Print2-Pr2Base$Expression' [#2, 3] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 2] › || ‹ '$Print2-Pr2Base$Expression' [#2, 3] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_=_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 1],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 2] › = ‹ '$Print2-Pr2Base$Expression' [#2, 1] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 2] › = ‹ '$Print2-Pr2Base$Expression' [#2, 1] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_=_ObjectLiteral_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 1],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 2] › = ‹ '$Print2-Pr2Base$ObjectLiteral' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 2] › = ‹ '$Print2-Pr2Base$ObjectLiteral' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_+=_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 1],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 2] › += ‹ '$Print2-Pr2Base$Expression' [#2, 1] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 2] › += ‹ '$Print2-Pr2Base$Expression' [#2, 1] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Expression' [ 'Pr2Base$Expression__Expression_,_Expression_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Expression' [#1, 1] › , ‹ '$Print2-Pr2Base$Expression' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Expression' [#1, 1] › , ‹ '$Print2-Pr2Base$Expression' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Literal' [ 'Pr2Base$Literal__SimpleLiteral_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$SimpleLiteral' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$SimpleLiteral' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$Literal' [ 'Pr2Base$Literal__ObjectLiteral_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$ObjectLiteral' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$ObjectLiteral' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$SimpleLiteral' [ 'Pr2Base$SimpleLiteral__String_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$String' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$String' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$SimpleLiteral' [ 'Pr2Base$SimpleLiteral__Integer_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Integer' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Integer' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$ObjectLiteral' [ 'Pr2Base$ObjectLiteral_{}' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( { } )⟫,
+  %n⟪ { } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$ObjectLiteral' [ 'Pr2Base$ObjectLiteral_{_KeyValue__KeyValueTail_}' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( { ‹ '$Print2-Pr2Base$KeyValue' [#1, 0] › ‹ '$Print2-Pr2Base$KeyValueTail' [#2, 0] › } )⟫,
+  %n⟪ { ‹ '$Print2-Pr2Base$KeyValue' [#1, 0] › ‹ '$Print2-Pr2Base$KeyValueTail' [#2, 0] › } ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$KeyValueTail' [ 'Pr2Base$KeyValueTail_,_KeyValue__KeyValueTail_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( , ‹ '$Print2-Pr2Base$KeyValue' [#1, 0] › ‹ '$Print2-Pr2Base$KeyValueTail' [#2, 0] › )⟫,
+  %n⟪ , ‹ '$Print2-Pr2Base$KeyValue' [#1, 0] › ‹ '$Print2-Pr2Base$KeyValueTail' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$KeyValueTail' [ 'Pr2Base$KeyValueTail_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( )⟫,
+  %n⟪ ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr2Base$KeyValue' [ 'Pr2Base$KeyValue__Identifier_:_Literal_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › : ‹ '$Print2-Pr2Base$Literal' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Pr2Base$Identifier' [#1, 0] › : ‹ '$Print2-Pr2Base$Literal' [#2, 0] › ⟫
+]
+;
+
+
+'$Print-Pr2Base$Identifier' [Pr2Base$Identifier] :: Text ;
+'$Print-Pr2Base$Identifier' [#] → '$Print2-Pr2Base$Identifier' [#, 0] ;
+
+'$Print2-Pr2Base$Identifier' [Pr2Base$Identifier, $Numeric] :: Text ;
+'$Print2-Pr2Base$Identifier' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+
+
+'$Print-Pr2Base$Integer' [Pr2Base$Integer] :: Text ;
+'$Print-Pr2Base$Integer' [#] → '$Print2-Pr2Base$Integer' [#, 0] ;
+
+'$Print2-Pr2Base$Integer' [Pr2Base$Integer, $Numeric] :: Text ;
+'$Print2-Pr2Base$Integer' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+
+
+'$Print-Pr2Base$String' [Pr2Base$String] :: Text ;
+'$Print-Pr2Base$String' [#] → '$Print2-Pr2Base$String' [#, 0] ;
+
+'$Print2-Pr2Base$String' [Pr2Base$String, $Numeric] :: Text ;
+'$Print2-Pr2Base$String' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+
+
+'$Print-Compile' [#1]
+→
+'$Print2-Pr2Base$Program' [
+  'Pr2Base$Program_Compile' [#1],
+  0]
+;
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RULES.
+
+<!--RULES FOR SORT Pr2Base$Program.-->
+
+
+
+
+- :
+    'Pr2Base$Program_Compile' [   #  ] 
+→
+    #  
+;
+
+
+
+<!--RULES FOR SORT Pr2Base$Literal.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$KeyValue.-->
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Members.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$ArgumentSignature.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$TypeIdentifierTail.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$KeyValueTail.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Declarations.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Declaration.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Member.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$IfTail.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Expression.-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Statements.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Statement.-->
+
+
+
+
+
+
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$SimpleLiteral.-->
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$Type.-->
+
+
+
+
+
+
+
+
+<!--RULES FOR SORT Pr2Base$ObjectLiteral.-->
+
+
+
+
+
+
+)] //Pr2Base
+
