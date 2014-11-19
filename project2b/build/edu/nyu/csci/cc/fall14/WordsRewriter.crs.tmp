@@ -1,0 +1,220 @@
+ // CRSX RULES FOR edu.nyu.csci.cc.fall14.Words.
+
+Words[(
+
+// Print uses text.
+  $CheckGrammar["net.sf.crsx.text.Text"];
+  $Use["net/sf/crsx/text/Text.crs"];
+
+// Standard functions.
+  $Use["org/crsx/hacs/Prelude.crs"];
+
+// Infer options.
+  $Lax;
+
+/////////////////////////////////////////////////////////////////////////////
+// DECLARATIONS AND OUTPUT.
+
+
+
+'$Print-Words$Query' [$Words$Query] :: Text ;
+'$Print-Words$Query' [#] → '$Print2-Words$Query' [#, 0] ;
+
+
+'$Print-Words$List' [$Words$List] :: Text ;
+'$Print-Words$List' [#] → '$Print2-Words$List' [#, 0] ;
+
+
+'$Print-Words$Words' [$Words$Words] :: Text ;
+'$Print-Words$Words' [#] → '$Print2-Words$Words' [#, 0] ;
+
+
+'$Print-Words$Answer' [$Words$Answer] :: Text ;
+'$Print-Words$Answer' [#] → '$Print2-Words$Answer' [#, 0] ;
+
+
+-[Data[#prec]] :
+'$Print2-Words$Query' [ 'Words$Query__WORD_in_List_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Words$WORD' [#1, 0] › in ‹ '$Print2-Words$List' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Words$WORD' [#1, 0] › in ‹ '$Print2-Words$List' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Words$List' [ 'Words$List__WORD_,_List_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Words$WORD' [#1, 0] ›, ‹ '$Print2-Words$List' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Words$WORD' [#1, 0] ›, ‹ '$Print2-Words$List' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Words$List' [ 'Words$List__WORD_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-Words$WORD' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-Words$WORD' [#1, 0] › ⟫
+]
+;
+
+
+'$Print-Words$WORD' [Words$WORD] :: Text ;
+'$Print-Words$WORD' [#] → '$Print2-Words$WORD' [#, 0] ;
+
+'$Print2-Words$WORD' [Words$WORD, $Numeric] :: Text ;
+'$Print2-Words$WORD' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+
+
+
+'$Print2-Words$Words' [ 'MoreWords' [#1, #2], #prec ]
+→
+%n⟪'MoreWords' [‹ '$Print2-Words$WORD' [ '$Print2-Words$Words' [#1, 0],0] ›, ‹ '$Print2-Words$Words' [ '$Print2-Words$Words' [#2, 0],0] ›]⟫
+;
+
+
+
+'$Print2-Words$Words' [ 'NoWords' , #prec ]
+→
+%n⟪'NoWords' ⟫
+;
+
+
+-[Data[#prec]] :
+'$Print2-Words$Answer' [ 'Words$Answer_Yes,thelistcontains_WORD_.' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪(Yes, the list contains ‹ '$Print2-Words$WORD' [#1, 0] ›.)⟫,
+  %n⟪Yes, the list contains ‹ '$Print2-Words$WORD' [#1, 0] ›.⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Words$Answer' [ 'Words$Answer_No,thelistdoesnotcontain_WORD_.' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪(No, the list does not contain ‹ '$Print2-Words$WORD' [#1, 0] ›.)⟫,
+  %n⟪No, the list does not contain ‹ '$Print2-Words$WORD' [#1, 0] ›.⟫
+]
+;
+
+
+'$Print-CheckMember' [#1, #2]
+→
+'$Print2-Words$Answer' [
+  'Words$Answer_CheckMember' [#1, #2],
+  0]
+;
+
+
+'$Print-Check' [#1]
+→
+'$Print2-Words$Answer' [
+  'Words$Answer_Check' [#1],
+  0]
+;
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RULES.
+
+<!--RULES FOR SORT Words$Query.-->
+
+
+
+
+<!--RULES FOR SORT Words$List.-->
+
+
+
+
+
+
+
+- :
+    'Words$List_Need_z' [  { "z" : A_z[  #z  ]  }  #  ] 
+→
+    #  
+;
+
+
+- :
+    'Words$List_Need_z' [  { #synthesized }  'Words$List__WORD_,_List_' [   #w  ,    #ws  ] ] 
+→
+    'Words$List_Collect_z' [  { #synthesized }  'Words$List__WORD_,_List_' [   #w  ,    'Words$List_Need_z' [   #ws  ] ] ] 
+;
+
+
+- :
+    'Words$List_Collect_z' [  { #synthesized }  'Words$List__WORD_,_List_' [   #w  ,   { "z" : A_z[  #zs  ]  }  #ws  ] ] 
+→
+   { #synthesized; "z" : A_z[  'Words$Words_MoreWords' [   #w  ,    #zs  ] ]  }  'Words$List__WORD_,_List_' [   #w  ,    #ws  ] 
+;
+
+
+- :
+    'Words$List_Need_z' [   'Words$List__WORD_' [   #w  ] ] 
+→
+   { "z" : A_z[  'Words$Words_MoreWords' [   #w  ,    'Words$Words_NoWords'  ] ]  }  'Words$List__WORD_' [   #w  ] 
+;
+
+
+
+<!--RULES FOR SORT Words$Words.-->
+
+
+
+
+
+<!--RULES FOR SORT Words$Answer.-->
+
+
+
+
+
+
+- :
+    'Words$Answer_CheckMember' [   #w  ,    'Words$Words_MoreWords' [   #w  ,    #zs  ] ] 
+→
+    'Words$Answer_Yes,thelistcontains_WORD_.' [   #w  ] 
+;
+
+
+- :
+    'Words$Answer_CheckMember' [   #w  ,    'Words$Words_NoWords'  ] 
+→
+    'Words$Answer_No,thelistdoesnotcontain_WORD_.' [   #w  ] 
+;
+
+
+- [Fallback]:
+    'Words$Answer_CheckMember' [   #w  ,    'Words$Words_MoreWords' [   #z  ,    #zs  ] ] 
+→
+    'Words$Answer_CheckMember' [   #w  ,    #zs  ] 
+;
+
+
+
+- :
+    'Words$Answer_Check' [   'Words$Query__WORD_in_List_' [   #w  ,    #ws  ] ] 
+→
+    'Words$Answer_Delayed_Check' [   'Words$Query__WORD_in_List_' [   #w  ,    'Words$List_Need_z' [   #ws  ] ] ] 
+;
+
+
+- :
+    'Words$Answer_Delayed_Check' [   'Words$Query__WORD_in_List_' [   #w  ,   { "z" : A_z[  #zs  ]  }  #ws  ] ] 
+→
+    'Words$Answer_CheckMember' [   #w  ,    #zs  ] 
+;
+
+
+
+
+)] //Words
+

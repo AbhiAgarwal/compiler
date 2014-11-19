@@ -1,4 +1,4 @@
-module edu.nyu.csci.cc.fall14.SimpleList {
+module edu.nyu.csci.cc.fall14.Words {
 
 	// Simple word membership query.
 	main sort Query 
@@ -34,6 +34,8 @@ module edu.nyu.csci.cc.fall14.SimpleList {
 
 	// If the word and the first member of the list are the same, then we succeed!
 	CheckMember(#w, MoreWords(#w, #zs)) → ⟦Yes, the list contains ⟨WORD#w⟩.⟧;
+
+	CheckMember(#w, NoWords) → ⟦No, the list does not contain ⟨WORD#w⟩.⟧ ;
 
 	// If the word was not the same, fall back to a default recursive case
 	default CheckMember(#w, MoreWords(#z, #zs)) → CheckMember(#w, #zs) ;

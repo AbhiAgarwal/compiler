@@ -1,0 +1,213 @@
+ // CRSX RULES FOR edu.nyu.csci.cc.fall14.SimpleList.
+
+SimpleList[(
+
+// Print uses text.
+  $CheckGrammar["net.sf.crsx.text.Text"];
+  $Use["net/sf/crsx/text/Text.crs"];
+
+// Standard functions.
+  $Use["org/crsx/hacs/Prelude.crs"];
+
+// Infer options.
+  $Lax;
+
+/////////////////////////////////////////////////////////////////////////////
+// DECLARATIONS AND OUTPUT.
+
+
+
+'$Print-SimpleList$Query' [$SimpleList$Query] :: Text ;
+'$Print-SimpleList$Query' [#] → '$Print2-SimpleList$Query' [#, 0] ;
+
+
+'$Print-SimpleList$List' [$SimpleList$List] :: Text ;
+'$Print-SimpleList$List' [#] → '$Print2-SimpleList$List' [#, 0] ;
+
+
+'$Print-SimpleList$Words' [$SimpleList$Words] :: Text ;
+'$Print-SimpleList$Words' [#] → '$Print2-SimpleList$Words' [#, 0] ;
+
+
+'$Print-SimpleList$Answer' [$SimpleList$Answer] :: Text ;
+'$Print-SimpleList$Answer' [#] → '$Print2-SimpleList$Answer' [#, 0] ;
+
+
+-[Data[#prec]] :
+'$Print2-SimpleList$Query' [ 'SimpleList$Query__WORD_in_List_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-SimpleList$WORD' [#1, 0] › in ‹ '$Print2-SimpleList$List' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-SimpleList$WORD' [#1, 0] › in ‹ '$Print2-SimpleList$List' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-SimpleList$List' [ 'SimpleList$List__WORD_,_List_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-SimpleList$WORD' [#1, 0] ›, ‹ '$Print2-SimpleList$List' [#2, 0] › )⟫,
+  %n⟪ ‹ '$Print2-SimpleList$WORD' [#1, 0] ›, ‹ '$Print2-SimpleList$List' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-SimpleList$List' [ 'SimpleList$List__WORD_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪( ‹ '$Print2-SimpleList$WORD' [#1, 0] › )⟫,
+  %n⟪ ‹ '$Print2-SimpleList$WORD' [#1, 0] › ⟫
+]
+;
+
+
+'$Print-SimpleList$WORD' [SimpleList$WORD] :: Text ;
+'$Print-SimpleList$WORD' [#] → '$Print2-SimpleList$WORD' [#, 0] ;
+
+'$Print2-SimpleList$WORD' [SimpleList$WORD, $Numeric] :: Text ;
+'$Print2-SimpleList$WORD' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+
+
+
+'$Print2-SimpleList$Words' [ 'MoreWords' [#1, #2], #prec ]
+→
+%n⟪'MoreWords' [‹ '$Print2-SimpleList$WORD' [ '$Print2-SimpleList$Words' [#1, 0],0] ›, ‹ '$Print2-SimpleList$Words' [ '$Print2-SimpleList$Words' [#2, 0],0] ›]⟫
+;
+
+
+
+'$Print2-SimpleList$Words' [ 'NoWords' , #prec ]
+→
+%n⟪'NoWords' ⟫
+;
+
+
+-[Data[#prec]] :
+'$Print2-SimpleList$Answer' [ 'SimpleList$Answer_Yes,thelistcontains_WORD_.' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪(Yes, the list contains ‹ '$Print2-SimpleList$WORD' [#1, 0] ›.)⟫,
+  %n⟪Yes, the list contains ‹ '$Print2-SimpleList$WORD' [#1, 0] ›.⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-SimpleList$Answer' [ 'SimpleList$Answer_No,thelistdoesnotcontain_WORD_.' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+  %n⟪(No, the list does not contain ‹ '$Print2-SimpleList$WORD' [#1, 0] ›.)⟫,
+  %n⟪No, the list does not contain ‹ '$Print2-SimpleList$WORD' [#1, 0] ›.⟫
+]
+;
+
+
+'$Print-CheckMember' [#1, #2]
+→
+'$Print2-SimpleList$Answer' [
+  'SimpleList$Answer_CheckMember' [#1, #2],
+  0]
+;
+
+
+'$Print-Check' [#1]
+→
+'$Print2-SimpleList$Answer' [
+  'SimpleList$Answer_Check' [#1],
+  0]
+;
+
+
+/////////////////////////////////////////////////////////////////////////////
+// RULES.
+
+<!--RULES FOR SORT SimpleList$Query.-->
+
+
+
+
+<!--RULES FOR SORT SimpleList$List.-->
+
+
+
+
+
+
+
+- :
+    'SimpleList$List_Need_z' [  { "z" : A_z[  #z  ]  }  #  ] 
+→
+    #  
+;
+
+
+- :
+    'SimpleList$List_Need_z' [  { #synthesized }  'SimpleList$List__WORD_,_List_' [   #w  ,    #ws  ] ] 
+→
+    'SimpleList$List_Collect_z' [  { #synthesized }  'SimpleList$List__WORD_,_List_' [   #w  ,    'SimpleList$List_Need_z' [   #ws  ] ] ] 
+;
+
+
+- :
+    'SimpleList$List_Collect_z' [  { #synthesized }  'SimpleList$List__WORD_,_List_' [   #w  ,   { "z" : A_z[  #zs  ]  }  #ws  ] ] 
+→
+   { #synthesized; "z" : A_z[  'SimpleList$Words_MoreWords' [   #w  ,    #zs  ] ]  }  'SimpleList$List__WORD_,_List_' [   #w  ,    #ws  ] 
+;
+
+
+- :
+    'SimpleList$List_Need_z' [   'SimpleList$List__WORD_' [   #w  ] ] 
+→
+   { "z" : A_z[  'SimpleList$Words_MoreWords' [   #w  ,    'SimpleList$Words_NoWords'  ] ]  }  'SimpleList$List__WORD_' [   #w  ] 
+;
+
+
+
+<!--RULES FOR SORT SimpleList$Words.-->
+
+
+
+
+
+<!--RULES FOR SORT SimpleList$Answer.-->
+
+
+
+
+
+
+- :
+    'SimpleList$Answer_CheckMember' [   #w  ,    'SimpleList$Words_MoreWords' [   #w  ,    #zs  ] ] 
+→
+    'SimpleList$Answer_Yes,thelistcontains_WORD_.' [   #w  ] 
+;
+
+
+- [Fallback]:
+    'SimpleList$Answer_CheckMember' [   #w  ,    'SimpleList$Words_MoreWords' [   #z  ,    #zs  ] ] 
+→
+    'SimpleList$Answer_CheckMember' [   #w  ,    #zs  ] 
+;
+
+
+
+- :
+    'SimpleList$Answer_Check' [   'SimpleList$Query__WORD_in_List_' [   #w  ,    #ws  ] ] 
+→
+    'SimpleList$Answer_Delayed_Check' [   'SimpleList$Query__WORD_in_List_' [   #w  ,    'SimpleList$List_Need_z' [   #ws  ] ] ] 
+;
+
+
+- :
+    'SimpleList$Answer_Delayed_Check' [   'SimpleList$Query__WORD_in_List_' [   #w  ,   { "z" : A_z[  #zs  ]  }  #ws  ] ] 
+→
+    'SimpleList$Answer_CheckMember' [   #w  ,    #zs  ] 
+;
+
+
+
+
+)] //SimpleList
+
