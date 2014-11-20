@@ -129,9 +129,35 @@ token fragment Digit      | [0-9] ;
 token fragment Escape  | "\n" | \' | \" | \\ | [nt] | 'x' ⟨Hex⟩ ⟨Hex⟩ ;
 token fragment Hex     | [0-9A-Fa-f] ;
 
+// 1.1, 1.2 is covered
+// 1.3 - Implementing a map
+
+sort Name
+	| symbol ⟦ ⟨Identifier⟩ ⟧ ;
+
+attribute ↑dl();
+attribute ↑ok();
+
+// To see if the types are the same
+sort Type
+	| scheme SameType(Type,Type) ;
+
+SameType(int, int) → boolean;
+SameType(string, string) → boolean;
+SameType(id, id) → boolean;
+SameType(boolean, boolean) → boolean;
+default SameType(#1,#2) → TypeError;
+
+attribute ↑t(Type);
+sort Expression | ↑t;
+⟦⟨Expression#1 ↑t(#t1)⟩ + ⟨Expression#2 ↑t(#t2)⟩⟧↑t(SameType(#t1,#t2)) ;
+
+attribute ↓e{Name:Type};
+sort Expression | scheme Ee(Expression) ↓e ;
+Ee(⟦⟨Expression#1⟩ + ⟨Expression#2⟩⟧) → ⟦⟨Expression Ee(#1)) + ⟨Expression Ee(#2))⟧ ;
+
 // Dummy scheme to avoid 0.9.0 bug.
 sort Program | scheme Compile(Program);
 Compile(#) → #;
 
 }
-
