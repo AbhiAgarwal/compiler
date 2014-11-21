@@ -167,14 +167,29 @@ sort Boolean
 	|	True
 	|	False
 	|	TypeError
+	|	scheme SingleIntType(Type)
+	|	scheme SingleBooleanType(Type)
 	|	scheme SameType(Type,Type)
+	|	scheme SameNoVoid(Type,Type)
 	|	scheme IntType(Type,Type)
 	|	scheme BooleanType(Type,Type)
-	|	scheme StingIntType(Type, Type) ;
+	|	scheme StingIntType(Type,Type) ;
+
+SingleBooleanType(⟦boolean⟧) → True ;
+default SingleBooleanType(#) → TypeError ;
+
+SingleIntType(⟦int⟧) → True ;
+default SingleIntType(#) → TypeError ;
 
 // To see if the types are the same
 SameType(#, #) → True ;
 default SameType(#1,#2) → TypeError ;
+
+SameNoVoid(⟦void⟧, ⟦void⟧) → TypeError ;
+SameNoVoid(⟦void⟧, #2) → TypeError ;
+SameNoVoid(#1, ⟦void⟧) → TypeError ;
+SameNoVoid(#, #) → True ;
+default SameNoVoid(#1, #2) → TypeError ;
 
 IntType(⟦int⟧, ⟦int⟧) → True ;
 default IntType(#1,#2) → TypeError ;
@@ -190,8 +205,13 @@ default StingIntType(#1,#2) → TypeError ;
 sort Name
 	|	symbol ⟦ ⟨Identifier⟩ ⟧ ;
 
+sort TD
+	|	Type
+	|	
+	|	TypeError ;
+
 sort Map
-	|	Map(Name, Type)
+	|	Map(Name, TD)
 
 sort Maps
 	|	MoreMaps(Map, Maps)
@@ -203,6 +223,7 @@ sort Type
 	|	scheme Defined(Maps, Name)
 	|	scheme Lookup(Maps, Name)
 	|	scheme Extend(Maps, Name, Type)
+	|	scheme AssignCompat(Maps, Type, Type)
 	|	TypeError ;
 
 // whether m has a value for key k
@@ -218,6 +239,11 @@ default Lookup(MoreMaps(Map(#Name1, #Type), #Maps), #Name2) → Lookup(#Maps, #N
 // a new map which adds the mapping k → v to those of m
 default Extend(#Maps, #Name, #Type) → Maps(Map(#Name, #Type), #Maps)
 
+// Assignment Compatible
+AssignCompat(#Maps, #Type1, #Type2) → SameNoVoid(#Type1, #Type2) ;
+
+
+// If Statement
 
 
 attribute ↑dl(Maps);
@@ -227,6 +253,14 @@ attribute ↑ok(Boolean);
 
 attribute ↑t(Type);
 sort Expression | ↑t;
+
+// Single Boolean
+⟦ ! ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleBooleanType(#t1)) ;
+
+// Single Integer
+⟦ - ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleIntType(#t1)) ;
+⟦ + ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleIntType(#t1)) ;
+
 
 // Integer Only
 ⟦⟨Expression#1 ↑t(#t1)⟩ * ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
