@@ -160,52 +160,95 @@ token fragment Hex
 	|	[0-9A-Fa-f] ;
 
 // 1.1, 1.2 is covered
-// 1.3 - Implementing a map
+// 1.3
 
 // TYPES
 sort Boolean
-	| True
-	| False
-	| TypeError
-	| scheme SameType(Type,Type) ;
+	|	True
+	|	False
+	|	TypeError
+	|	scheme SameType(Type,Type)
+	|	scheme IntType(Type,Type)
+	|	scheme BooleanType(Type,Type)
+	|	scheme StingIntType(Type, Type) ;
 
 // To see if the types are the same
-SameType(⟦int⟧, ⟦int⟧) → True ;
-SameType(⟦string⟧, ⟦string⟧) → True ;
-SameType(⟦boolean⟧, ⟦boolean⟧) → True ;
+SameType(#, #) → True ;
 default SameType(#1,#2) → TypeError ;
+
+IntType(⟦int⟧, ⟦int⟧) → True ;
+default IntType(#1,#2) → TypeError ;
+
+BooleanType(⟦boolean⟧, ⟦boolean⟧) → True ;
+default BooleanType(#1,#2) → TypeError ;
+
+StingIntType(⟦string⟧, ⟦string⟧) → True ;
+StingIntType(⟦int⟧, ⟦int⟧) → True ;
+default StingIntType(#1,#2) → TypeError ;
 
 // MAP DECLAREATION
 sort Name
 	|	symbol ⟦ ⟨Identifier⟩ ⟧ ;
 
-sort MAP
+sort Map
 	|	Map(Name, Type)
 
 sort Maps
-	|	MoreMaps(MAP, Maps)
+	|	MoreMaps(Map, Maps)
 	|	NoMaps ;
 
 sort Type
-	|	scheme Lookup(Maps, Name) 
+	|	True
+	|	False
+	|	scheme Defined(Maps, Name)
+	|	scheme Lookup(Maps, Name)
+	|	scheme Extend(Maps, Name, Type)
 	|	TypeError ;
 
+// whether m has a value for key k
+Defined(NoMaps, #Name) → False ;
+Defined(MoreMaps(Map(#Name, #Type), #Maps), #Name) → True ;
+default Defined(MoreMaps(Map(#Name1, #Type), #Maps), #Name2) → Lookup(#Maps, #Name2) ;
+
+// the value v that m has for key k, or default to error
 Lookup(NoMaps, #Name) → TypeError ;
 Lookup(MoreMaps(Map(#Name, #Type), #Maps), #Name) → #Type ;
 default Lookup(MoreMaps(Map(#Name1, #Type), #Maps), #Name2) → Lookup(#Maps, #Name2) ;
+
+// a new map which adds the mapping k → v to those of m
+default Extend(#Maps, #Name, #Type) → Maps(Map(#Name, #Type), #Maps)
+
 
 
 attribute ↑dl(Maps);
 
 
-attribute ↑ok();
+attribute ↑ok(Boolean);
 
 attribute ↑t(Type);
 sort Expression | ↑t;
-⟦⟨Expression#1 ↑t(#t1)⟩ + ⟨Expression#2 ↑t(#t2)⟩⟧↑t(SameType(#t1,#t2)) ;
 
+// Integer Only
+⟦⟨Expression#1 ↑t(#t1)⟩ * ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ / ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ % ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
 
+// Integer or String
+⟦⟨Expression#1 ↑t(#t1)⟩ + ⟨Expression#2 ↑t(#t2)⟩⟧↑t(StingIntType(#t1,#t2)) ;
 
+// Integer Only
+⟦⟨Expression#1 ↑t(#t1)⟩ - ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ < ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ > ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ <= ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ >= ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+
+// Same Types
+⟦⟨Expression#1 ↑t(#t1)⟩ == ⟨Expression#2 ↑t(#t2)⟩⟧↑t(SameType(#t1,#t2)) ;
+
+// Boolean Only
+⟦⟨Expression#1 ↑t(#t1)⟩ && ⟨Expression#2 ↑t(#t2)⟩⟧↑t(BooleanType(#t1,#t2)) ;
+⟦⟨Expression#1 ↑t(#t1)⟩ || ⟨Expression#2 ↑t(#t2)⟩⟧↑t(BooleanType(#t1,#t2)) ;
 
 attribute ↓e{Name:Type};
 sort Expression | scheme Ee(Expression) ↓e ;
