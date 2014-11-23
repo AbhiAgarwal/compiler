@@ -174,7 +174,8 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	scheme IntType(Type,Type)
 		|	scheme BooleanType(Type,Type)
 		|	scheme StingIntType(Type,Type)
-		|	scheme IsIdentifier(Type) ;
+		|	scheme IsIdentifier(Type) 
+		|	scheme IsAny(Type,Type);
 
 	SingleBooleanType(⟦boolean⟧) → True ;
 	default SingleBooleanType(#) → TypeError ;
@@ -204,6 +205,10 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 
 	IsIdentifier(⟦ ⟨Identifier⟩ ⟧) → True ;
 	default IsIdentifier(#1) → TypeError ;
+
+	IsAny(any,#2) → True ;
+	IsAny(#1,any) → True ;
+	default IsAny(#1) → TypeError ;
 
 	// MAP DECLAREATION
 	sort Name
@@ -245,8 +250,9 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	default Extend(#Maps, #Name, #Type) → MoreMaps(Map(#Name, #Type), #Maps)
 
 	// Assignment Compatible
-	AssignCompat(#Maps, #Type1, #Type2) → SameNoVoid(#Type1, #Type2) ;
-	AssignCompat(NoMaps, #Type1, #Type2) → 
+	AssignCompat(#Maps, #Type1, #Type2) → SameNoVoid(#Type1, #Type2)
+	AssignCompat(#Maps, #Type1, #Type2) → IsAny(#Type1, #Type2)
+	AssignCompat(NoMaps, #Type1, #Type2) → TypeError ;
 
 	// If Statement
 
@@ -314,6 +320,15 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	sort Statement
 		|	scheme Se(S) ↓e
 		|	scheme SeB(S) ↓e ;
+
+	Se(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧) → SeB(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧)
+	⟦ ; ⟧
+	⟦ ⟨Expression⟩ ; ⟧
+	⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧
+	⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧
+	⟦ return ⟨Expression⟩ ; ⟧
+	⟦ return ; ⟧ ;
+
 
 
 
