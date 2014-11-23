@@ -211,7 +211,8 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 
 	sort TD
 		|	Type
-		|	
+		|	⟦ Class ⟧ ( ⟨Members⟩ )
+		|	⟦ Call ⟧ ⟨Type⟩ ⟨ArgumentSignature⟩
 		|	TypeError ;
 
 	sort Map
@@ -290,8 +291,10 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	// LValue
 
 
-	attribute ↓e{Name:Type};
-	sort Expression | scheme Ee(Expression) ↓e ;
+	attribute ↓e(Maps);
+	sort Expression
+		|	scheme Ee(Expression) ↓e ;
+
 	Ee(⟦Identifier⟧) ↓e{⟦Identifier⟧ : #t} → ⟦Identifier⟧ ↑t(#t) ;
 	Ee(⟦Identifier⟧) ↓e{¬⟦Identifier⟧} → error ⟦Undefined identifier ⟨Identifier⟩⟧ ;
 
@@ -308,12 +311,15 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	Ee(⟦⟨Expression#1⟩ && ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) && ⟨Expression Ee(#2))⟧ ↑#syn;
 	Ee(⟦⟨Expression#1⟩ || ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) || ⟨Expression Ee(#2))⟧ ↑#syn;
 
-	sort Statement | scheme Se(S) ↓e | scheme SeB(S) ↓e ;
+	sort Statement
+		|	scheme Se(S) ↓e
+		|	scheme SeB(S) ↓e ;
 
 
 
 	// Dummy scheme to avoid 0.9.0 bug.
-	sort Program | scheme Compile(Program);
-	Compile(#) → #;
+	sort Program
+		|	scheme D(Program) ↓e
+		|	scheme S(Program) ↓e ;
 
 }
