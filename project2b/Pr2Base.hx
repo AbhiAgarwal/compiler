@@ -317,18 +317,18 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	Ee(⟦⟨Expression#1⟩ && ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) && ⟨Expression Ee(#2))⟧ ↑#syn;
 	Ee(⟦⟨Expression#1⟩ || ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) || ⟨Expression Ee(#2))⟧ ↑#syn;
 
+
+	// Statement
 	sort Statement
 		|	scheme Se(S) ↓e
 		|	scheme SeB(S) ↓e ;
 
-	Se(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧) → SeB(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧)
-	⟦ ⟨Expression⟩ ; ⟧
-	⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧
-	⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧
-	⟦ return ⟨Expression⟩ ; ⟧
-	⟦ return ; ⟧ ;
-
-
+	Se(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧) → SeB() ;
+	Se(⟨Expression⟩ ; ↑#syn⟧) → SeB() ;
+	Se(⟦if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧) → SeB() ;
+	Se(⟦while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧) → SeB() ;
+	Se(⟦return ⟨Expression⟩ ; ⟧) → SeB() ;
+	Se(⟦return ; ⟧) → SeB() ;
 
 
 	// Dummy scheme to avoid 0.9.0 bug.
