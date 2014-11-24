@@ -322,7 +322,6 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	scheme SeB(S) ↓e ;
 
 	Se(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧) → SeB(⟦var ⟨Type#1⟩ ⟨Identifier#1⟩ ; ↑#syn⟧)
-	⟦ ; ⟧
 	⟦ ⟨Expression⟩ ; ⟧
 	⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧
 	⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧
