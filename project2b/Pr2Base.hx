@@ -234,6 +234,7 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	scheme Lookup(Maps, Name)
 		|	scheme Extend(Maps, Name, Type)
 		|	scheme AssignCompat(Maps, Type, Type)
+		|	scheme If(b, x, y)
 		|	TypeError ;
 
 	// whether m has a value for key k
@@ -247,23 +248,23 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	default Lookup(MoreMaps(Map(#Name1, #Type), #Maps), #Name2) → Lookup(#Maps, #Name2) ;
 
 	// a new map which adds the mapping k → v to those of m
-	default Extend(#Maps, #Name, #Type) → MoreMaps(Map(#Name, #Type), #Maps)
+	default Extend(#Maps, #Name, #Type) → MoreMaps(Map(#Name, #Type), #Maps) ;
 
 	// Assignment Compatible
-	AssignCompat(#Maps, #Type1, #Type2) → SameNoVoid(#Type1, #Type2)
-	AssignCompat(#Maps, #Type1, #Type2) → IsAny(#Type1, #Type2)
+	AssignCompat(#Maps, #Type1, #Type2) → SameNoVoid(#Type1, #Type2) ;
+	AssignCompat(#Maps, #Type1, #Type2) → IsAny(#Type1, #Type2) ;
 	AssignCompat(NoMaps, #Type1, #Type2) → TypeError ;
 
 	// If Statement
-
+	If(#b, True, #y) → True ;
+	default If(#)
 
 	attribute ↑dl(Maps);
-
-
 	attribute ↑ok(Boolean);
-
 	attribute ↑t(Type);
-	sort Expression | ↑t;
+
+	sort Expression
+		|	↑t;
 
 	// Single Boolean
 	⟦ ! ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleBooleanType(#t1)) ;
@@ -316,6 +317,17 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	Ee(⟦⟨Expression#1⟩ == ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) == ⟨Expression Ee(#2))⟧ ↑#syn;
 	Ee(⟦⟨Expression#1⟩ && ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) && ⟨Expression Ee(#2))⟧ ↑#syn;
 	Ee(⟦⟨Expression#1⟩ || ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) || ⟨Expression Ee(#2))⟧ ↑#syn;
+
+
+	sort Literal
+		|	↑t;
+
+	SimpleLiteral
+
+	sort ObjectLiteral
+		| 
+	KeyValueTail
+	KeyValue
 
 
 	// Statement
