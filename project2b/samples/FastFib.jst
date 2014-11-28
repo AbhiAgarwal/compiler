@@ -1,0 +1,29 @@
+// result is the 5th fib
+function string main() {
+  return "Fib of 5 is " + fastfib(5);
+}
+
+// setup and use a fast memoizing algorithm
+function int fastfib(int n) {
+  var Pair pair;
+  pair = {fst:0, snd:1};
+  return fastfib2(n, pair).snd;
+  return pair.snd;
+}
+
+// with two most recent results compute the next
+function Pair fastfib2(int n, Pair recent) {
+  if (n<=0) return recent.snd;
+  else {
+    var Pair next;
+    next.fst = recent.snd;
+    next.snd = recent.fst+recent.snd;
+    return fastfib2(n-1, next);
+  }
+}
+
+// helper class to collect pairs of numbers
+class Pair {
+  int fst;
+  int snd;
+}

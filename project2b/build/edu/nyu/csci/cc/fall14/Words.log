@@ -1,0 +1,749 @@
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+edu/nyu/csci/cc/fall14/WordsHx.java:2895: error: variable a might not have been initialized
+sink = sink.start(makeTConstructor(sink, a, hx("CatchAllAttributes"), null)).start(makeTConstructor(sink, a, hx(t.toString()), null)) .end();
+                                         ^
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+edu/nyu/csci/cc/fall14/WordsHx.java:2895: error: variable a might not have been initialized
+sink = sink.start(makeTConstructor(sink, a, hx("CatchAllAttributes"), null)).start(makeTConstructor(sink, a, hx(t.toString()), null)) .end();
+                                         ^
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+edu/nyu/csci/cc/fall14/WordsHx.java:2895: error: variable a might not have been initialized
+sink = sink.start(makeTConstructor(sink, a, hx("CatchAllAttributes"), null)).start(makeTConstructor(sink, a, hx(t.toString()), null)) .end();
+                                         ^
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+edu/nyu/csci/cc/fall14/WordsHx.java:2895: error: variable a might not have been initialized
+sink = sink.start(makeTConstructor(sink, a, hx("CatchAllAttributes"), null)).start(makeTConstructor(sink, a, hx(t.toString()), null)) .end();
+                                         ^
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/compiler4/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler3/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler3/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler3/project2b/build /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler3/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler3/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+edu/nyu/csci/cc/fall14/WordsHx.java:2895: error: variable a might not have been initialized
+sink = sink.start(makeTConstructor(sink, a, hx("CatchAllAttributes"), null)).start(makeTConstructor(sink, a, hx(t.toString()), null)) .end();
+                                         ^
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 error
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*EMBEDPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsEmbed.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsEmbed.jj . . .
+Warning: Line 312, Column 32: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsEmbed.java
+Note: edu/nyu/csci/cc/fall14/WordsEmbed.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ MODULE=edu.nyu.csci.cc.fall14.Words
++ NAME=Words
++ SORT=Query
++ SORTS='Query List Words Answer WORD'
++ SINKCLASS=net.sf.crsx.text.TextSink
++ PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser
++ PREFIX=words_
++ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx
++ METAPREFIX=wordsMeta_
++ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed
++ EMBEDPREFIX=wordsEmbed_
++ dir=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ package=edu.nyu.csci.cc.fall14
+++ tr . /
+++ echo edu.nyu.csci.cc.fall14
++ packagedir=edu/nyu/csci/cc/fall14
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''edu.nyu.csci.cc.fall14.WordsHx'\'';'\''edu.nyu.csci.cc.fall14.WordsEmbed'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=wordsMeta_HxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "wordsMeta_HxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter crsx-debug-steps wrapper=Cook input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsRewriter.crs.tmp
++ sed s/222222222/9/g /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsRewriter.crs.tmp
++ MODULE=edu.nyu.csci.cc.fall14.Words
++ NAME=Words
++ SORT=Query
++ SORTS='Query List Words Answer WORD'
++ SINKCLASS=net.sf.crsx.text.TextSink
++ PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser
++ PREFIX=words_
++ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx
++ METAPREFIX=wordsMeta_
++ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed
++ EMBEDPREFIX=wordsEmbed_
++ dir=./
++ package=edu.nyu.csci.cc.fall14
+++ tr . /
+++ echo edu.nyu.csci.cc.fall14
++ packagedir=edu/nyu/csci/cc/fall14
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
+++ unzip -q -p /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/VERSION
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter term=MakeRun output=Words.run.tmp MODULE=edu.nyu.csci.cc.fall14.Words NAME=Words SORT=Query 'SORTS=Query List Words Answer WORD' SINKCLASS=net.sf.crsx.text.TextSink PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser PREFIX=words_ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx METAPREFIX=wordsMeta_ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed EMBEDPREFIX=wordsEmbed_ PACKAGE=edu.nyu.csci.cc.fall14 PACKAGEDIR=edu/nyu/csci/cc/fall14 BUILD=/home/abhi/Desktop/compiler/project2b/build HACSVERSION=0.9.2 CRSXJAR=/home/abhi/.hacs/share/java/crsx.jar HACSJAR=/home/abhi/.hacs/share/java/hacs.jar CRSXC=/home/abhi/.hacs/lib/hacs/crsxc ICU4CINCLUDE=/home/abhi/Desktop/hacs/hacs/lib/icu4c/include ICU4CDIR=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib LIBDIR=/home/abhi/.hacs/lib/hacs BINDIR=/home/abhi/.hacs/bin DOCDIR= SHAREDIR=/home/abhi/.hacs/share/hacs SHAREJAVA=/home/abhi/.hacs/share/java SHELL=/bin/bash JAVA=java JAVAC=javac
++ mv Words.run.tmp Words.run
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*USERPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsParser.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsParser.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsParser.jj . . .
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated successfully.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsParser.java
+Note: edu/nyu/csci/cc/fall14/WordsParser.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*METAPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgnames
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgdecs
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpre
++ cd /home/abhi/Desktop/compiler/project2b/build
++ jar xf /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/Hx.pgpost
+++ sed -n 's/prefix *"\(.*\)".*/\1/p' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ prefix=wordsMeta_
++ sed -e s/%%%PREFIX%%%/wordsMeta_/g
++ sed -e '/%%%HXNONTERMINALS%%%/ bnames' -e '/%%%HXDECLARATIONS%%%/ bdecs' -e '/%%%HXPREPRODUCTIONS%%%/ bpre' -e '/%%%HXPOSTPRODUCTIONS%%%/ bpost' -e b -e :names -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgnames' -e d -e :decs -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgdecs' -e d -e :pre -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgpre' -e d -e :post -e 'r /home/abhi/Desktop/compiler/project2b/build/org/crsx/hacs/Hx.pgpost' -e d -e 's/ *$//' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pgtemplate
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsHx.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsHx.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsHx.jj . . .
+Warning: Line 4279, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsHx.java
+Note: edu/nyu/csci/cc/fall14/WordsHx.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=Prep input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ sed -e :start -e '/[/][*][*][*]\([^*]\|[*][^*]\)*$/{N; bstart;}' -e 's./[*][*][*]\([A-Z]*[&]\)*EMBEDPG\([&][A-Z]*\)*: *\(\([^*]\|[*][^*]\)*\)[*][*][*]/.\3.g' -e tstart -e 's./[*][*][*]\([^*]\|[*][^*]\)*[*][*][*]/..g' -e tstart -e 's/ *$//gM' /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.prep
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar net.sf.crsx.pg.PG verbose=1 -source=/home/abhi/Desktop/compiler/project2b/build /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsEmbed.pg
++ mkdir -p /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ cd /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ java -cp /home/abhi/.hacs/share/java/javacc.jar javacc WordsEmbed.jj
+Java Compiler Compiler Version 6.0_1 (Parser Generator)
+(type "javacc" with no arguments for help)
+Reading from file WordsEmbed.jj . . .
+Warning: Line 312, Column 32: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+File "TokenMgrError.java" is being rebuilt.
+File "ParseException.java" is being rebuilt.
+File "Token.java" is being rebuilt.
+File "SimpleCharStream.java" is being rebuilt.
+Parser generated with 0 errors and 1 warnings.
++ cd /home/abhi/Desktop/compiler/project2b/build
++ javac -cp :/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar edu/nyu/csci/cc/fall14/WordsEmbed.java
+Note: edu/nyu/csci/cc/fall14/WordsEmbed.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=rawHxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxraw
++ MODULE=edu.nyu.csci.cc.fall14.Words
++ NAME=Words
++ SORT=Query
++ SORTS='Query List Words Answer WORD'
++ SINKCLASS=net.sf.crsx.text.TextSink
++ PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser
++ PREFIX=words_
++ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx
++ METAPREFIX=wordsMeta_
++ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed
++ EMBEDPREFIX=wordsEmbed_
++ dir=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/
++ package=edu.nyu.csci.cc.fall14
+++ tr . /
+++ echo edu.nyu.csci.cc.fall14
++ packagedir=edu/nyu/csci/cc/fall14
++ java -ea -cp /home/abhi/Desktop/compiler/project2b/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''edu.nyu.csci.cc.fall14.WordsHx'\'';'\''edu.nyu.csci.cc.fall14.WordsEmbed'\'';'\''net.sf.crsx.text.Text'\'';)' input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx category=wordsMeta_HxModule output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hx", "wordsMeta_HxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep.tmp /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter crsx-debug-steps wrapper=Cook input=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/Words.hxprep output=/home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsRewriter.crs.tmp
++ sed s/222222222/9/g /home/abhi/Desktop/compiler/project2b/build/edu/nyu/csci/cc/fall14/WordsRewriter.crs.tmp
++ MODULE=edu.nyu.csci.cc.fall14.Words
++ NAME=Words
++ SORT=Query
++ SORTS='Query List Words Answer WORD'
++ SINKCLASS=net.sf.crsx.text.TextSink
++ PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser
++ PREFIX=words_
++ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx
++ METAPREFIX=wordsMeta_
++ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed
++ EMBEDPREFIX=wordsEmbed_
++ dir=./
++ package=edu.nyu.csci.cc.fall14
+++ tr . /
+++ echo edu.nyu.csci.cc.fall14
++ packagedir=edu/nyu/csci/cc/fall14
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
+++ unzip -q -p /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/VERSION
++ LD_LIBRARY_PATH=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter term=MakeRun output=Words.run.tmp MODULE=edu.nyu.csci.cc.fall14.Words NAME=Words SORT=Query 'SORTS=Query List Words Answer WORD' SINKCLASS=net.sf.crsx.text.TextSink PARSERCLASS=edu.nyu.csci.cc.fall14.WordsParser PREFIX=words_ METAPARSERCLASS=edu.nyu.csci.cc.fall14.WordsHx METAPREFIX=wordsMeta_ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.WordsEmbed EMBEDPREFIX=wordsEmbed_ PACKAGE=edu.nyu.csci.cc.fall14 PACKAGEDIR=edu/nyu/csci/cc/fall14 BUILD=/home/abhi/Desktop/compiler/project2b/build HACSVERSION=0.9.2 CRSXJAR=/home/abhi/.hacs/share/java/crsx.jar HACSJAR=/home/abhi/.hacs/share/java/hacs.jar CRSXC=/home/abhi/.hacs/lib/hacs/crsxc ICU4CINCLUDE=/home/abhi/Desktop/hacs/hacs/lib/icu4c/include ICU4CDIR=/home/abhi/Desktop/hacs/hacs/lib/icu4c/lib LIBDIR=/home/abhi/.hacs/lib/hacs BINDIR=/home/abhi/.hacs/bin DOCDIR= SHAREDIR=/home/abhi/.hacs/share/hacs SHAREJAVA=/home/abhi/.hacs/share/java SHELL=/bin/bash JAVA=java JAVAC=javac
++ mv Words.run.tmp Words.run
