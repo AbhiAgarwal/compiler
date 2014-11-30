@@ -116,7 +116,7 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	⟦ { } ⟧
 		|	⟦ { ⟨KeyValue⟩ ⟨KeyValueTail⟩ } ⟧ ;
 
-	sort KeyValueTail   
+	sort KeyValueTail
 		|	⟦ , ⟨KeyValue⟩ ⟨KeyValueTail⟩ ⟧
 		|	⟦ ⟧ ;
 
@@ -164,50 +164,55 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 
 	// TYPES
 	sort Boolean
-		|	True
-		|	False
+		|	⟦True⟧
+		|	⟦False⟧
 		|	TypeError
 		|	scheme SingleIntType(Type)
 		|	scheme SingleBooleanType(Type)
-		|	scheme SameType(Type,Type)
-		|	scheme SameNoVoid(Type,Type)
-		|	scheme IntType(Type,Type)
-		|	scheme BooleanType(Type,Type)
-		|	scheme StingIntType(Type,Type)
-		|	scheme IsIdentifier(Type) 
-		|	scheme IsAny(Type,Type);
+		|	scheme SameType(Type, Type)
+		|	scheme SameNoVoid(Type, Type)
+		|	scheme IntType(Type, Type)
+		|	scheme BooleanType(Type, Type)
+		|	scheme StingIntType(Type, Type)
+		|	scheme IsIdentifier(Type)
+		|	scheme checkIfInt(Type)
+		|	scheme checkIfString(Type)
+		|	scheme IsAny(Type,Type) ;
 
-	SingleBooleanType(⟦boolean⟧) → True ;
+	SingleBooleanType(⟦boolean⟧) → ⟦True⟧ ;
 	default SingleBooleanType(#) → TypeError ;
 
-	SingleIntType(⟦int⟧) → True ;
+	SingleIntType(⟦int⟧) → ⟦True⟧ ;
 	default SingleIntType(#) → TypeError ;
 
 	// To see if the types are the same
-	SameType(#, #) → True ;
-	default SameType(#1,#2) → TypeError ;
+	SameType(#, #) → ⟦True⟧ ;
+	default SameType(#1, #2) → TypeError ;
 
 	SameNoVoid(⟦void⟧, ⟦void⟧) → TypeError ;
 	SameNoVoid(⟦void⟧, #2) → TypeError ;
 	SameNoVoid(#1, ⟦void⟧) → TypeError ;
-	SameNoVoid(#, #) → True ;
+	SameNoVoid(#, #) → ⟦True⟧ ;
 	default SameNoVoid(#1, #2) → TypeError ;
 
-	IntType(⟦int⟧, ⟦int⟧) → True ;
-	default IntType(#1,#2) → TypeError ;
+	IntType(⟦int⟧, ⟦int⟧) → ⟦True⟧ ;
+	default IntType(#1, #2) → TypeError ;
 
-	BooleanType(⟦boolean⟧, ⟦boolean⟧) → True ;
-	default BooleanType(#1,#2) → TypeError ;
+	default checkIfInt(⟦int⟧) → ⟦True⟧ ;
+	default checkIfString(⟦string⟧) → ⟦True⟧ ;
 
-	StingIntType(⟦string⟧, ⟦string⟧) → True ;
-	StingIntType(⟦int⟧, ⟦int⟧) → True ;
-	default StingIntType(#1,#2) → TypeError ;
+	BooleanType(⟦boolean⟧, ⟦boolean⟧) → ⟦True⟧ ;
+	default BooleanType(#1, #2) → TypeError ;
 
-	IsIdentifier(⟦ ⟨Identifier⟩ ⟧) → True ;
+	StingIntType(⟦string⟧, ⟦string⟧) → ⟦True⟧ ;
+	StingIntType(⟦int⟧, ⟦int⟧) → ⟦True⟧ ;
+	default StingIntType(#1, #2) → TypeError ;
+
+	IsIdentifier(⟨Identifier⟩) → True ;
 	default IsIdentifier(#1) → TypeError ;
 
-	IsAny(any,#2) → True ;
-	IsAny(#1,any) → True ;
+	IsAny(any, #2) → ⟦True⟧ ;
+	IsAny(#1, any) → ⟦True⟧ ;
 	default IsAny(#1) → TypeError ;
 
 	// MAP DECLAREATION
@@ -228,8 +233,8 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	NoMaps ;
 
 	sort Type
-		|	True
-		|	False
+		|	⟦True⟧
+		|	⟦False⟧
 		|	scheme Defined(Maps, Name)
 		|	scheme Lookup(Maps, Name)
 		|	scheme Extend(Maps, Name, Type)
@@ -238,8 +243,8 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	TypeError ;
 
 	// whether m has a value for key k
-	Defined(NoMaps, #Name) → False ;
-	Defined(MoreMaps(Map(#Name, #Type), #Maps), #Name) → True ;
+	Defined(NoMaps, #Name) → ⟦False⟧ ;
+	Defined(MoreMaps(Map(#Name, #Type), #Maps), #Name) → ⟦True⟧ ;
 	default Defined(MoreMaps(Map(#Name1, #Type), #Maps), #Name2) → Lookup(#Maps, #Name2) ;
 
 	// the value v that m has for key k, or default to error
@@ -256,8 +261,9 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	AssignCompat(NoMaps, #Type1, #Type2) → TypeError ;
 
 	// If Statement
-	If(#b, True, #y) → True ;
-	default If(#)
+	If(#b, ⟦True⟧, #y) → ⟦True⟧ ;
+	If(#b, ⟦False⟧, #y) → ⟦False⟧ ;
+	default If(#b, #x, #y) → If() ;
 
 	attribute ↑dl(Maps);
 	attribute ↑ok(Boolean);
@@ -297,6 +303,34 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 
 	// LValue
 
+	sort Literal
+		|	↑t;
+
+	⟦ ⟨SimpleLiteral⟩ ⟧ ;
+	⟦ ⟨ObjectLiteral⟩ ⟧ ;
+
+	SimpleLiteral
+		|	↑t;
+
+	⟦ ⟨String ↑t(#t1)⟩ ⟧↑t(checkIfInt(#t1)) ;
+	⟦ ⟨Integer ↑t(#t1)⟩ ⟧↑t(checkIfString(#t1)) ;
+
+	sort ObjectLiteral
+		|	↑t;
+
+	⟦ { } ⟧ ;
+	⟦ { ⟨KeyValue⟩ ⟨KeyValueTail⟩ } ⟧ ;
+
+	KeyValueTail
+		|	↑t;
+
+	⟦ , ⟨KeyValue⟩ ⟨KeyValueTail⟩ ⟧ ;
+	⟦ ⟧ ;
+
+	KeyValue
+		|	↑t;
+
+	⟦ ⟨Identifier⟩ : ⟨Literal⟩ ⟧ ;
 
 	attribute ↓e(Maps);
 	sort Expression
@@ -318,18 +352,6 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	Ee(⟦⟨Expression#1⟩ && ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) && ⟨Expression Ee(#2))⟧ ↑#syn;
 	Ee(⟦⟨Expression#1⟩ || ⟨Expression#2⟩⟧ ↑#syn) → ⟦⟨Expression Ee(#1)) || ⟨Expression Ee(#2))⟧ ↑#syn;
 
-
-	sort Literal
-		|	↑t;
-
-	SimpleLiteral
-
-	sort ObjectLiteral
-		| 
-	KeyValueTail
-	KeyValue
-
-
 	// Statement
 	sort Statement
 		|	scheme Se(S) ↓e
@@ -341,7 +363,6 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	Se(⟦while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧) → SeB() ;
 	Se(⟦return ⟨Expression⟩ ; ⟧) → SeB() ;
 	Se(⟦return ; ⟧) → SeB() ;
-
 
 	// Dummy scheme to avoid 0.9.0 bug.
 	sort Program
