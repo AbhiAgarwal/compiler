@@ -270,65 +270,66 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	attribute ↑t(Type);
 
 	sort Expression
-		|	↑t;
+		|	↑ok
+		|	↑t ;
 
 	// Single Boolean
-	⟦ ! ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleBooleanType(#t1)) ;
+	⟦ ! ⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ ⟧↑ok(SingleBooleanType(#t1))↑t(⟦ boolean ⟧) ;
 
 	// Single Integer
-	⟦ - ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleIntType(#t1)) ;
-	⟦ + ⟨Expression#1 ↑t(#t1)⟩ ⟧↑t(SingleIntType(#t1)) ;
+	⟦ - ⟨Expression#1 ↑ok(#t1)⟩ ⟧↑ok(SingleIntType(#t1)) ;
+	⟦ + ⟨Expression#1 ↑ok(#t1)⟩ ⟧↑ok(SingleIntType(#t1)) ;
 
 	// Integer Only
-	⟦⟨Expression#1 ↑t(#t1)⟩ * ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ / ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ % ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ * ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ / ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ % ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
 
 	// Integer or String
-	⟦⟨Expression#1 ↑t(#t1)⟩ + ⟨Expression#2 ↑t(#t2)⟩⟧↑t(StingIntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ + ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(StingIntType(#t1,#t2)) ;
 
 	// Integer Only
-	⟦⟨Expression#1 ↑t(#t1)⟩ - ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ < ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ > ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ <= ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ >= ⟨Expression#2 ↑t(#t2)⟩⟧↑t(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ - ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ < ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ > ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ <= ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ >= ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
 
 	// Same Types
-	⟦⟨Expression#1 ↑t(#t1)⟩ == ⟨Expression#2 ↑t(#t2)⟩⟧↑t(SameType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ == ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(SameType(#t1,#t2)) ;
 
 	// Boolean Only
-	⟦⟨Expression#1 ↑t(#t1)⟩ && ⟨Expression#2 ↑t(#t2)⟩⟧↑t(BooleanType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑t(#t1)⟩ || ⟨Expression#2 ↑t(#t2)⟩⟧↑t(BooleanType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ && ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1)⟩ || ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ;
 
 	// LValue
 
 	sort Literal
-		|	↑t;
+		|	↑ok;
 
 	⟦ ⟨SimpleLiteral⟩ ⟧ ;
 	⟦ ⟨ObjectLiteral⟩ ⟧ ;
 
 	SimpleLiteral
-		|	↑t;
+		|	↑ok;
 
-	⟦ ⟨String ↑t(#t1)⟩ ⟧↑t(checkIfInt(#t1)) ;
-	⟦ ⟨Integer ↑t(#t1)⟩ ⟧↑t(checkIfString(#t1)) ;
+	⟦ ⟨String ↑ok(#t1)⟩ ⟧↑ok(checkIfInt(#t1)) ;
+	⟦ ⟨Integer ↑ok(#t1)⟩ ⟧↑ok(checkIfString(#t1)) ;
 
 	sort ObjectLiteral
-		|	↑t;
+		|	↑ok;
 
 	⟦ { } ⟧ ;
 	⟦ { ⟨KeyValue⟩ ⟨KeyValueTail⟩ } ⟧ ;
 
 	KeyValueTail
-		|	↑t;
+		|	↑ok;
 
 	⟦ , ⟨KeyValue⟩ ⟨KeyValueTail⟩ ⟧ ;
 	⟦ ⟧ ;
 
 	KeyValue
-		|	↑t;
+		|	↑ok;
 
 	⟦ ⟨Identifier⟩ : ⟨Literal⟩ ⟧ ;
 
