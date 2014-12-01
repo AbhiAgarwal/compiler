@@ -274,33 +274,33 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	↑t ;
 
 	// Single Boolean
-	⟦ ! ⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ ⟧↑ok(SingleBooleanType(#t1))↑t(⟦ boolean ⟧) ;
+	⟦ ! ⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ ⟧↑ok(SingleBooleanType(#t1)) ↑t(#1) ;
 
 	// Single Integer
-	⟦ - ⟨Expression#1 ↑ok(#t1)⟩ ⟧↑ok(SingleIntType(#t1)) ;
-	⟦ + ⟨Expression#1 ↑ok(#t1)⟩ ⟧↑ok(SingleIntType(#t1)) ;
+	⟦ - ⟨Expression#1 ↑ok(#t1)⟩ ↑t(#t1) ⟧↑ok(SingleIntType(#t1)) ↑t(#1) ;
+	⟦ + ⟨Expression#1 ↑ok(#t1)⟩ ↑t(#t1) ⟧↑ok(SingleIntType(#t1)) ↑t(#1) ;
 
 	// Integer Only
-	⟦⟨Expression#1 ↑ok(#t1)⟩ * ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ / ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ % ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ * ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ / ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ % ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
 
 	// Integer or String
-	⟦⟨Expression#1 ↑ok(#t1)⟩ + ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(StingIntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ + ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(StingIntType(#t1,#t2)) ↑t(#1) ;
 
 	// Integer Only
-	⟦⟨Expression#1 ↑ok(#t1)⟩ - ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ < ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ > ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ <= ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ >= ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ - ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ < ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ > ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ <= ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ >= ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(IntType(#t1,#t2)) ↑t(#1) ;
 
 	// Same Types
-	⟦⟨Expression#1 ↑ok(#t1)⟩ == ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(SameType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ == ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(SameType(#t1,#t2)) ↑t(⟦boolean⟧) ;
 
 	// Boolean Only
-	⟦⟨Expression#1 ↑ok(#t1)⟩ && ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ;
-	⟦⟨Expression#1 ↑ok(#t1)⟩ || ⟨Expression#2 ↑ok(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ && ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ↑t(#1) ;
+	⟦⟨Expression#1 ↑ok(#t1) ↑t(#t1)⟩ || ⟨Expression#2 ↑ok(#t2) ↑t(#t2)⟩⟧↑ok(BooleanType(#t1,#t2)) ↑t(#1) ;
 
 	// LValue
 
