@@ -124,10 +124,7 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 		|	⟦ ⟨Identifier⟩ : ⟨Literal⟩ ⟧ ;
 
 	// LEXICAL CONVENTIONS
-	space [ \t\n\r]
-		|	'//' [^\n]*
-		|	'/*' ( [^*]
-		|	'*' [^/] )* '*/' ;
+	space [ \t\n\r] | '//' [^\n]* | '/*' ( [^*] | '*' [^/] )* '*/'  ;
 
 	token Identifier
 		|	⟨LetterEtc⟩ (⟨LetterEtc⟩
@@ -263,7 +260,7 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	// If Statement
 	If(#b, ⟦True⟧, #y) → ⟦True⟧ ;
 	If(#b, ⟦False⟧, #y) → ⟦False⟧ ;
-	default If(#b, #x, #y) → If() ;
+	default If(#b, #x, #y) → If(#b, ⟨Expression #x⟩ ,#y) ;
 
 	attribute ↑dl(Maps);
 	attribute ↑ok(Boolean);
@@ -305,16 +302,17 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	// LValue
 
 	sort Literal
-		|	↑ok;
+		|	↑ok ;
 
 	⟦ ⟨SimpleLiteral⟩ ⟧ ;
 	⟦ ⟨ObjectLiteral⟩ ⟧ ;
 
 	SimpleLiteral
-		|	↑ok;
+		|	↑ok 
+		|	↑t ;
 
-	⟦ ⟨String ↑ok(#t1)⟩ ⟧↑ok(checkIfInt(#t1)) ;
-	⟦ ⟨Integer ↑ok(#t1)⟩ ⟧↑ok(checkIfString(#t1)) ;
+	⟦ ⟨String ↑ok(#t1)⟩ ⟧↑ok(checkIfInt(#t1)) ↑t(#1) ;
+	⟦ ⟨Integer ↑ok(#t1)⟩ ⟧↑ok(checkIfString(#t1)) ↑t(#1) ;
 
 	sort ObjectLiteral
 		|	↑ok;
@@ -329,9 +327,11 @@ module edu.nyu.csci.cc.fall14.Pr2Base {
 	⟦ ⟧ ;
 
 	KeyValue
-		|	↑ok;
+		|	↑ok 
+		|	↑keyValue ;
 
-	⟦ ⟨Identifier⟩ : ⟨Literal⟩ ⟧ ;
+	attribute ↑keyValue(Map);
+	⟦ ⟨Identifier#1⟩ : ⟨Literal#2⟩ ⟧↑keyValue(Map(#1, #2));
 
 	attribute ↓e(Maps);
 	sort Expression
