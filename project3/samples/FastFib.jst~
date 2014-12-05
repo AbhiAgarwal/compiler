@@ -1,0 +1,13 @@
+// result is the 5th fib
+function int main() {
+  return fastfib(5, 1, 0);
+}
+
+// with two most recent results compute the next
+function Pair fastfib2(int n, int last, int lastlast) {
+  if (n<=1) return last;
+  else {
+    var int current = last + lastlast ;
+    return fastfib2(n-1, current, last);
+  }
+}
