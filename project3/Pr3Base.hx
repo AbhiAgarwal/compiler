@@ -10,173 +10,189 @@
 
 module edu.nyu.csci.cc.fall14.Pr3Base {
 
-////////////////////////////////////////////////////////////////////////
-// 1. LEXICAL ANALYSIS
-////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	// 1. LEXICAL ANALYSIS
+	////////////////////////////////////////////////////////////////////////
 
-space [ \t\n\r] | '//' [^\n]* | '/*' ( [^*] | '*' [^/] )* '*/'  ; // Inner /* ignored
+	space [ \t\n\r] | '//' [^\n]* | '/*' ( [^*] | '*' [^/] )* '*/'  ; // Inner /* ignored
 
-token IDENTIFIER  | ⟨LetterEtc⟩ (⟨LetterEtc⟩ | ⟨Digit⟩)* ;
+	token IDENTIFIER
+		|	⟨LetterEtc⟩ (⟨LetterEtc⟩ | ⟨Digit⟩)* ;
 
-token INTEGER     | ⟨Digit⟩+ ;
+	token INTEGER
+		|	⟨Digit⟩+ ;
 
-token fragment Letter     | [A-Za-z] ;
-token fragment LetterEtc  | ⟨Letter⟩ | [$_] ;
-token fragment Digit      | [0-9] ;
+	token fragment Letter
+		|	[A-Za-z] ;
+	token fragment LetterEtc
+		|	⟨Letter⟩
+		|	[$_] ;
+	token fragment Digit
+		|	[0-9] ;
 
-////////////////////////////////////////////////////////////////////////
-// 2. JST GRAMMAR
-////////////////////////////////////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////
+	// 2. JST GRAMMAR
+	////////////////////////////////////////////////////////////////////////
 
-// PROGRAM
+	// PROGRAM
+	main sort Program
+		|	⟦ ⟨Declarations⟩ ⟧ ;
 
-main sort Program  |  ⟦ ⟨Declarations⟩ ⟧ ;
+	// DECLARATIONS
+	sort Declarations
+		|	⟦ ⟨Declaration⟩ ⟨Declarations⟩ ⟧
+		|	⟦⟧ ;
 
-// DECLARATIONS
+	sort Declaration
+		|	⟦ function ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
 
-sort Declarations | ⟦ ⟨Declaration⟩ ⟨Declarations⟩ ⟧ | ⟦⟧ ;
+	sort ArgumentSignature
+		|	⟦ ( ) ⟧
+		|	⟦ ( ⟨Type⟩ ⟨Identifier⟩ ⟨TypeIdentifierTail⟩ ) ⟧ ;
 
-sort Declaration
-|  ⟦ function ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧
-;
+	sort TypeIdentifierTail
+		|	⟦ , ⟨Type⟩ ⟨Identifier⟩ ⟨TypeIdentifierTail⟩ ⟧
+		|	⟦ ⟧ ;
 
-sort ArgumentSignature
-|  ⟦ ( ) ⟧
-|  ⟦ ( ⟨Type⟩ ⟨Identifier⟩ ⟨TypeIdentifierTail⟩ ) ⟧
-;
-sort TypeIdentifierTail |  ⟦ , ⟨Type⟩ ⟨Identifier⟩ ⟨TypeIdentifierTail⟩ ⟧  |  ⟦ ⟧ ;
+	// STATEMENTS
+	sort Statements
+		|	⟦ ⟨Statement⟩ ⟨Statements⟩ ⟧
+		|	⟦⟧ ;
 
-// STATEMENTS
+	sort Statement
+		|	⟦ { ⟨Statements⟩ } ⟧
+		|	⟦ var ⟨Type⟩ ⟨Identifier⟩ ; ⟧
+		|	⟦ ; ⟧
+		|	⟦ ⟨Expression⟩ ; ⟧
+		|	⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧
+		|	⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧
+		|	⟦ return ⟨Expression⟩ ; ⟧
+		|	⟦ return ; ⟧ ;
 
-sort Statements | ⟦ ⟨Statement⟩ ⟨Statements⟩ ⟧ | ⟦⟧ ;
+	sort IfTail
+		|	⟦ ⟨Statement⟩ else ⟨Statement⟩ ⟧
+		|	⟦ ⟨Statement⟩ ⟧ ;
 
-sort Statement
-|  ⟦ { ⟨Statements⟩ } ⟧
-|  ⟦ var ⟨Type⟩ ⟨Identifier⟩ ; ⟧
-|  ⟦ ; ⟧
-|  ⟦ ⟨Expression⟩ ; ⟧
-|  ⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧
-|  ⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧
-|  ⟦ return ⟨Expression⟩ ; ⟧
-|  ⟦ return ; ⟧
-;
+	// TYPES
+	sort Type
+		|	⟦ boolean ⟧
+		|	⟦ int ⟧ ;
 
-sort IfTail | ⟦ ⟨Statement⟩ else ⟨Statement⟩ ⟧ | ⟦ ⟨Statement⟩ ⟧ ;
+	// EXPRESSIONS
+	sort Expression
 
-// TYPES
+		|	sugar ⟦ ( ⟨Expression#e⟩ ) ⟧@10 → #e
 
-sort Type
-|  ⟦ boolean ⟧
-|  ⟦ int ⟧
-;
+		|	⟦ ⟨Integer⟩ ⟧@10
+		|	⟦ ⟨Identifier⟩ ⟧@10
 
-// EXPRESSIONS
+		|	⟦ ⟨Expression@9⟩ ( ) ⟧@9
+		|	⟦ ⟨Expression@9⟩ ( ⟨Expression⟩ ) ⟧@9
 
-sort Expression
+		|	⟦ ! ⟨Expression@8⟩ ⟧@8
+		|	⟦ - ⟨Expression@8⟩ ⟧@8
+		|	⟦ + ⟨Expression@8⟩ ⟧@8
 
-|  sugar ⟦ ( ⟨Expression#e⟩ ) ⟧@10 → #e
+		|	⟦ ⟨Expression@7⟩ * ⟨Expression@8⟩ ⟧@7
 
-|  ⟦ ⟨Integer⟩ ⟧@10
-|  ⟦ ⟨Identifier⟩ ⟧@10
+		|	⟦ ⟨Expression@6⟩ + ⟨Expression@7⟩ ⟧@6
+		|	⟦ ⟨Expression@6⟩ - ⟨Expression@7⟩ ⟧@6
 
-|  ⟦ ⟨Expression@9⟩ ( ) ⟧@9
-|  ⟦ ⟨Expression@9⟩ ( ⟨Expression⟩ ) ⟧@9
+		|	⟦ ⟨Expression@6⟩ < ⟨Expression@6⟩ ⟧@5
+		|	⟦ ⟨Expression@6⟩ > ⟨Expression@6⟩ ⟧@5
+		|	⟦ ⟨Expression@6⟩ <= ⟨Expression@6⟩ ⟧@5
+		|	⟦ ⟨Expression@6⟩ >= ⟨Expression@6⟩ ⟧@5
 
-|  ⟦ ! ⟨Expression@8⟩ ⟧@8
-|  ⟦ - ⟨Expression@8⟩ ⟧@8
-|  ⟦ + ⟨Expression@8⟩ ⟧@8
+		|	⟦ ⟨Expression@5⟩ == ⟨Expression@5⟩ ⟧@4
+		|	⟦ ⟨Expression@5⟩ != ⟨Expression@5⟩ ⟧@4
 
-|  ⟦ ⟨Expression@7⟩ * ⟨Expression@8⟩ ⟧@7
+		|	⟦ ⟨Expression@3⟩ && ⟨Expression@4⟩ ⟧@3
 
-|  ⟦ ⟨Expression@6⟩ + ⟨Expression@7⟩ ⟧@6
-|  ⟦ ⟨Expression@6⟩ - ⟨Expression@7⟩ ⟧@6
+		|	⟦ ⟨Expression@2⟩ || ⟨Expression@3⟩ ⟧@2
 
-|  ⟦ ⟨Expression@6⟩ < ⟨Expression@6⟩ ⟧@5
-|  ⟦ ⟨Expression@6⟩ > ⟨Expression@6⟩ ⟧@5
-|  ⟦ ⟨Expression@6⟩ <= ⟨Expression@6⟩ ⟧@5
-|  ⟦ ⟨Expression@6⟩ >= ⟨Expression@6⟩ ⟧@5
+		|	⟦ ⟨Expression@2⟩ = ⟨Expression@1⟩ ⟧@1
 
-|  ⟦ ⟨Expression@5⟩ == ⟨Expression@5⟩ ⟧@4
-|  ⟦ ⟨Expression@5⟩ != ⟨Expression@5⟩ ⟧@4
+		|	⟦ ⟨Expression@1⟩ , ⟨Expression⟩ ⟧ ;
 
-|  ⟦ ⟨Expression@3⟩ && ⟨Expression@4⟩ ⟧@3
+	sort Integer
+		|	⟦ ⟨INTEGER⟩ ⟧ ;
 
-|  ⟦ ⟨Expression@2⟩ || ⟨Expression@3⟩ ⟧@2
+	sort Identifier
+		|	symbol ⟦⟨IDENTIFIER⟩⟧ ;
 
-|  ⟦ ⟨Expression@2⟩ = ⟨Expression@1⟩ ⟧@1
+	////////////////////////////////////////////////////////////////////////
+	// 3. MinARM32 ASSEMBLER GRAMMAR
+	////////////////////////////////////////////////////////////////////////
 
-|  ⟦ ⟨Expression@1⟩ , ⟨Expression⟩ ⟧
-;
+	// Instructions.
+	sort Instructions
+		|	⟦ ⟨Instruction⟩ ⟨Instructions⟩ ⟧
+		|	⟦⟧ ;
 
-sort Integer  |   ⟦ ⟨INTEGER⟩ ⟧ ;
-sort Identifier  |  symbol ⟦⟨IDENTIFIER⟩⟧ ;
+	sort Instruction
+		|	⟦ ⟨Identifier⟩ = ⟨Integer⟩ ⟧ // define identifier
+		|	⟦ ⟨Identifier⟩ ⟧ // label
+		|	⟦ DCI ⟨Integers⟩ ⟧ // allocate integers
+		|	⟦ ⟨Op⟩ ⟧ ; // machine instruction
 
-////////////////////////////////////////////////////////////////////////
-// 3. MinARM32 ASSEMBLER GRAMMAR
-////////////////////////////////////////////////////////////////////////
+	sort Integers
+		|	⟦ ⟨Integer⟩, ⟨Integers⟩ ⟧
+		|	⟦ ⟨Integer⟩ ⟧ ;
 
-// Instructions.
-sort Instructions | ⟦ ⟨Instruction⟩ ⟨Instructions⟩ ⟧ | ⟦⟧ ;
+	// Syntax of individual machine instructions.
+	sort Op
+		|	⟦ MOV ⟨Reg⟩, ⟨Arg⟩ ⟧ // move
+		|	⟦ MVN ⟨Reg⟩, ⟨Arg⟩ ⟧ // move not
+		|	⟦ ADD ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧ // add
+		|	⟦ SUB ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧ // subtract
+		|	⟦ AND ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧ // bitwise and
+		|	⟦ ORR ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧ // bitwise or
+		|	⟦ EOR ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧ // bitwise exclusive or
+		|	⟦ CMP ⟨Reg⟩, ⟨Arg⟩ ⟧ // compare
+		|	⟦ MUL ⟨Reg⟩, ⟨Reg⟩, ⟨Reg⟩ ⟧ // multiply
 
-sort Instruction
-| ⟦ ⟨Identifier⟩ = ⟨Integer⟩ ¶⟧		// define identifier
-| ⟦ ⟨Identifier⟩ ⟧ 		 		// label
-| ⟦ DCI ⟨Integers⟩ ¶⟧			// allocate integers
-| ⟦ ⟨Op⟩ ¶⟧	  			// machine instruction
-;
+		|	⟦ B ⟨Identifier⟩ ⟧ // branch always
+		|	⟦ BEQ ⟨Identifier⟩ ⟧ // branch if equal
+		|	⟦ BNE ⟨Identifier⟩ ⟧ // branch if not equal
+		|	⟦ BGT ⟨Identifier⟩ ⟧ // branch if greater than
+		|	⟦ BLT ⟨Identifier⟩ ⟧ // branch if less than
+		|	⟦ BGE ⟨Identifier⟩ ⟧ // branch if greater than or equal
+		|	⟦ BLE ⟨Identifier⟩ ⟧ // branch if less than or equal
+		|	⟦ BL ⟨Identifier⟩ ⟧ // branch and link
 
-sort Integers | ⟦ ⟨Integer⟩, ⟨Integers⟩ ⟧ | ⟦ ⟨Integer⟩ ⟧ ;
+		|	⟦ LDR ⟨Reg⟩, ⟨Mem⟩ ⟧ // load register from memory
+		|	⟦ STR ⟨Reg⟩, ⟨Mem⟩ ⟧ // store register to memory
+		|	⟦ LDRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // load byte into register from memory
+		|	⟦ STRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // store byte from register into memory
+		|	⟦ LDMFD ⟨Reg⟩! , {⟨Regs⟩] ⟧ // load multiple fully descending (pop)
+		|	⟦ STMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧ // store multiple fully descending (push)
+		;
 
-// Syntax of individual machine instructions.
-sort Op
+	// Arguments.
 
-| ⟦ MOV ⟨Reg⟩, ⟨Arg⟩ ⟧			// move
-| ⟦ MVN ⟨Reg⟩, ⟨Arg⟩ ⟧			// move not
-| ⟦ ADD ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧		// add
-| ⟦ SUB ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧		// subtract
-| ⟦ AND ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧		// bitwise and
-| ⟦ ORR ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧		// bitwise or
-| ⟦ EOR ⟨Reg⟩, ⟨Reg⟩, ⟨Arg⟩ ⟧		// bitwise exclusive or
-| ⟦ CMP ⟨Reg⟩, ⟨Arg⟩ ⟧	    		// compare
-| ⟦ MUL ⟨Reg⟩, ⟨Reg⟩, ⟨Reg⟩ ⟧		// multiply
+	sort Reg	| ⟦R0⟧ | ⟦R1⟧ | ⟦R2⟧ | ⟦R3⟧ | ⟦R4⟧ | ⟦R5⟧ | ⟦R6⟧ | ⟦R7⟧
+	     		| ⟦R8⟧ | ⟦R9⟧ | ⟦R10⟧ | ⟦R11⟧ | ⟦R12⟧ | ⟦SP⟧ | ⟦LR⟧ | ⟦PC⟧ ;
 
-| ⟦ B ⟨Identifier⟩ ⟧			// branch always
-| ⟦ BEQ ⟨Identifier⟩ ⟧			// branch if equal
-| ⟦ BNE ⟨Identifier⟩ ⟧			// branch if not equal
-| ⟦ BGT ⟨Identifier⟩ ⟧			// branch if greater than
-| ⟦ BLT ⟨Identifier⟩ ⟧			// branch if less than
-| ⟦ BGE ⟨Identifier⟩ ⟧			// branch if greater than or equal
-| ⟦ BLE ⟨Identifier⟩ ⟧			// branch if less than or equal
-| ⟦ BL ⟨Identifier⟩ ⟧			// branch and link
+	sort Arg | ⟦⟨Constant⟩⟧ | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, LSL ⟨Constant⟩⟧ | ⟦⟨Reg⟩, LSR ⟨Constant⟩⟧ ;
 
-| ⟦ LDR ⟨Reg⟩, ⟨Mem⟩ ⟧			// load register from memory
-| ⟦ STR ⟨Reg⟩, ⟨Mem⟩ ⟧			// store register to memory
-| ⟦ LDRB ⟨Reg⟩, ⟨Mem⟩ ⟧			// load byte into register from memory
-| ⟦ STRB ⟨Reg⟩, ⟨Mem⟩ ⟧			// store byte from register into memory
-| ⟦ LDMFD ⟨Reg⟩! , {⟨Regs⟩] ⟧ 		// load multiple fully descending (pop)
-| ⟦ STMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧		// store multiple fully descending (push)
-;
+	sort Mem | ⟦ [ ⟨Reg⟩, ⟨Sign⟩ ⟨Arg⟩ ] ⟧ ;
+	sort Sign | ⟦+⟧ | ⟦-⟧ | ⟦⟧ ;
 
-// Arguments.
+	sort Regs | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, ⟨Regs⟩⟧ ;
 
-sort Reg	| ⟦R0⟧ | ⟦R1⟧ | ⟦R2⟧ | ⟦R3⟧ | ⟦R4⟧ | ⟦R5⟧ | ⟦R6⟧ | ⟦R7⟧
-     		| ⟦R8⟧ | ⟦R9⟧ | ⟦R10⟧ | ⟦R11⟧ | ⟦R12⟧ | ⟦SP⟧ | ⟦LR⟧ | ⟦PC⟧ ;
+	sort Constant | ⟦#⟨Integer⟩⟧ | ⟦&⟨Identifier⟩⟧ ;
 
-sort Arg | ⟦⟨Constant⟩⟧ | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, LSL ⟨Constant⟩⟧ | ⟦⟨Reg⟩, LSR ⟨Constant⟩⟧ ;
+	////////////////////////////////////////////////////////////////////////
+	// 4. COMPILER
+	////////////////////////////////////////////////////////////////////////
 
-sort Mem | ⟦ [ ⟨Reg⟩, ⟨Sign⟩ ⟨Arg⟩ ] ⟧ ;
-sort Sign | ⟦+⟧ | ⟦-⟧ | ⟦⟧ ;
 
-sort Regs | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, ⟨Regs⟩⟧ ;
 
-sort Constant | ⟦#⟨Integer⟩⟧ | ⟦&⟨Identifier⟩⟧ ;
+	////////////////////////////////////////////////////////////////////////
+	// 5. MAIN
+	////////////////////////////////////////////////////////////////////////
 
-////////////////////////////////////////////////////////////////////////
-// 4. COMPILER
-////////////////////////////////////////////////////////////////////////
-
-sort Instructions  |  scheme Compile(Program) ;
-
-Compile(#1) → ⟦main MOV PC,LR⟧ ;
+	sort Instructions  |  scheme Compile(Program) ;
+	Compile(#1) → ⟦main MOV PC,LR⟧ ;
 
 }
