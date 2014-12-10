@@ -19,14 +19,19 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	token IDENTIFIER
 		|	⟨LetterEtc⟩ (⟨LetterEtc⟩ | ⟨Digit⟩)* ;
 
+	sort Identifier
+		|	symbol ⟦⟨IDENTIFIER⟩⟧ ;
+
 	token INTEGER
 		|	⟨Digit⟩+ ;
 
 	token fragment Letter
 		|	[A-Za-z] ;
+
 	token fragment LetterEtc
 		|	⟨Letter⟩
 		|	[$_] ;
+
 	token fragment Digit
 		|	[0-9] ;
 
@@ -80,12 +85,9 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	// EXPRESSIONS
 	sort Expression
-
 		|	sugar ⟦ ( ⟨Expression#e⟩ ) ⟧@10 → #e
-
 		|	⟦ ⟨Integer⟩ ⟧@10
 		|	⟦ ⟨Identifier⟩ ⟧@10
-
 		|	⟦ ⟨Expression@9⟩ ( ) ⟧@9
 		|	⟦ ⟨Expression@9⟩ ( ⟨Expression⟩ ) ⟧@9
 
@@ -94,7 +96,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ + ⟨Expression@8⟩ ⟧@8
 
 		|	⟦ ⟨Expression@7⟩ * ⟨Expression@8⟩ ⟧@7
-
 		|	⟦ ⟨Expression@6⟩ + ⟨Expression@7⟩ ⟧@6
 		|	⟦ ⟨Expression@6⟩ - ⟨Expression@7⟩ ⟧@6
 
@@ -102,23 +103,16 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ ⟨Expression@6⟩ > ⟨Expression@6⟩ ⟧@5
 		|	⟦ ⟨Expression@6⟩ <= ⟨Expression@6⟩ ⟧@5
 		|	⟦ ⟨Expression@6⟩ >= ⟨Expression@6⟩ ⟧@5
-
 		|	⟦ ⟨Expression@5⟩ == ⟨Expression@5⟩ ⟧@4
 		|	⟦ ⟨Expression@5⟩ != ⟨Expression@5⟩ ⟧@4
 
 		|	⟦ ⟨Expression@3⟩ && ⟨Expression@4⟩ ⟧@3
-
 		|	⟦ ⟨Expression@2⟩ || ⟨Expression@3⟩ ⟧@2
-
 		|	⟦ ⟨Expression@2⟩ = ⟨Expression@1⟩ ⟧@1
-
 		|	⟦ ⟨Expression@1⟩ , ⟨Expression⟩ ⟧ ;
 
 	sort Integer
 		|	⟦ ⟨INTEGER⟩ ⟧ ;
-
-	sort Identifier
-		|	symbol ⟦⟨IDENTIFIER⟩⟧ ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 3. MinARM32 ASSEMBLER GRAMMAR
@@ -165,34 +159,66 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ LDRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // load byte into register from memory
 		|	⟦ STRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // store byte from register into memory
 		|	⟦ LDMFD ⟨Reg⟩! , {⟨Regs⟩] ⟧ // load multiple fully descending (pop)
-		|	⟦ STMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧ // store multiple fully descending (push)
-		;
+		|	⟦ STMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧ ; // store multiple fully descending (push)
 
 	// Arguments.
+	sort Reg
+		|	⟦R0⟧ |	⟦R1⟧ |	⟦R2⟧ |	⟦R3⟧ |	⟦R4⟧ |	⟦R5⟧ |	⟦R6⟧ |	⟦R7⟧
+		|	⟦R8⟧ |	⟦R9⟧ |	⟦R10⟧ |	⟦R11⟧ |	⟦R12⟧ |	⟦SP⟧ |	⟦LR⟧ |	⟦PC⟧ ;
 
-	sort Reg	| ⟦R0⟧ | ⟦R1⟧ | ⟦R2⟧ | ⟦R3⟧ | ⟦R4⟧ | ⟦R5⟧ | ⟦R6⟧ | ⟦R7⟧
-	     		| ⟦R8⟧ | ⟦R9⟧ | ⟦R10⟧ | ⟦R11⟧ | ⟦R12⟧ | ⟦SP⟧ | ⟦LR⟧ | ⟦PC⟧ ;
+	sort Regs
+		|	⟦⟨Reg⟩⟧
+		|	⟦⟨Reg⟩, ⟨Regs⟩⟧ ;
 
-	sort Arg | ⟦⟨Constant⟩⟧ | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, LSL ⟨Constant⟩⟧ | ⟦⟨Reg⟩, LSR ⟨Constant⟩⟧ ;
+	sort Identifiers
+		|	⟦⟨Identifier⟩⟧
+		|	⟦⟨Identifier⟩, ⟨Identifiers⟩⟧ ;
 
-	sort Mem | ⟦ [ ⟨Reg⟩, ⟨Sign⟩ ⟨Arg⟩ ] ⟧ ;
-	sort Sign | ⟦+⟧ | ⟦-⟧ | ⟦⟧ ;
+	sort Arg
+		|	⟦⟨Constant⟩⟧
+		|	⟦⟨Reg⟩⟧
+		|	⟦⟨Reg⟩, LSL ⟨Constant⟩⟧
+		|	⟦⟨Reg⟩, LSR ⟨Constant⟩⟧ ;
 
-	sort Regs | ⟦⟨Reg⟩⟧ | ⟦⟨Reg⟩, ⟨Regs⟩⟧ ;
+	sort Mem
+		|	⟦ [ ⟨Reg⟩, ⟨Sign⟩ ⟨Arg⟩ ] ⟧ ;
 
-	sort Constant | ⟦#⟨Integer⟩⟧ | ⟦&⟨Identifier⟩⟧ ;
+	sort Sign
+		|	⟦+⟧
+		|	⟦-⟧
+		|	⟦⟧ ;
+
+	sort Constant
+		|	⟦#⟨Integer⟩⟧
+		|	⟦&⟨Identifier⟩⟧ ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 4. COMPILER
 	////////////////////////////////////////////////////////////////////////
 
+	// Keeping track of the register we are using
+	attribute ↓idToReg {Identifier:Regs} ;
+	attribute ↓regToID {Reg:Identifiers} ;
 
+	// Find
+	// RegGivenIdentifier: Given an Identifier - find what register it is in
+	sort Reg
+		|	Find(Regs)
+		| 	RegGivenIdentifier(Identifier) ↓idToReg ;
+
+	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧) → Reg#r ;
+	RegGivenIdentifier(⟦id⟧)↓idToReg {⟦id⟧:Regs#rs} → Find(Regs#rs) ;
+
+	sort Regs
+		|	scheme ⟦ (⟨Regs⟩ + ⟨Regs⟩)⟧ ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 5. MAIN
 	////////////////////////////////////////////////////////////////////////
 
-	sort Instructions  |  scheme Compile(Program) ;
+	sort Instructions
+		|	scheme Compile(Program) ;
+
 	Compile(#1) → ⟦main MOV PC,LR⟧ ;
 
 }
