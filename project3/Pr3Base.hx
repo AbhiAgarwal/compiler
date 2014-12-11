@@ -209,16 +209,21 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧) → Reg#r ;
 	RegGivenIdentifier(⟦id⟧)↓idToReg {⟦id⟧:Regs#rs} → Find(Regs#rs) ;
 
+	// Appending Reg
 	sort Regs
 		|	scheme ⟦ (⟨Regs⟩ + ⟨Regs⟩)⟧ ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 5. MAIN
+	// LDMFD, and STMFD to save registers r4-r11. For each function do:
+	// STMFD sp!, {r4-r11, lr}
+	// LDMFD sp!, {r4-r11, pc}
 	////////////////////////////////////////////////////////////////////////
 
 	sort Instructions
 		|	scheme Compile(Program) ;
 
-	Compile(#1) → ⟦main MOV PC,LR⟧ ;
+	Compile( ⟦ ⟨Declaration⟩ ⟧ ) → ⟦  ⟧ ;
+
 
 }
