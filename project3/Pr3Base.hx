@@ -5,7 +5,7 @@
 // 2. JST Grammar
 // 3. MinARM32 assembler grammar
 // 4. Compiler (To Be done)
-//
+// 5. Instructions
 // See http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr3/pr3.pdf
 
 module edu.nyu.csci.cc.fall14.Pr3Base {
@@ -198,7 +198,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	// Keeping track of the register we are using
 	attribute ↓idToReg {Identifier:Regs} ;
-	attribute ↓regToID {Reg:Identifiers} ;
 
 	// Find
 	// RegGivenIdentifier: Given an Identifier - find what register it is in
@@ -209,12 +208,10 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧) → Reg#r ;
 	RegGivenIdentifier(⟦id⟧)↓idToReg {⟦id⟧:Regs#rs} → Find(Regs#rs) ;
 
-	// Appending Reg
-	sort Regs
-		|	scheme ⟦ (⟨Regs⟩ + ⟨Regs⟩)⟧ ;
-
 	////////////////////////////////////////////////////////////////////////
-	// 5. MAIN
+	// 5. INSTRUCTIONS
+	// ↓idToReg answers the question of Allocation: what variables are in registers?
+	// ↓regAval answers the question of Assignment: which specific registers are free?
 	// LDMFD, and STMFD to save registers r4-r11. For each function do:
 	// STMFD sp!, {r4-r11, lr}
 	// LDMFD sp!, {r4-r11, pc}
@@ -223,7 +220,26 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme Compile(Program) ;
 
-	Compile( ⟦ ⟨Declaration⟩ ⟧ ) → ⟦  ⟧ ;
+	// ##################
+	// Handling Declerations of Functions: D
+	Compile(⟦ function ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧)
+		→ ⟦ D ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧ ;
 
+	// Now looking through the function. We know it's a decleration now.
+	sort Instructions
+		|	scheme ⟦ D ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
+
+	// Empty ArgumentSignature
+	⟦ D ⟨Type#t⟩ ⟨Identifier#i⟩ ( ) { ⟨Statements#s⟩ } ⟧
+		→ ;
+
+	// With ArgumentSignature present
+	⟦ D ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧
+		→ ⟦ A R0, R1, R2, R3 ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧ ;
+
+	// ##################
+	// Handling Arguments: A
+	sort Instructions
+		|	scheme ⟦ A ⟨Regs⟩ ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
 
 }
