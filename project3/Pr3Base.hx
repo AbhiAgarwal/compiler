@@ -123,8 +123,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ ⟨Instruction⟩ ⟨Instructions⟩ ⟧
 		|	⟦⟧ ;
 
-		
-
 	sort Instruction
 		|	⟦ ⟨Identifier⟩ = ⟨Integer⟩ ⟧ // define identifier
 		|	⟦ ⟨Identifier⟩ ⟧ // label
@@ -243,12 +241,24 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ;
 
 	// With ArgumentSignature present
-	⟦ D ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧
+	// Here we are opening up the bracket so allo for ArgumentSignature to begin handling
+	⟦ D ⟨Type#t⟩ ⟨Identifier#i⟩ ( ⟨ArgumentSignature#as⟩ ⟧
 		→ ⟦ A R0, R1, R2, R3 ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ { ⟨Statements#s⟩ } ⟧ ;
 
 	// ##################
 	// Handling Arguments: A
 	sort Instructions
-		|	scheme ⟦ A ⟨Regs⟩ ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
+		|	scheme ⟦ A ⟨Regs⟩ ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ ⟧ ↓idToReg ;
+
+	⟦ A ⟨Reg#r⟩, ⟨Regs#re⟩ ⟨Type#t⟩ ⟨Identifier#i⟩ ⟨ArgumentSignature#as⟩ ⟧
+		→ ⟦ ⟧ ↓idToReg{⟨Identifier#i⟩: ⟨Reg#r⟩}
+
+
+	// ##################
+	// Handling Expressions: E
+	sort Instructions
+		|	scheme ⟦ E  ⟨Expression⟩ ⟧ ↓idToReg ;
+
+	
 
 }
