@@ -123,6 +123,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ ⟨Instruction⟩ ⟨Instructions⟩ ⟧
 		|	⟦⟧ ;
 
+		
+
 	sort Instruction
 		|	⟦ ⟨Identifier⟩ = ⟨Integer⟩ ⟧ // define identifier
 		|	⟦ ⟨Identifier⟩ ⟧ // label
@@ -191,6 +193,13 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Constant
 		|	⟦#⟨Integer⟩⟧
 		|	⟦&⟨Identifier⟩⟧ ;
+
+		// Assembler helper: concatenation/flattening of code:
+
+	sort Instructions
+	| scheme ⟦ { ⟨Instructions⟩ } ⟨Instructions⟩ ⟧ ;
+	⟦ {} ⟨Instructions#⟩ ⟧ → # ;
+	⟦ {⟨Instruction#1⟩ ⟨Instructions#2⟩} ⟨Instructions#3⟩ ⟧ → ⟦ ⟨Instruction#1⟩ {⟨Instructions#2⟩} ⟨Instructions#3⟩ ⟧ ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 4. COMPILER
