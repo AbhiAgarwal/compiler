@@ -1,0 +1,19 @@
+/* This function computes 2014/35. */
+function int main(int n) {
+  return div(2014, 35);
+}
+
+// The lowest value that we cannot safely multiply by 2 is 2^30
+funtion int halfmax() {
+  return 1073741824;
+}
+
+function int div(int nominator, int divisor) {
+  var int sign;
+  if (nominator < 0) {
+    nominator = 
+
+  int shift = 0;
+  while (nominator < 
+}
+

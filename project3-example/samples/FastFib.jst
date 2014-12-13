@@ -1,0 +1,11 @@
+function int main(int in) {
+  return fastfib(in, 1, 0);
+}
+
+// with two most recent results compute the next
+function int fastfib2(int n, int last, int lastlast) {
+  if (n<=1)
+    return last;
+  else
+    return fastfib2(n-1, last + lastlast, last);
+}
