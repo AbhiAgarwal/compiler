@@ -106,7 +106,7 @@ Pr3Base[(
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_2223]]: '$Print2-Pr3Base$Identifier' [y_2223, #prec] → %n⟪†‹$[Symbol,y_2223]›⟫ ;
+-[Free[y_2451]]: '$Print2-Pr3Base$Identifier' [y_2451, #prec] → %n⟪†‹$[Symbol,y_2451]›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -1173,6 +1173,14 @@ $[If, $[GreaterThan, #prec, 0],
   0]
 ;
 
+
+'$Print-ArgumentAnalysis' [#1]
+→
+'$Print2-Pr3Base$Instructions' [
+  'Pr3Base$Instructions_ArgumentAnalysis' [#1],
+  0]
+;
+
 $Print2-Pr3Base$Computed[$Numeric, $Numeric] :: Text ;
 $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]›⟫ ;
 
@@ -1209,6 +1217,7 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 <!--RULES FOR SORT Pr3Base$Instructions.-->
+
 
 
 
@@ -1254,6 +1263,13 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 - [Free[name2_2::Identifier]]:
     'Pr3Base$Instructions_CompileDeclaration' [   'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [   #1  ,    name2_2  ,    #3  ,    #4  ] ] 
+→
+    'Pr3Base$Instructions_ArgumentAnalysis' [   'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [   #1  ,    name2_2  ,    #3  ,    #4  ] ] 
+;
+
+
+- [Free[name2_2::Identifier]]:
+    'Pr3Base$Instructions_ArgumentAnalysis' [   'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [   #1  ,    name2_2  ,    'Pr3Base$ArgumentSignature_()'  ,    #4  ] ] 
 →
     'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Identifier_' [   name2_2  ] ,    'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_PC'  ,    'Pr3Base$Arg__Reg_' [   'Pr3Base$Reg_LR'  ] ] ] ,    'Pr3Base$Instructions_'  ] ] 
 ;

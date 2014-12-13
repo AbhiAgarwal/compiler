@@ -240,6 +240,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	scheme CompileDeclaration(Declaration) ;
 
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
+		→	ArgumentAnalysis( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ );
+
+	sort Instructions
+		|	scheme ArgumentAnalysis(Declaration) ;
+
+	ArgumentAnalysis( ⟦ function ⟨Type#1⟩ name2 ( ) { ⟨Statements#4⟩ } ⟧ )
 		→	⟦ name2 MOV PC,LR ⟧ ;
 
 }
