@@ -247,9 +247,9 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→	
 		⟦ 
 			{name2 MOV PC,LR} 
-			⟨Instructions Argument(#3)⟩ 
+			⟨Instructions Argument(#3)⟩
+			⟨Instructions AllStatements(#4)⟩
 		⟧ ;
-
 
 	// HANDLING ARGUMENTS
 	sort Instructions
@@ -307,5 +307,21 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	SubArguments( ⟦ ⟧ )
 		→ ⟦ ⟧ ;
+
+	sort Instructions
+		|	scheme AllStatements(Statements) ;
+
+	AllStatements( ⟦ ⟨Statement#1⟩ ⟨Statements#2⟩ ⟧ )
+		→	
+		⟦ 
+			{⟨Instructions SingleStatement(#1)⟩}
+			⟨Instructions AllStatements(#2)⟩ 
+		⟧ ;
+
+	AllStatements( ⟦ ⟧ )
+		→ ⟦ ⟧ ;
+
+	sort Instructions
+		|	scheme SingleStatement(Statement) ;
 
 }
