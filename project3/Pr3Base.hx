@@ -231,7 +231,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	scheme CompileDeclarations(Declarations) ;
 
 	CompileDeclarations( ⟦ ⟨Declaration#1⟩ ⟨Declarations#2⟩ ⟧ )
-		→	⟦ {⟨Instructions CompileDeclaration(#1)⟩} ⟨Instructions CompileDeclarations(#2)⟩ ⟧ ;
+		→	
+		⟦ 
+			{⟨Instructions CompileDeclaration(#1)⟩}
+			⟨Instructions CompileDeclarations(#2)⟩ 
+		⟧ ;
 
 	CompileDeclarations( ⟦ ⟧ )
 		→	⟦ ⟧ ;
@@ -240,12 +244,68 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	scheme CompileDeclaration(Declaration) ;
 
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
-		→	ArgumentAnalysis( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ );
+		→	
+		⟦ 
+			{name2 MOV PC,LR} 
+			⟨Instructions Argument(#3)⟩ 
+		⟧ ;
 
+
+	// HANDLING ARGUMENTS
 	sort Instructions
-		|	scheme ArgumentAnalysis(Declaration) ;
+		|	scheme Argument(ArgumentSignature) ;
 
-	ArgumentAnalysis( ⟦ function ⟨Type#1⟩ name2 ( ) { ⟨Statements#4⟩ } ⟧ )
-		→	⟦ name2 MOV PC,LR ⟧ ;
+	// No Arguments Handling
+	Argument( ⟦ ( ) ⟧ )
+		→	⟦ ⟧ ;
+
+	// 1 Argument Handling
+	Argument( ⟦ ( ⟨Type#1⟩ name1 ) ⟧ )
+		→	
+		⟦
+			{MOV R0, &name1}
+		⟧ ;
+
+	// 2 Argument Handling
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2 ) ⟧ )
+		→	
+		⟦
+			{MOV R0, &name1}
+			{MOV R1, &name2}
+		⟧ ;
+
+	// 3 Argument Handling
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2, ⟨Type#5⟩ name3 ) ⟧ )
+		→	
+		⟦
+			{MOV R0, &name1}
+			{MOV R1, &name2}
+			{MOV R2, &name3}
+		⟧ ;
+
+	// 4 Argument Handling
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2, ⟨Type#5⟩ name3, ⟨Type#7⟩ name4 ) ⟧ )
+		→	
+		⟦
+			{MOV R0, &name1}
+			{MOV R1, &name2}
+			{MOV R2, &name3}
+			{MOV R3, &name4}
+		⟧ ;
+
+	// For SubArguments -- NOT REQUIRED because we assume that functions never have more than four arguments
+	// Will replace later if have the time
+	sort Instructions
+		|	scheme SubArguments(TypeIdentifierTail) ;
+
+	SubArguments( ⟦, ⟨Type#1⟩ ⟨Identifier#2⟩ ⟨TypeIdentifierTail#3⟩ ⟧ )
+		→
+		⟦
+			{l1 MOV PC,LR}
+			⟨Instructions SubArguments(#3)⟩
+		⟧ ;
+
+	SubArguments( ⟦ ⟧ )
+		→ ⟦ ⟧ ;
 
 }
