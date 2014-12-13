@@ -298,10 +298,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme SubArguments(TypeIdentifierTail) ;
 
-	SubArguments( ⟦, ⟨Type#1⟩ ⟨Identifier#2⟩ ⟨TypeIdentifierTail#3⟩ ⟧ )
+	// Just puts everything into R0
+	SubArguments( ⟦, ⟨Type#1⟩ name1 ⟨TypeIdentifierTail#3⟩ ⟧ )
 		→
 		⟦
-			{l1 MOV PC,LR}
+			{MOV R0, &name1}
 			⟨Instructions SubArguments(#3)⟩
 		⟧ ;
 
@@ -315,7 +316,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→	
 		⟦ 
 			{⟨Instructions SingleStatement(#1)⟩}
-			⟨Instructions AllStatements(#2)⟩ 
+			⟨Instructions AllStatements(#2)⟩
 		⟧ ;
 
 	AllStatements( ⟦ ⟧ )
