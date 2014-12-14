@@ -205,7 +205,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Symbol
 		|	symbol ⟦⟨SYMBOL⟩⟧ ;
 
-
 	// Keeping track of the register we are using
 	attribute ↓idToReg {Identifier:Regs} ;
 
@@ -249,9 +248,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme CompileDeclaration(Declaration) ;
 
-		// {STMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, LR}}
-		// {LDMFD SP! , ({R4, R5, R6, R7, R8, R9, R10, R11, PC}⟩}
-
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
 		→	
 		⟦
@@ -271,7 +267,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	// No Arguments Handling
 	Argument( ⟦ ( ) ⟧ )
-		→	⟦ ⟧ ;
+		→ ⟦ ⟧ ;
 
 	// 1 Argument Handling
 	Argument( ⟦ ( ⟨Type#1⟩ name1 ) ⟧ )
@@ -397,7 +393,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ * ⟨Expression#2⟩ ⟧)
-		→ ⟦ 
+		→ 
+		⟦ 
 			{MOV R0, R1}
 		⟧ ;
 
