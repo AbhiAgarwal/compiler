@@ -200,6 +200,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	// 4. COMPILER
 	////////////////////////////////////////////////////////////////////////
 
+	token SYMBOL
+		|	[a-z]+ ('_' [0-9=+)* ;
+	sort Symbol
+		|	symbol ⟦⟨SYMBOL⟩⟧ ;
+
+
 	// Keeping track of the register we are using
 	attribute ↓idToReg {Identifier:Regs} ;
 
@@ -311,6 +317,15 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			⟨Instructions AllStatements(#2)⟩
 		⟧ ;
 
+	// Special Case?
+	// { ⟨Statements⟩ }
+	AllStatements(⟦ { ⟨Statement#1⟩ ⟨Statements#2⟩ } ⟧)
+		→
+		⟦
+			{⟨Instructions SingleStatement(#1)⟩}
+			⟨Instructions AllStatements(#2)⟩
+		⟧ ;
+
 	AllStatements(⟦ ⟧)
 		→ ⟦ ⟧ ;
 
@@ -323,6 +338,37 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			⟨Instructions SingleExpression(#1)⟩
 		⟧ ;
 
+	SingleStatement(⟦ var ⟨Type⟩ ⟨Identifier⟩ ; ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ if ( ⟨Expression⟩ ) ⟨IfTail⟩ ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ while ( ⟨Expression⟩ ) ⟨Statement⟩ ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ return ⟨Expression⟩ ; ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ return ; ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	// This shouldn't have to be dealt with.
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
 		→ 
 		⟦
@@ -352,7 +398,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	SingleExpression(⟦ ⟨Expression#1⟩ * ⟨Expression#2⟩ ⟧)
 		→ ⟦ 
-			{MOV R0, &main}
+			{MOV R0, R1}
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ + ⟨Expression#2⟩ ⟧)

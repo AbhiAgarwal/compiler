@@ -106,7 +106,7 @@ Pr3Base[(
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_3866]]: '$Print2-Pr3Base$Identifier' [y_3866, #prec] → %n⟪†‹$[Symbol,y_3866]›⟫ ;
+-[Free[y_3865]]: '$Print2-Pr3Base$Identifier' [y_3865, #prec] → %n⟪†‹$[Symbol,y_3865]›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -1356,7 +1356,7 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 - :
     'Pr3Base$Instructions_AllStatements' [   'Pr3Base$Statements__Statement__Statements_' [   #1  ,    #2  ] ] 
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [   'Pr3Base$Reg_SP'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R4'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R5'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R6'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R7'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R8'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R9'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R10'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R11'  ,    'Pr3Base$Regs__Reg_' [   'Pr3Base$Reg_LR'  ] ] ] ] ] ] ] ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] 
+    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_SingleStatement' [   #1  ] ,    'Pr3Base$Instructions_AllStatements' [   #2  ] ] 
 ;
 
 
@@ -1423,10 +1423,10 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Fresh[main_6::Identifier]]:
+- :
     'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_*_Expression_' [   #1  ,    #2  ] ] 
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   main_6  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] 
+    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Reg_' [   'Pr3Base$Reg_R1'  ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] 
 ;
 
 

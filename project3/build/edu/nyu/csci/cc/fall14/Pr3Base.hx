@@ -352,7 +352,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	SingleExpression(⟦ ⟨Expression#1⟩ * ⟨Expression#2⟩ ⟧)
 		→ ⟦ 
-			{MOV R0, &main}
+			{MOV R0, R1}
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ + ⟨Expression#2⟩ ⟧)
