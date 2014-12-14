@@ -25,33 +25,33 @@ public interface Pr3BaseEmbedConstants {
   /** RegularExpression Id. */
   int T_meta_Instruction = 48;
   /** RegularExpression Id. */
-  int T_meta_Op = 79;
+  int T_meta_Op = 78;
   /** RegularExpression Id. */
-  int T_meta_Declarations = 85;
+  int T_meta_Declarations = 84;
   /** RegularExpression Id. */
-  int T_meta_Declaration = 92;
+  int T_meta_Declaration = 91;
   /** RegularExpression Id. */
-  int T_meta_IDENTIFIER = 98;
+  int T_meta_IDENTIFIER = 97;
   /** RegularExpression Id. */
-  int T_meta_IfTail = 105;
+  int T_meta_IfTail = 104;
   /** RegularExpression Id. */
-  int T_meta_Expression = 122;
+  int T_meta_Expression = 121;
   /** RegularExpression Id. */
-  int T_meta_Statements = 128;
+  int T_meta_Statements = 127;
   /** RegularExpression Id. */
-  int T_meta_Statement = 139;
+  int T_meta_Statement = 138;
   /** RegularExpression Id. */
-  int T_meta_Identifier = 145;
+  int T_meta_Identifier = 144;
   /** RegularExpression Id. */
-  int T_meta_INTEGER = 151;
+  int T_meta_INTEGER = 150;
   /** RegularExpression Id. */
-  int T_meta_Type = 159;
+  int T_meta_Type = 158;
   /** RegularExpression Id. */
-  int T_meta_Reg = 181;
+  int T_meta_Reg = 180;
   /** RegularExpression Id. */
-  int T_meta_Regs = 187;
+  int T_meta_Regs = 186;
   /** RegularExpression Id. */
-  int T_meta_Arg = 195;
+  int T_meta_Arg = 194;
   /** RegularExpression Id. */
   int T_meta_Mem = 202;
   /** RegularExpression Id. */
@@ -234,7 +234,6 @@ public interface Pr3BaseEmbedConstants {
     "\"EOR\"",
     "\"LDMFD\"",
     "\"!\"",
-    "\"]\"",
     "\"LDR\"",
     "\"LDRB\"",
     "\"MOV\"",
@@ -245,38 +244,38 @@ public interface Pr3BaseEmbedConstants {
     "\"STR\"",
     "\"STRB\"",
     "\"SUB\"",
-    "<token of kind 75>",
+    "<token of kind 74>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 79>",
     "<token of kind 80>",
-    "<token of kind 81>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 86>",
+    "<token of kind 85>",
     "\"function\"",
-    "<token of kind 88>",
+    "<token of kind 87>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 92>",
     "<token of kind 93>",
-    "<token of kind 94>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 99>",
+    "<token of kind 98>",
     "\"else\"",
-    "<token of kind 101>",
+    "<token of kind 100>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 106>",
+    "<token of kind 105>",
     "\"||\"",
     "\"&&\"",
     "\"!=\"",
@@ -288,49 +287,49 @@ public interface Pr3BaseEmbedConstants {
     "\"+\"",
     "\"-\"",
     "\"*\"",
-    "<token of kind 118>",
+    "<token of kind 117>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 122>",
     "<token of kind 123>",
-    "<token of kind 124>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 129>",
+    "<token of kind 128>",
     "\";\"",
     "\"if\"",
     "\"return\"",
     "\"var\"",
     "\"while\"",
-    "<token of kind 135>",
+    "<token of kind 134>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 139>",
     "<token of kind 140>",
-    "<token of kind 141>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 145>",
     "<token of kind 146>",
-    "<token of kind 147>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 152>",
+    "<token of kind 151>",
     "\"boolean\"",
     "\"int\"",
-    "<token of kind 155>",
+    "<token of kind 154>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 160>",
+    "<token of kind 159>",
     "\"LR\"",
     "\"PC\"",
     "\"R0\"",
@@ -347,27 +346,28 @@ public interface Pr3BaseEmbedConstants {
     "\"R8\"",
     "\"R9\"",
     "\"SP\"",
-    "<token of kind 177>",
+    "<token of kind 176>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
+    "<token of kind 181>",
     "<token of kind 182>",
-    "<token of kind 183>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 188>",
+    "<token of kind 187>",
     "\"LSL\"",
     "\"LSR\"",
-    "<token of kind 191>",
+    "<token of kind 190>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 196>",
+    "<token of kind 195>",
     "\"[\"",
+    "\"]\"",
     "<token of kind 198>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",

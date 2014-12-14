@@ -158,7 +158,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ STR ⟨Reg⟩, ⟨Mem⟩ ⟧ // store register to memory
 		|	⟦ LDRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // load byte into register from memory
 		|	⟦ STRB ⟨Reg⟩, ⟨Mem⟩ ⟧ // store byte from register into memory
-		|	⟦ LDMFD ⟨Reg⟩! , {⟨Regs⟩] ⟧ // load multiple fully descending (pop)
+		|	⟦ LDMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧ // load multiple fully descending (pop)
 		|	⟦ STMFD ⟨Reg⟩! , {⟨Regs⟩} ⟧ ; // store multiple fully descending (push)
 
 	// Arguments.
@@ -243,22 +243,29 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme CompileDeclaration(Declaration) ;
 
+		// {STMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, LR}}
+		// {LDMFD SP! , ({R4, R5, R6, R7, R8, R9, R10, R11, PC}⟩}
+
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
 		→	
-		⟦ 
-			{name2 MOV PC,LR} 
-			⟨Instructions Argument(#3)⟩ 
+		⟦
+			{
+				{STMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, LR}}
+				⟨Instructions Argument(#3)⟩
+			}
+			{
+				{⟨Instructions AllStatements(#4)⟩}
+				LDMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, PC}
+			}
 		⟧ ;
 
+	// HANDLING ARGUMENTS
 	sort Instructions
 		|	scheme Argument(ArgumentSignature) ;
 
 	// No Arguments Handling
 	Argument( ⟦ ( ) ⟧ )
-		→	
-		⟦ 
-			{l1 MOV PC,LR}
-		⟧ ;
+		→	⟦ ⟧ ;
 
 	// 1 Argument Handling
 	Argument( ⟦ ( ⟨Type#1⟩ name1 ) ⟧ )
@@ -294,15 +301,104 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{MOV R3, &name4}
 		⟧ ;
 
+	sort Instructions
+		|	scheme AllStatements(Statements) ;
+
+	AllStatements(⟦ ⟨Statement#1⟩ ⟨Statements#2⟩ ⟧)
+		→
+		⟦
+			{⟨Instructions SingleStatement(#1)⟩}
+			⟨Instructions AllStatements(#2)⟩
+		⟧ ;
+
+	AllStatements(⟦ ⟧)
+		→ ⟦ ⟧ ;
+
+	sort Instructions
+		|	scheme SingleStatement(Statement) ;
+
+	SingleStatement(⟦ ⟨Expression#1⟩ ; ⟧)
+		→ 
+		⟦
+			⟨Instructions SingleExpression(#1)⟩
+		⟧ ;
+
+	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
+		→ 
+		⟦
+			⟨Instructions AllStatements(#1)⟩
+		⟧ ;
+
+	SingleStatement(⟦ ; ⟧)
+		→ ⟦ ⟧ ;
+
+	sort Instructions
+		|	scheme SingleExpression(Expression) ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ ( ) ⟧)
+		→ ⟦ ⟧ ;
+	
+	SingleExpression(⟦ ⟨Expression#1⟩ ( ⟨Expression#1⟩ ) ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ! ⟨Expression#1⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ - ⟨Expression#1⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ + ⟨Expression#1⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ * ⟨Expression#2⟩ ⟧)
+		→ ⟦ 
+			{MOV R0, &main}
+		⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ + ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ - ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ < ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ > ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ <= ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ >= ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ == ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ != ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ && ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ || ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	SingleExpression(⟦ ⟨Expression#1⟩ = ⟨Expression#2⟩ ⟧)
+		→ ⟦ ⟧ ;
+
+	// EXTRAS:
 	// For SubArguments -- NOT REQUIRED because we assume that functions never have more than four arguments
 	// Will replace later if have the time
 	sort Instructions
 		|	scheme SubArguments(TypeIdentifierTail) ;
 
-	SubArguments( ⟦, ⟨Type#1⟩ ⟨Identifier#2⟩ ⟨TypeIdentifierTail#3⟩ ⟧ )
+	// Just puts everything into R0
+	SubArguments( ⟦, ⟨Type#1⟩ name1 ⟨TypeIdentifierTail#3⟩ ⟧ )
 		→
 		⟦
-			{l1 MOV PC,LR}
+			{MOV R0, &name1}
 			⟨Instructions SubArguments(#3)⟩
 		⟧ ;
 
