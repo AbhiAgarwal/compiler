@@ -124,10 +124,10 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦⟧ ;
 
 	sort Instruction
-		|	⟦ ⟨Identifier⟩ = ⟨Integer⟩ ⟧ // define identifier
+		|	⟦ ⟨Identifier⟩ = ⟨Integer⟩ ¶⟧ // define identifier
 		|	⟦ ⟨Identifier⟩ ⟧ // label
-		|	⟦ DCI ⟨Integers⟩ ⟧ // allocate integers
-		|	⟦ ⟨Op⟩ ⟧ ; // machine instruction
+		|	⟦ DCI ⟨Integers⟩ ¶⟧ // allocate integers
+		|	⟦ ⟨Op⟩ ¶⟧ ; // machine instruction
 
 	sort Integers
 		|	⟦ ⟨Integer⟩, ⟨Integers⟩ ⟧
@@ -185,7 +185,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦⟧ ;
 
 	sort Constant
-		|	⟦#⟨Integer⟩⟧
+		|	⟦# ⟨Sign⟩ ⟨Integer⟩⟧
 		|	⟦&⟨Identifier⟩⟧ ;
 
 		// Assembler helper: concatenation/flattening of code:
@@ -200,17 +200,26 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	// 4. COMPILER
 	////////////////////////////////////////////////////////////////////////
 
+	token SYMBOL
+		|	[a-z]+ ('_' [0-9]+)* ;
+
+	sort Symbol
+		|	symbol ⟦⟨SYMBOL⟩⟧ ;
+
 	// Keeping track of the register we are using
 	attribute ↓idToReg {Identifier:Regs} ;
 
 	// Find
 	// RegGivenIdentifier: Given an Identifier - find what register it is in
 	sort Reg
-		|	Find(Regs)
-		| 	RegGivenIdentifier(Identifier) ↓idToReg ;
+		|	Find(Regs) ↓idToReg
+		| 	RegsGivenIdentifier(Identifier) ↓idToReg ;
 
-	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧) → Reg#r ;
-	RegGivenIdentifier(⟦id⟧)↓idToReg {⟦id⟧:Regs#rs} → Find(Regs#rs) ;
+	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧)
+		→ Reg#r ;
+
+	RegsGivenIdentifier(⟦id⟧)↓idToReg{⟦id⟧:Regs#rs} 
+		→ Find(Regs#rs) ;
 
 	////////////////////////////////////////////////////////////////////////
 	// 5. INSTRUCTIONS
@@ -243,9 +252,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme CompileDeclaration(Declaration) ;
 
-		// {STMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, LR}}
-		// {LDMFD SP! , ({R4, R5, R6, R7, R8, R9, R10, R11, PC}⟩}
-
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
 		→	
 		⟦
@@ -265,7 +271,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	// No Arguments Handling
 	Argument( ⟦ ( ) ⟧ )
-		→	⟦ ⟧ ;
+		→ ⟦ ⟧ ;
 
 	// 1 Argument Handling
 	Argument( ⟦ ( ⟨Type#1⟩ name1 ) ⟧ )
@@ -311,11 +317,22 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			⟨Instructions AllStatements(#2)⟩
 		⟧ ;
 
+	// Special Case?
+	// { ⟨Statements⟩ }
+	AllStatements(⟦ { ⟨Statement#1⟩ ⟨Statements#2⟩ } ⟧)
+		→
+		⟦
+			{⟨Instructions SingleStatement(#1)⟩}
+			⟨Instructions AllStatements(#2)⟩
+		⟧ ;
+
 	AllStatements(⟦ ⟧)
 		→ ⟦ ⟧ ;
 
+	attribute ↓r(Reg) ;
+
 	sort Instructions
-		|	scheme SingleStatement(Statement) ;
+		|	scheme SingleStatement(Statement) ↓idToReg;
 
 	SingleStatement(⟦ ⟨Expression#1⟩ ; ⟧)
 		→ 
@@ -323,6 +340,31 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			⟨Instructions SingleExpression(#1)⟩
 		⟧ ;
 
+	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧)
+		→ ⟦ ⟧ ↓idToReg{name2: ⟦R0⟧} ;
+
+	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨IfTail#2⟩ ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ while ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ ⟧)
+		→ 
+		⟦
+			
+		⟧ ;
+
+	SingleStatement(⟦ return ⟨Expression#1⟩ ; ⟧)
+		→ 
+		⟦
+			⟨Instructions SingleExpression(#1)⟩
+		⟧ ;
+
+	SingleStatement(⟦ return ; ⟧)
+		→ ⟦ ⟧ ;
+
+	// This shouldn't have to be dealt with.
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
 		→ 
 		⟦
@@ -335,6 +377,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme SingleExpression(Expression) ;
 
+	SingleExpression(⟦ ⟨Integer#i⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, #⟨Integer#i⟩}
+		⟧ ;
+
 	SingleExpression(⟦ ⟨Expression#1⟩ ( ) ⟧)
 		→ ⟦ ⟧ ;
 	
@@ -345,14 +393,26 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	SingleExpression(⟦ - ⟨Expression#1⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{MOV R5, #-1}
+			{MUL R4, R4, R5}
+		⟧ ;
 
 	SingleExpression(⟦ + ⟨Expression#1⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦
+			{ ⟨Instructions SingleExpression(#1)⟩ }
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ * ⟨Expression#2⟩ ⟧)
-		→ ⟦ 
-			{MOV R0, R1}
+		→
+		⟦
+			{
+				{⟨Instructions SingleExpression(#1)⟩}
+				⟨Instructions SingleExpression(#2)⟩
+			}
+			{MUL R4,R4,R5}
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ + ⟨Expression#2⟩ ⟧)
@@ -385,8 +445,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	SingleExpression(⟦ ⟨Expression#1⟩ || ⟨Expression#2⟩ ⟧)
 		→ ⟦ ⟧ ;
 
-	SingleExpression(⟦ ⟨Expression#1⟩ = ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+	// ⟨Reg RegsGivenIdentifier(⟦arg⟧)⟩ 
+	SingleExpression(⟦ arg = ⟨Expression#2⟩ ⟧)
+		→ 
+		⟦ 
+			
+		⟧ ;
 
 	// EXTRAS:
 	// For SubArguments -- NOT REQUIRED because we assume that functions never have more than four arguments

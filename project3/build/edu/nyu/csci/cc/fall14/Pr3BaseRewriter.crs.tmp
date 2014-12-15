@@ -1,4 +1,4 @@
- // CRSX RULES FOR edu.nyu.csci.cc.fall14.Pr3Base.
+// CRSX RULES FOR edu.nyu.csci.cc.fall14.Pr3Base.
 
 Pr3Base[(
 
@@ -35,6 +35,10 @@ Pr3Base[(
 
 '$Print-Pr3Base$Constant' [Pr3Base$Constant] :: Text ;
 -[Data[#]]: '$Print-Pr3Base$Constant' [#] → '$Print2-Pr3Base$Constant' [#, 0] ;
+
+
+'$Print-Pr3Base$Computed' [Pr3Base$Computed] :: Text ;
+-[Data[#]]: '$Print-Pr3Base$Computed' [#] → '$Print2-Pr3Base$Computed' [#, 0] ;
 
 
 '$Print-Pr3Base$ArgumentSignature' [Pr3Base$ArgumentSignature] :: Text ;
@@ -101,12 +105,20 @@ Pr3Base[(
 -[Data[#]]: '$Print-Pr3Base$Reg' [#] → '$Print2-Pr3Base$Reg' [#, 0] ;
 
 
+'$Print-DummyComputed' 
+→
+'$Print2-Pr3Base$Computed' [
+ 'Pr3Base$Computed_DummyComputed' ,
+ 0]
+;
+
+
 '$Print-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER] :: Text ;
 '$Print-Pr3Base$IDENTIFIER' [#] → '$Print2-Pr3Base$IDENTIFIER' [#, 0] ;
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_3865]]: '$Print2-Pr3Base$Identifier' [y_3865, #prec] → %n⟪†‹$[Symbol,y_3865]›⟫ ;
+-[Free[y_4255]]: '$Print2-Pr3Base$Identifier' [y_4255, #prec] → %n⟪‹y_4255›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -120,8 +132,8 @@ Pr3Base[(
 '$Print2-Pr3Base$Program' [ 'Pr3Base$Program__Declarations_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Declarations' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Declarations' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Declarations' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Declarations' [#1, 0] › ⟫
 ]
 ;
 
@@ -130,8 +142,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Declarations' [ 'Pr3Base$Declarations__Declaration__Declarations_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Declaration' [#1, 0] › ‹ '$Print2-Pr3Base$Declarations' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Declaration' [#1, 0] › ‹ '$Print2-Pr3Base$Declarations' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Declaration' [#1, 0] › ‹ '$Print2-Pr3Base$Declarations' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Declaration' [#1, 0] › ‹ '$Print2-Pr3Base$Declarations' [#2, 0] › ⟫
 ]
 ;
 
@@ -140,8 +152,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Declarations' [ 'Pr3Base$Declarations_' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪()⟫,
-  %n⟪⟫
+ %n⟪()⟫,
+ %n⟪⟫
 ]
 ;
 
@@ -150,8 +162,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Declaration' [ 'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [#1, #2, #3, #4], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( function ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr3Base$Statements' [#4, 0] › } )⟫,
-  %n⟪ function ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr3Base$Statements' [#4, 0] › } ⟫
+ %n⟪( function ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr3Base$Statements' [#4, 0] › } )⟫,
+ %n⟪ function ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$ArgumentSignature' [#3, 0] › { ‹ '$Print2-Pr3Base$Statements' [#4, 0] › } ⟫
 ]
 ;
 
@@ -160,8 +172,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$ArgumentSignature' [ 'Pr3Base$ArgumentSignature_()' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ( ) )⟫,
-  %n⟪ ( ) ⟫
+ %n⟪( ( ) )⟫,
+ %n⟪ ( ) ⟫
 ]
 ;
 
@@ -170,8 +182,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$ArgumentSignature' [ 'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ( ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ) )⟫,
-  %n⟪ ( ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ) ⟫
+ %n⟪( ( ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ) )⟫,
+ %n⟪ ( ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ) ⟫
 ]
 ;
 
@@ -180,8 +192,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$TypeIdentifierTail' [ 'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( , ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › )⟫,
-  %n⟪ , ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ⟫
+ %n⟪( , ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › )⟫,
+ %n⟪ , ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ‹ '$Print2-Pr3Base$TypeIdentifierTail' [#3, 0] › ⟫
 ]
 ;
 
@@ -190,8 +202,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$TypeIdentifierTail' [ 'Pr3Base$TypeIdentifierTail_' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( )⟫,
-  %n⟪ ⟫
+ %n⟪( )⟫,
+ %n⟪ ⟫
 ]
 ;
 
@@ -200,8 +212,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statements' [ 'Pr3Base$Statements__Statement__Statements_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ‹ '$Print2-Pr3Base$Statements' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ‹ '$Print2-Pr3Base$Statements' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ‹ '$Print2-Pr3Base$Statements' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ‹ '$Print2-Pr3Base$Statements' [#2, 0] › ⟫
 ]
 ;
 
@@ -210,8 +222,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statements' [ 'Pr3Base$Statements_' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪()⟫,
-  %n⟪⟫
+ %n⟪()⟫,
+ %n⟪⟫
 ]
 ;
 
@@ -220,8 +232,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_{_Statements_}' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( { ‹ '$Print2-Pr3Base$Statements' [#1, 0] › } )⟫,
-  %n⟪ { ‹ '$Print2-Pr3Base$Statements' [#1, 0] › } ⟫
+ %n⟪( { ‹ '$Print2-Pr3Base$Statements' [#1, 0] › } )⟫,
+ %n⟪ { ‹ '$Print2-Pr3Base$Statements' [#1, 0] › } ⟫
 ]
 ;
 
@@ -230,8 +242,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_var_Type__Identifier_;' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( var ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ; )⟫,
-  %n⟪ var ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ; ⟫
+ %n⟪( var ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ; )⟫,
+ %n⟪ var ‹ '$Print2-Pr3Base$Type' [#1, 0] › ‹ '$Print2-Pr3Base$Identifier' [#2, 0] › ; ⟫
 ]
 ;
 
@@ -240,8 +252,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_;' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ; )⟫,
-  %n⟪ ; ⟫
+ %n⟪( ; )⟫,
+ %n⟪ ; ⟫
 ]
 ;
 
@@ -250,8 +262,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement__Expression_;' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; ⟫
 ]
 ;
 
@@ -260,8 +272,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_if(_Expression_)_IfTail_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( if ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$IfTail' [#2, 0] › )⟫,
-  %n⟪ if ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$IfTail' [#2, 0] › ⟫
+ %n⟪( if ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$IfTail' [#2, 0] › )⟫,
+ %n⟪ if ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$IfTail' [#2, 0] › ⟫
 ]
 ;
 
@@ -270,8 +282,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_while(_Expression_)_Statement_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( while ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$Statement' [#2, 0] › )⟫,
-  %n⟪ while ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$Statement' [#2, 0] › ⟫
+ %n⟪( while ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$Statement' [#2, 0] › )⟫,
+ %n⟪ while ( ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ) ‹ '$Print2-Pr3Base$Statement' [#2, 0] › ⟫
 ]
 ;
 
@@ -280,8 +292,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_return_Expression_;' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( return ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; )⟫,
-  %n⟪ return ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; ⟫
+ %n⟪( return ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; )⟫,
+ %n⟪ return ‹ '$Print2-Pr3Base$Expression' [#1, 0] › ; ⟫
 ]
 ;
 
@@ -290,8 +302,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Statement' [ 'Pr3Base$Statement_return;' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( return ; )⟫,
-  %n⟪ return ; ⟫
+ %n⟪( return ; )⟫,
+ %n⟪ return ; ⟫
 ]
 ;
 
@@ -300,8 +312,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$IfTail' [ 'Pr3Base$IfTail__Statement_else_Statement_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › else ‹ '$Print2-Pr3Base$Statement' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › else ‹ '$Print2-Pr3Base$Statement' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › else ‹ '$Print2-Pr3Base$Statement' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › else ‹ '$Print2-Pr3Base$Statement' [#2, 0] › ⟫
 ]
 ;
 
@@ -310,8 +322,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$IfTail' [ 'Pr3Base$IfTail__Statement_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Statement' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Statement' [#1, 0] › ⟫
 ]
 ;
 
@@ -320,8 +332,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Type' [ 'Pr3Base$Type_boolean' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( boolean )⟫,
-  %n⟪ boolean ⟫
+ %n⟪( boolean )⟫,
+ %n⟪ boolean ⟫
 ]
 ;
 
@@ -330,8 +342,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Type' [ 'Pr3Base$Type_int' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( int )⟫,
-  %n⟪ int ⟫
+ %n⟪( int )⟫,
+ %n⟪ int ⟫
 ]
 ;
 
@@ -340,8 +352,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Integer_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 10],
-  %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] › ⟫
 ]
 ;
 
@@ -350,8 +362,8 @@ $[If, $[GreaterThan, #prec, 10],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 10],
-  %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -360,8 +372,8 @@ $[If, $[GreaterThan, #prec, 10],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_()' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 9],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ) )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ) ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ) )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ) ⟫
 ]
 ;
 
@@ -370,8 +382,8 @@ $[If, $[GreaterThan, #prec, 9],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_(_Expression_)' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 9],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) ⟫
 ]
 ;
 
@@ -380,8 +392,8 @@ $[If, $[GreaterThan, #prec, 9],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression_!_Expression_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 8],
-  %n⟪( ! ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
-  %n⟪ ! ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
+ %n⟪( ! ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
+ %n⟪ ! ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
 ]
 ;
 
@@ -390,8 +402,8 @@ $[If, $[GreaterThan, #prec, 8],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression_-_Expression_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 8],
-  %n⟪( - ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
-  %n⟪ - ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
+ %n⟪( - ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
+ %n⟪ - ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
 ]
 ;
 
@@ -400,8 +412,8 @@ $[If, $[GreaterThan, #prec, 8],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression_+_Expression_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 8],
-  %n⟪( + ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
-  %n⟪ + ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
+ %n⟪( + ‹ '$Print2-Pr3Base$Expression' [#1, 8] › )⟫,
+ %n⟪ + ‹ '$Print2-Pr3Base$Expression' [#1, 8] › ⟫
 ]
 ;
 
@@ -410,8 +422,8 @@ $[If, $[GreaterThan, #prec, 8],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_*_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 7],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 7] › * ‹ '$Print2-Pr3Base$Expression' [#2, 8] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 7] › * ‹ '$Print2-Pr3Base$Expression' [#2, 8] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 7] › * ‹ '$Print2-Pr3Base$Expression' [#2, 8] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 7] › * ‹ '$Print2-Pr3Base$Expression' [#2, 8] › ⟫
 ]
 ;
 
@@ -420,8 +432,8 @@ $[If, $[GreaterThan, #prec, 7],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_+_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 6],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › + ‹ '$Print2-Pr3Base$Expression' [#2, 7] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › + ‹ '$Print2-Pr3Base$Expression' [#2, 7] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › + ‹ '$Print2-Pr3Base$Expression' [#2, 7] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › + ‹ '$Print2-Pr3Base$Expression' [#2, 7] › ⟫
 ]
 ;
 
@@ -430,8 +442,8 @@ $[If, $[GreaterThan, #prec, 6],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_-_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 6],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › - ‹ '$Print2-Pr3Base$Expression' [#2, 7] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › - ‹ '$Print2-Pr3Base$Expression' [#2, 7] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › - ‹ '$Print2-Pr3Base$Expression' [#2, 7] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › - ‹ '$Print2-Pr3Base$Expression' [#2, 7] › ⟫
 ]
 ;
 
@@ -440,8 +452,8 @@ $[If, $[GreaterThan, #prec, 6],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_<_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 5],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › < ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › < ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › < ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › < ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
 ]
 ;
 
@@ -450,8 +462,8 @@ $[If, $[GreaterThan, #prec, 5],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_>_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 5],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › > ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › > ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › > ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › > ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
 ]
 ;
 
@@ -460,8 +472,8 @@ $[If, $[GreaterThan, #prec, 5],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_<=_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 5],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › <= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
 ]
 ;
 
@@ -470,8 +482,8 @@ $[If, $[GreaterThan, #prec, 5],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_>=_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 5],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 6] › >= ‹ '$Print2-Pr3Base$Expression' [#2, 6] › ⟫
 ]
 ;
 
@@ -480,8 +492,8 @@ $[If, $[GreaterThan, #prec, 5],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_==_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 4],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 5] › == ‹ '$Print2-Pr3Base$Expression' [#2, 5] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 5] › == ‹ '$Print2-Pr3Base$Expression' [#2, 5] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 5] › == ‹ '$Print2-Pr3Base$Expression' [#2, 5] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 5] › == ‹ '$Print2-Pr3Base$Expression' [#2, 5] › ⟫
 ]
 ;
 
@@ -490,8 +502,8 @@ $[If, $[GreaterThan, #prec, 4],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_!=_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 4],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 5] › != ‹ '$Print2-Pr3Base$Expression' [#2, 5] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 5] › != ‹ '$Print2-Pr3Base$Expression' [#2, 5] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 5] › != ‹ '$Print2-Pr3Base$Expression' [#2, 5] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 5] › != ‹ '$Print2-Pr3Base$Expression' [#2, 5] › ⟫
 ]
 ;
 
@@ -500,8 +512,8 @@ $[If, $[GreaterThan, #prec, 4],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_&&_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 3],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 3] › && ‹ '$Print2-Pr3Base$Expression' [#2, 4] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 3] › && ‹ '$Print2-Pr3Base$Expression' [#2, 4] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 3] › && ‹ '$Print2-Pr3Base$Expression' [#2, 4] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 3] › && ‹ '$Print2-Pr3Base$Expression' [#2, 4] › ⟫
 ]
 ;
 
@@ -510,8 +522,8 @@ $[If, $[GreaterThan, #prec, 3],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_||_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 2],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 2] › || ‹ '$Print2-Pr3Base$Expression' [#2, 3] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 2] › || ‹ '$Print2-Pr3Base$Expression' [#2, 3] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 2] › || ‹ '$Print2-Pr3Base$Expression' [#2, 3] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 2] › || ‹ '$Print2-Pr3Base$Expression' [#2, 3] › ⟫
 ]
 ;
 
@@ -520,8 +532,8 @@ $[If, $[GreaterThan, #prec, 2],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_=_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 1],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 2] › = ‹ '$Print2-Pr3Base$Expression' [#2, 1] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 2] › = ‹ '$Print2-Pr3Base$Expression' [#2, 1] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 2] › = ‹ '$Print2-Pr3Base$Expression' [#2, 1] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 2] › = ‹ '$Print2-Pr3Base$Expression' [#2, 1] › ⟫
 ]
 ;
 
@@ -530,8 +542,8 @@ $[If, $[GreaterThan, #prec, 1],
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_,_Expression_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 1] › , ‹ '$Print2-Pr3Base$Expression' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 1] › , ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 1] › , ‹ '$Print2-Pr3Base$Expression' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 1] › , ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ⟫
 ]
 ;
 
@@ -540,8 +552,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Integer' [ 'Pr3Base$Integer__INTEGER_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$INTEGER' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$INTEGER' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$INTEGER' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$INTEGER' [#1, 0] › ⟫
 ]
 ;
 
@@ -550,8 +562,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instructions' [ 'Pr3Base$Instructions__Instruction__Instructions_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Instruction' [#1, 0] › ‹ '$Print2-Pr3Base$Instructions' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Instruction' [#1, 0] › ‹ '$Print2-Pr3Base$Instructions' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Instruction' [#1, 0] › ‹ '$Print2-Pr3Base$Instructions' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Instruction' [#1, 0] › ‹ '$Print2-Pr3Base$Instructions' [#2, 0] › ⟫
 ]
 ;
 
@@ -560,8 +572,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instructions' [ 'Pr3Base$Instructions_' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪()⟫,
-  %n⟪⟫
+ %n⟪()⟫,
+ %n⟪⟫
 ]
 ;
 
@@ -570,8 +582,10 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instruction' [ 'Pr3Base$Instruction__Identifier_=_Integer_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › = ‹ '$Print2-Pr3Base$Integer' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › = ‹ '$Print2-Pr3Base$Integer' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › = ‹ '$Print2-Pr3Base$Integer' [#2, 0] › ↲
+)⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › = ‹ '$Print2-Pr3Base$Integer' [#2, 0] › ↲
+⟫
 ]
 ;
 
@@ -580,8 +594,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instruction' [ 'Pr3Base$Instruction__Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -590,8 +604,10 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instruction' [ 'Pr3Base$Instruction_DCI_Integers_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( DCI ‹ '$Print2-Pr3Base$Integers' [#1, 0] › )⟫,
-  %n⟪ DCI ‹ '$Print2-Pr3Base$Integers' [#1, 0] › ⟫
+ %n⟪( DCI ‹ '$Print2-Pr3Base$Integers' [#1, 0] › ↲
+)⟫,
+ %n⟪ DCI ‹ '$Print2-Pr3Base$Integers' [#1, 0] › ↲
+⟫
 ]
 ;
 
@@ -600,8 +616,10 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Instruction' [ 'Pr3Base$Instruction__Op_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Op' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Op' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Op' [#1, 0] › ↲
+)⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Op' [#1, 0] › ↲
+⟫
 ]
 ;
 
@@ -610,8 +628,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Integers' [ 'Pr3Base$Integers__Integer_,_Integers_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] ›, ‹ '$Print2-Pr3Base$Integers' [#2, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] ›, ‹ '$Print2-Pr3Base$Integers' [#2, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] ›, ‹ '$Print2-Pr3Base$Integers' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] ›, ‹ '$Print2-Pr3Base$Integers' [#2, 0] › ⟫
 ]
 ;
 
@@ -620,8 +638,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Integers' [ 'Pr3Base$Integers__Integer_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] › )⟫,
-  %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] › ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] › ⟫
 ]
 ;
 
@@ -630,8 +648,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_MOV_Reg_,_Arg_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( MOV ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
-  %n⟪ MOV ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
+ %n⟪( MOV ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
+ %n⟪ MOV ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
 ]
 ;
 
@@ -640,8 +658,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_MVN_Reg_,_Arg_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( MVN ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
-  %n⟪ MVN ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
+ %n⟪( MVN ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
+ %n⟪ MVN ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
 ]
 ;
 
@@ -650,8 +668,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_ADD_Reg_,_Reg_,_Arg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ADD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
-  %n⟪ ADD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
+ %n⟪( ADD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
+ %n⟪ ADD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
 ]
 ;
 
@@ -660,8 +678,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_SUB_Reg_,_Reg_,_Arg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( SUB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
-  %n⟪ SUB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
+ %n⟪( SUB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
+ %n⟪ SUB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
 ]
 ;
 
@@ -670,8 +688,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_AND_Reg_,_Reg_,_Arg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( AND ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
-  %n⟪ AND ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
+ %n⟪( AND ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
+ %n⟪ AND ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
 ]
 ;
 
@@ -680,8 +698,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_ORR_Reg_,_Reg_,_Arg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( ORR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
-  %n⟪ ORR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
+ %n⟪( ORR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
+ %n⟪ ORR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
 ]
 ;
 
@@ -690,8 +708,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_EOR_Reg_,_Reg_,_Arg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( EOR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
-  %n⟪ EOR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
+ %n⟪( EOR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › )⟫,
+ %n⟪ EOR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ⟫
 ]
 ;
 
@@ -700,8 +718,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_CMP_Reg_,_Arg_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( CMP ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
-  %n⟪ CMP ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
+ %n⟪( CMP ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › )⟫,
+ %n⟪ CMP ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Arg' [#2, 0] › ⟫
 ]
 ;
 
@@ -710,8 +728,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( MUL ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#3, 0] › )⟫,
-  %n⟪ MUL ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#3, 0] › ⟫
+ %n⟪( MUL ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#3, 0] › )⟫,
+ %n⟪ MUL ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#2, 0] ›, ‹ '$Print2-Pr3Base$Reg' [#3, 0] › ⟫
 ]
 ;
 
@@ -720,8 +738,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_B_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( B ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ B ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( B ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ B ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -730,8 +748,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BEQ_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BEQ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BEQ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BEQ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BEQ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -740,8 +758,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BNE_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BNE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BNE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BNE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BNE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -750,8 +768,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BGT_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BGT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BGT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BGT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BGT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -760,8 +778,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BLT_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BLT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BLT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BLT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BLT ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -770,8 +788,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BGE_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BGE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BGE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BGE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BGE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -780,8 +798,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BLE_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BLE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BLE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BLE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BLE ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -790,8 +808,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_BL_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( BL ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
-  %n⟪ BL ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+ %n⟪( BL ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ BL ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
 ]
 ;
 
@@ -800,8 +818,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_LDR_Reg_,_Mem_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( LDR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
-  %n⟪ LDR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
+ %n⟪( LDR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
+ %n⟪ LDR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
 ]
 ;
 
@@ -810,8 +828,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_STR_Reg_,_Mem_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( STR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
-  %n⟪ STR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
+ %n⟪( STR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
+ %n⟪ STR ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
 ]
 ;
 
@@ -820,8 +838,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_LDRB_Reg_,_Mem_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( LDRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
-  %n⟪ LDRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
+ %n⟪( LDRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
+ %n⟪ LDRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
 ]
 ;
 
@@ -830,8 +848,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_STRB_Reg_,_Mem_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( STRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
-  %n⟪ STRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
+ %n⟪( STRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › )⟫,
+ %n⟪ STRB ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Mem' [#2, 0] › ⟫
 ]
 ;
 
@@ -840,8 +858,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_LDMFD_Reg_!,{_Regs_}' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( LDMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} )⟫,
-  %n⟪ LDMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} ⟫
+ %n⟪( LDMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} )⟫,
+ %n⟪ LDMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} ⟫
 ]
 ;
 
@@ -850,8 +868,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Op' [ 'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( STMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} )⟫,
-  %n⟪ STMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} ⟫
+ %n⟪( STMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} )⟫,
+ %n⟪ STMFD ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›! , {‹ '$Print2-Pr3Base$Regs' [#2, 0] ›} ⟫
 ]
 ;
 
@@ -860,8 +878,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R0' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R0)⟫,
-  %n⟪R0⟫
+ %n⟪(R0)⟫,
+ %n⟪R0⟫
 ]
 ;
 
@@ -870,8 +888,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R1' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R1)⟫,
-  %n⟪R1⟫
+ %n⟪(R1)⟫,
+ %n⟪R1⟫
 ]
 ;
 
@@ -880,8 +898,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R2' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R2)⟫,
-  %n⟪R2⟫
+ %n⟪(R2)⟫,
+ %n⟪R2⟫
 ]
 ;
 
@@ -890,8 +908,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R3' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R3)⟫,
-  %n⟪R3⟫
+ %n⟪(R3)⟫,
+ %n⟪R3⟫
 ]
 ;
 
@@ -900,8 +918,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R4' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R4)⟫,
-  %n⟪R4⟫
+ %n⟪(R4)⟫,
+ %n⟪R4⟫
 ]
 ;
 
@@ -910,8 +928,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R5' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R5)⟫,
-  %n⟪R5⟫
+ %n⟪(R5)⟫,
+ %n⟪R5⟫
 ]
 ;
 
@@ -920,8 +938,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R6' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R6)⟫,
-  %n⟪R6⟫
+ %n⟪(R6)⟫,
+ %n⟪R6⟫
 ]
 ;
 
@@ -930,8 +948,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R7' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R7)⟫,
-  %n⟪R7⟫
+ %n⟪(R7)⟫,
+ %n⟪R7⟫
 ]
 ;
 
@@ -940,8 +958,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R8' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R8)⟫,
-  %n⟪R8⟫
+ %n⟪(R8)⟫,
+ %n⟪R8⟫
 ]
 ;
 
@@ -950,8 +968,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R9' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R9)⟫,
-  %n⟪R9⟫
+ %n⟪(R9)⟫,
+ %n⟪R9⟫
 ]
 ;
 
@@ -960,8 +978,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R10' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R10)⟫,
-  %n⟪R10⟫
+ %n⟪(R10)⟫,
+ %n⟪R10⟫
 ]
 ;
 
@@ -970,8 +988,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R11' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R11)⟫,
-  %n⟪R11⟫
+ %n⟪(R11)⟫,
+ %n⟪R11⟫
 ]
 ;
 
@@ -980,8 +998,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_R12' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(R12)⟫,
-  %n⟪R12⟫
+ %n⟪(R12)⟫,
+ %n⟪R12⟫
 ]
 ;
 
@@ -990,8 +1008,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_SP' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(SP)⟫,
-  %n⟪SP⟫
+ %n⟪(SP)⟫,
+ %n⟪SP⟫
 ]
 ;
 
@@ -1000,8 +1018,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_LR' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(LR)⟫,
-  %n⟪LR⟫
+ %n⟪(LR)⟫,
+ %n⟪LR⟫
 ]
 ;
 
@@ -1010,8 +1028,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Reg' [ 'Pr3Base$Reg_PC' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(PC)⟫,
-  %n⟪PC⟫
+ %n⟪(PC)⟫,
+ %n⟪PC⟫
 ]
 ;
 
@@ -1020,8 +1038,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Regs' [ 'Pr3Base$Regs__Reg_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›⟫
 ]
 ;
 
@@ -1030,8 +1048,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Regs' [ 'Pr3Base$Regs__Reg_,_Regs_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Regs' [#2, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Regs' [#2, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Regs' [#2, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Regs' [#2, 0] ›⟫
 ]
 ;
 
@@ -1040,8 +1058,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Arg' [ 'Pr3Base$Arg__Constant_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Constant' [#1, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Constant' [#1, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Constant' [#1, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Constant' [#1, 0] ›⟫
 ]
 ;
 
@@ -1050,8 +1068,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Arg' [ 'Pr3Base$Arg__Reg_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›⟫
 ]
 ;
 
@@ -1060,8 +1078,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Arg' [ 'Pr3Base$Arg__Reg_,LSL_Constant_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSL ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSL ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSL ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSL ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›⟫
 ]
 ;
 
@@ -1070,8 +1088,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Arg' [ 'Pr3Base$Arg__Reg_,LSR_Constant_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSR ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›)⟫,
-  %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSR ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›⟫
+ %n⟪(‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSR ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›)⟫,
+ %n⟪‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, LSR ‹ '$Print2-Pr3Base$Constant' [#2, 0] ›⟫
 ]
 ;
 
@@ -1080,8 +1098,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Mem' [ 'Pr3Base$Mem_[_Reg_,_Sign__Arg_]' [#1, #2, #3], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪( [ ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Sign' [#2, 0] › ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ] )⟫,
-  %n⟪ [ ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Sign' [#2, 0] › ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ] ⟫
+ %n⟪( [ ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Sign' [#2, 0] › ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ] )⟫,
+ %n⟪ [ ‹ '$Print2-Pr3Base$Reg' [#1, 0] ›, ‹ '$Print2-Pr3Base$Sign' [#2, 0] › ‹ '$Print2-Pr3Base$Arg' [#3, 0] › ] ⟫
 ]
 ;
 
@@ -1090,8 +1108,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Sign' [ 'Pr3Base$Sign_+' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(+)⟫,
-  %n⟪+⟫
+ %n⟪(+)⟫,
+ %n⟪+⟫
 ]
 ;
 
@@ -1100,8 +1118,8 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Sign' [ 'Pr3Base$Sign_-' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(-)⟫,
-  %n⟪-⟫
+ %n⟪(-)⟫,
+ %n⟪-⟫
 ]
 ;
 
@@ -1110,18 +1128,18 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Sign' [ 'Pr3Base$Sign_' , #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪()⟫,
-  %n⟪⟫
+ %n⟪()⟫,
+ %n⟪⟫
 ]
 ;
 
 
 -[Data[#prec]] :
-'$Print2-Pr3Base$Constant' [ 'Pr3Base$Constant_#_Integer_' [#1], #prec ]
+'$Print2-Pr3Base$Constant' [ 'Pr3Base$Constant_#_Sign__Integer_' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(#‹ '$Print2-Pr3Base$Integer' [#1, 0] ›)⟫,
-  %n⟪#‹ '$Print2-Pr3Base$Integer' [#1, 0] ›⟫
+ %n⟪(# ‹ '$Print2-Pr3Base$Sign' [#1, 0] › ‹ '$Print2-Pr3Base$Integer' [#2, 0] ›)⟫,
+ %n⟪# ‹ '$Print2-Pr3Base$Sign' [#1, 0] › ‹ '$Print2-Pr3Base$Integer' [#2, 0] ›⟫
 ]
 ;
 
@@ -1130,10 +1148,18 @@ $[If, $[GreaterThan, #prec, 0],
 '$Print2-Pr3Base$Constant' [ 'Pr3Base$Constant_&_Identifier_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 0],
-  %n⟪(&‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›)⟫,
-  %n⟪&‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›⟫
+ %n⟪(&‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›)⟫,
+ %n⟪&‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›⟫
 ]
 ;
+
+
+'$Print-Pr3Base$SYMBOL' [Pr3Base$SYMBOL] :: Text ;
+'$Print-Pr3Base$SYMBOL' [#] → '$Print2-Pr3Base$SYMBOL' [#, 0] ;
+
+'$Print2-Pr3Base$SYMBOL' [Pr3Base$SYMBOL, $Numeric] :: Text ;
+'$Print2-Pr3Base$SYMBOL' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
+-[Free[y_8509]]: '$Print2-Pr3Base$Symbol' [y_8509, #prec] → %n⟪‹y_8509›⟫ ;
 
 
 
@@ -1144,73 +1170,73 @@ $[If, $[GreaterThan, #prec, 0],
 
 
 
-'$Print2-Pr3Base$Reg' [ 'RegGivenIdentifier' [#1], #prec ]
+'$Print2-Pr3Base$Reg' [ 'RegsGivenIdentifier' [#1], #prec ]
 →
-%n⟪'RegGivenIdentifier' [‹ '$Print2-Pr3Base$Identifier' [ '$Print2-Pr3Base$Reg' [#1, 0],0] ›]⟫
+%n⟪'RegsGivenIdentifier' [‹ '$Print2-Pr3Base$Identifier' [ '$Print2-Pr3Base$Reg' [#1, 0],0] ›]⟫
 ;
 
 
 '$Print-Compile' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_Compile' [#1],
-  0]
+ 'Pr3Base$Instructions_Compile' [#1],
+ 0]
 ;
 
 
 '$Print-CompileDeclarations' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_CompileDeclarations' [#1],
-  0]
+ 'Pr3Base$Instructions_CompileDeclarations' [#1],
+ 0]
 ;
 
 
 '$Print-CompileDeclaration' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_CompileDeclaration' [#1],
-  0]
+ 'Pr3Base$Instructions_CompileDeclaration' [#1],
+ 0]
 ;
 
 
 '$Print-Argument' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_Argument' [#1],
-  0]
+ 'Pr3Base$Instructions_Argument' [#1],
+ 0]
 ;
 
 
 '$Print-AllStatements' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_AllStatements' [#1],
-  0]
+ 'Pr3Base$Instructions_AllStatements' [#1],
+ 0]
 ;
 
 
 '$Print-SingleStatement' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_SingleStatement' [#1],
-  0]
+ 'Pr3Base$Instructions_SingleStatement' [#1],
+ 0]
 ;
 
 
 '$Print-SingleExpression' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_SingleExpression' [#1],
-  0]
+ 'Pr3Base$Instructions_SingleExpression' [#1],
+ 0]
 ;
 
 
 '$Print-SubArguments' [#1]
 →
 '$Print2-Pr3Base$Instructions' [
-  'Pr3Base$Instructions_SubArguments' [#1],
-  0]
+ 'Pr3Base$Instructions_SubArguments' [#1],
+ 0]
 ;
 
 $Print2-Pr3Base$Computed[$Numeric, $Numeric] :: Text ;
@@ -1250,6 +1276,11 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 
+<!--RULES FOR SORT Pr3Base$Computed.-->
+
+
+
+
 <!--RULES FOR SORT Pr3Base$ArgumentSignature.-->
 
 
@@ -1277,247 +1308,296 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 - :
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_'  ,    #  ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_' ,   # ]
 →
-    #  
+  # 
 ;
 
 
 - :
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   #1  ,    #2  ] ,    #3  ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  #1 ,   #2 ],   #3 ]
 →
-    'Pr3Base$Instructions__Instruction__Instructions_' [   #1  ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   #2  ,    #3  ] ] 
+  'Pr3Base$Instructions__Instruction__Instructions_' [  #1 ,   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  #2 ,   #3 ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_Compile' [   'Pr3Base$Program__Declarations_' [   #1  ] ] 
+  'Pr3Base$Instructions_Compile' [  'Pr3Base$Program__Declarations_' [  #1 ]]
 →
-    'Pr3Base$Instructions_CompileDeclarations' [   #1  ] 
+  'Pr3Base$Instructions_CompileDeclarations' [  #1 ]
 ;
 
 
 - :
-    'Pr3Base$Instructions_CompileDeclarations' [   'Pr3Base$Declarations__Declaration__Declarations_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_CompileDeclarations' [  'Pr3Base$Declarations__Declaration__Declarations_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_CompileDeclaration' [   #1  ] ,    'Pr3Base$Instructions_CompileDeclarations' [   #2  ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_CompileDeclaration' [  #1 ],   'Pr3Base$Instructions_CompileDeclarations' [  #2 ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_CompileDeclarations' [   'Pr3Base$Declarations_'  ] 
+  'Pr3Base$Instructions_CompileDeclarations' [  'Pr3Base$Declarations_' ]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name2_2::Identifier]]:
-    'Pr3Base$Instructions_CompileDeclaration' [   'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [   #1  ,    name2_2  ,    #3  ,    #4  ] ] 
+  'Pr3Base$Instructions_CompileDeclaration' [  'Pr3Base$Declaration_function_Type__Identifier__ArgumentSignature_{_Statements_}' [  #1 ,   name2_2 ,   #3 ,   #4 ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [   'Pr3Base$Reg_SP'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R4'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R5'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R6'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R7'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R8'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R9'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R10'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R11'  ,    'Pr3Base$Regs__Reg_' [   'Pr3Base$Reg_LR'  ] ] ] ] ] ] ] ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_Argument' [   #3  ] ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_AllStatements' [   #4  ] ,    'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_LDMFD_Reg_!,{_Regs_}' [   'Pr3Base$Reg_SP'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R4'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R5'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R6'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R7'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R8'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R9'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R10'  ,    'Pr3Base$Regs__Reg_,_Regs_' [   'Pr3Base$Reg_R11'  ,    'Pr3Base$Regs__Reg_' [   'Pr3Base$Reg_PC'  ] ] ] ] ] ] ] ] ] ] ] ,    'Pr3Base$Instructions_'  ] ] ,    'Pr3Base$Instructions_'  ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [  'Pr3Base$Reg_SP' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R5' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R6' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R7' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R8' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R9' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R10' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R11' ,   'Pr3Base$Regs__Reg_' [  'Pr3Base$Reg_LR' ]]]]]]]]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_Argument' [  #3 ]],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_AllStatements' [  #4 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_LDMFD_Reg_!,{_Regs_}' [  'Pr3Base$Reg_SP' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R5' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R6' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R7' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R8' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R9' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R10' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R11' ,   'Pr3Base$Regs__Reg_' [  'Pr3Base$Reg_PC' ]]]]]]]]]]],   'Pr3Base$Instructions_' ]],   'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_Argument' [   'Pr3Base$ArgumentSignature_()'  ] 
+  'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_()' ]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name1_3::Identifier]]:
-    'Pr3Base$Instructions_Argument' [   'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [   #1  ,    name1_3  ,    'Pr3Base$TypeIdentifierTail_'  ] ] 
+  'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_' ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name1_3  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]
 ;
 
 
 - [Free[name2_2::Identifier,name1_3::Identifier]]:
-    'Pr3Base$Instructions_Argument' [   'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [   #1  ,    name1_3  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #3  ,    name2_2  ,    'Pr3Base$TypeIdentifierTail_'  ] ] ] 
+  'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_' ]]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name1_3  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R1'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name2_2  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
 ;
 
 
 - [Free[name3_4::Identifier,name2_2::Identifier,name1_3::Identifier]]:
-    'Pr3Base$Instructions_Argument' [   'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [   #1  ,    name1_3  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #3  ,    name2_2  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #5  ,    name3_4  ,    'Pr3Base$TypeIdentifierTail_'  ] ] ] ] 
+  'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #5 ,   name3_4 ,   'Pr3Base$TypeIdentifierTail_' ]]]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name1_3  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R1'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name2_2  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R2'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name3_4  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R2' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name3_4 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]]
 ;
 
 
 - [Free[name2_2::Identifier,name3_4::Identifier,name4_5::Identifier,name1_3::Identifier]]:
-    'Pr3Base$Instructions_Argument' [   'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [   #1  ,    name1_3  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #3  ,    name2_2  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #5  ,    name3_4  ,    'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #7  ,    name4_5  ,    'Pr3Base$TypeIdentifierTail_'  ] ] ] ] ] 
+  'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #5 ,   name3_4 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #7 ,   name4_5 ,   'Pr3Base$TypeIdentifierTail_' ]]]]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name1_3  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R1'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name2_2  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R2'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name3_4  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R3'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name4_5  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] ] ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R2' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name3_4 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R3' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name4_5 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_AllStatements' [   'Pr3Base$Statements__Statement__Statements_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_AllStatements' [  'Pr3Base$Statements__Statement__Statements_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions_SingleStatement' [   #1  ] ,    'Pr3Base$Instructions_AllStatements' [   #2  ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [  #1 ],   'Pr3Base$Instructions_AllStatements' [  #2 ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_AllStatements' [   'Pr3Base$Statements_'  ] 
+  'Pr3Base$Instructions_AllStatements' [  'Pr3Base$Statements__Statement__Statements_' [  'Pr3Base$Statement_{_Statements_}' [  'Pr3Base$Statements__Statement__Statements_' [  #1 ,   #2 ]],   'Pr3Base$Statements_' ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [  #1 ],   'Pr3Base$Instructions_AllStatements' [  #2 ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleStatement' [   'Pr3Base$Statement__Expression_;' [   #1  ] ] 
+  'Pr3Base$Instructions_AllStatements' [  'Pr3Base$Statements_' ]
 →
-    'Pr3Base$Instructions_SingleExpression' [   #1  ] 
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleStatement' [   'Pr3Base$Statement_{_Statements_}' [   #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement__Expression_;' [ {  }  #1 ]]
 →
-    'Pr3Base$Instructions_AllStatements' [   #1  ] 
+ {  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ]
+;
+
+
+- [Free[name2_2::Pr3Base$Identifier]]:
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_var_Type__Identifier_;' [ {  }  #1 ,  {  }  name2_2 ]]
+→
+ { "idToReg" : {##idToReg;  name2_2  : {  }  'Pr3Base$Regs__Reg_' [ {  }  'Pr3Base$Reg_R0' ]}A_idToReg  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleStatement' [   'Pr3Base$Statement_;'  ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  #2 ]]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_()' [   #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_while(_Expression_)_Statement_' [ {  }  #1 ,  {  }  #2 ]]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_(_Expression_)' [   #1  ,    #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return_Expression_;' [ {  }  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression_!_Expression_' [   #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return;' ]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression_-_Expression_' [   #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression_+_Expression_' [   #1  ] ] 
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_;' ]
 →
-    'Pr3Base$Instructions_'  
+ {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_*_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Integer_' [  #i ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Reg_' [   'Pr3Base$Reg_R1'  ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_'  ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   #i ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_+_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_()' [  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_-_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_(_Expression_)' [  #1 ,   #1 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_<_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression_!_Expression_' [  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_>_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression_-_Expression_' [  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R5' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_-' ,   'Pr3Base$Integer__INTEGER_' [ "1"]]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R5' ]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_<=_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression_+_Expression_' [  #1 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_SingleExpression' [  #1 ],   'Pr3Base$Instructions_' ]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_>=_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_*_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_SingleExpression' [  #1 ],   'Pr3Base$Instructions_SingleExpression' [  #2 ]],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R5' ]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_==_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_+_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_!=_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_-_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_&&_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_<_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_||_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_>_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
 - :
-    'Pr3Base$Instructions_SingleExpression' [   'Pr3Base$Expression__Expression_=_Expression_' [   #1  ,    #2  ] ] 
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_<=_Expression_' [  #1 ,   #2 ]]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
+;
+
+
+- :
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_>=_Expression_' [  #1 ,   #2 ]]
+→
+  'Pr3Base$Instructions_' 
+;
+
+
+- :
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_==_Expression_' [  #1 ,   #2 ]]
+→
+  'Pr3Base$Instructions_' 
+;
+
+
+- :
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_!=_Expression_' [  #1 ,   #2 ]]
+→
+  'Pr3Base$Instructions_' 
+;
+
+
+- :
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_&&_Expression_' [  #1 ,   #2 ]]
+→
+  'Pr3Base$Instructions_' 
+;
+
+
+- :
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_||_Expression_' [  #1 ,   #2 ]]
+→
+  'Pr3Base$Instructions_' 
+;
+
+
+- [Free[arg_6::Identifier]]:
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_=_Expression_' [  'Pr3Base$Expression__Identifier_' [  arg_6 ],   #2 ]]
+→
+  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name1_3::Identifier]]:
-    'Pr3Base$Instructions_SubArguments' [   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [   #1  ,    name1_3  ,    #3  ] ] 
+  'Pr3Base$Instructions_SubArguments' [  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #1 ,   name1_3 ,   #3 ]]
 →
-    'Pr3Base$Instructions_{_Instructions_}_Instructions_' [   'Pr3Base$Instructions__Instruction__Instructions_' [   'Pr3Base$Instruction__Op_' [   'Pr3Base$Op_MOV_Reg_,_Arg_' [   'Pr3Base$Reg_R0'  ,    'Pr3Base$Arg__Constant_' [   'Pr3Base$Constant_&_Identifier_' [   name1_3  ] ] ] ] ,    'Pr3Base$Instructions_'  ] ,    'Pr3Base$Instructions_SubArguments' [   #3  ] ] 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_SubArguments' [  #3 ]]
 ;
 
 
 - :
-    'Pr3Base$Instructions_SubArguments' [   'Pr3Base$TypeIdentifierTail_'  ] 
+  'Pr3Base$Instructions_SubArguments' [  'Pr3Base$TypeIdentifierTail_' ]
 →
-    'Pr3Base$Instructions_'  
+  'Pr3Base$Instructions_' 
 ;
 
 
@@ -1662,16 +1742,16 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 - :
-    'Pr3Base$Reg_Find' [   'Pr3Base$Regs__Reg_,_Regs_' [   #r  ,    #rs  ] ] 
+  'Pr3Base$Reg_Find' [  'Pr3Base$Regs__Reg_,_Regs_' [  #r ,   #rs ]]
 →
-    #r  
+  #r 
 ;
 
 
 - [Free[id_1::Pr3Base$Identifier]]:
-   { "idToReg" : {  id_1   :   #rs  }A_idToReg  }  'Pr3Base$Reg_RegGivenIdentifier' [   id_1  ] 
+ { "idToReg" : { id_1  :  #rs }A_idToReg  }  'Pr3Base$Reg_RegsGivenIdentifier' [  id_1 ]
 →
-    'Pr3Base$Reg_Find' [   #rs  ] 
+  'Pr3Base$Reg_Find' [  #rs ]
 ;
 
 

@@ -20,6 +20,8 @@ public interface Pr3BaseParserConstants {
   int T_LetterEtc = 78;
   /** RegularExpression Id. */
   int T_Digit = 79;
+  /** RegularExpression Id. */
+  int T_SYMBOL = 80;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -28,6 +30,10 @@ public interface Pr3BaseParserConstants {
   String[] tokenImage = {
     "<EOF>",
     "\",\"",
+    "\"LSL\"",
+    "\"LSR\"",
+    "\"#\"",
+    "\"&\"",
     "\"(\"",
     "\")\"",
     "\"{\"",
@@ -78,6 +84,8 @@ public interface Pr3BaseParserConstants {
     "\"while\"",
     "\"boolean\"",
     "\"int\"",
+    "\"[\"",
+    "\"]\"",
     "\"LR\"",
     "\"PC\"",
     "\"R0\"",
@@ -94,18 +102,13 @@ public interface Pr3BaseParserConstants {
     "\"R8\"",
     "\"R9\"",
     "\"SP\"",
-    "\"LSL\"",
-    "\"LSR\"",
-    "\"[\"",
-    "\"]\"",
-    "\"#\"",
-    "\"&\"",
     "<token of kind 74>",
     "<T_IDENTIFIER>",
     "<T_INTEGER>",
     "<T_Letter>",
     "<T_LetterEtc>",
     "<T_Digit>",
+    "<T_SYMBOL>",
   };
 
 }
