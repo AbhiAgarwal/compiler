@@ -1424,10 +1424,10 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Free[name2_1::Identifier]]:
+- [Free[name2_1::Identifier], Fresh[name4_4::Pr3Base$Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_var_Type__Identifier_;' [ {  }  #1 ,  {  }  name2_1 ]]
 →
- {  }  'Pr3Base$Instructions_' 
+ { "e" : {##e;  name4_4  : {  }  'Pr3Base$Reg_R4' }A_e  }  'Pr3Base$Instructions_' 
 ;
 
 
@@ -1508,7 +1508,7 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Fresh[f_7::Identifier,false_10::Identifier,t_6::Identifier,l3_8::Identifier]]:
+- [Fresh[f_7::Identifier,t_6::Identifier,l3_8::Identifier,false_10::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_!_Expression_' [ {  }  #1 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
@@ -1550,56 +1550,56 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Fresh[f_7::Identifier,false_10::Identifier,t_6::Identifier,l3_8::Identifier]]:
+- [Fresh[f_7::Identifier,t_6::Identifier,l3_8::Identifier,false_10::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_==_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_!=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_&&_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- [Fresh[false_10::Identifier,t_6::Identifier,f_7::Identifier,l3_8::Identifier]]:
+- [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_||_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]

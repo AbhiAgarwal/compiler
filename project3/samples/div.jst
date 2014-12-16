@@ -5,41 +5,7 @@ function int div(int nominator, int divisor) {
 
   // Extract sign of result.
   var int sign;
-  sign = 1;
-  if (nominator < 0) {
-    nominator = -nominator;
-    sign = - sign;
-  }
-  if (divisor < 0) {
-    divisor = -divisor;
-    sign = -sign;
-  }
 
-  // Accumulate result.
-  var int result;
-  result = 0;
 
-  // The highest value that we cannot safely multiply by 2 is 2^30
-  var int halfmax;
-  halfmax = 1073741824;
-
-  // Find result by binary long division.
-  while (nominator >= divisor) {
-
-    // Find largest factor = 2^n such that factor*divisor <= nominator
-    var int factor;
-    var int product; // factor*divisor
-    factor = 1;
-    product = divisor;
-    while (product < halfmax && product*2 <= nominator) {
-      factor = factor*2;
-      product = product*2;
-    }
-    
-    // Record finding in result and reduce problem.
-    nominator = nominator - product;
-    result = result + factor;
-  }
   
-  return sign * result;
 }

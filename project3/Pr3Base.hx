@@ -336,7 +336,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧)
-		→ ⟦ ⟧ ;
+		→ ⟦ ⟧ ↓e{name4: ⟦R4⟧} ;
 
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ else ⟨Statement#3⟩ ⟧)
 		→ 
