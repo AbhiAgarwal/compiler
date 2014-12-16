@@ -332,30 +332,33 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ else ⟨Statement#3⟩ ⟧)
 		→ 
 		⟦
-			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩}
-        	t { ⟨ Instructions SingleStatement(#2) ⟩}
+			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+        	t { ⟨ Instructions SingleStatement(#2) ⟩ }
         	B l3
-        	f { ⟨ Instructions SingleStatement(#3) ⟩}
+        	f { ⟨ Instructions SingleStatement(#3) ⟩ }
         	l3
 		⟧ ;
 
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ ⟧)
 		→ 
 		⟦
-			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩}
-        	t { ⟨ Instructions SingleStatement(#2) ⟩}
+			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+        	t { ⟨ Instructions SingleStatement(#2) ⟩ }
 		⟧ ;
 
 	SingleStatement(⟦ while ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ ⟧)
 		→ 
 		⟦
-
+			B test
+			t   { ⟨ Instructions SingleStatement(#2) ⟩ }
+			test   { ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
 		⟧ ;
 
 	SingleStatement(⟦ return ⟨Expression#1⟩ ; ⟧)
 		→ 
 		⟦
 			⟨Instructions SingleExpression(#1)⟩
+			{MOV R0, R4}
 		⟧ ;
 
 	SingleStatement(⟦ return ; ⟧)
