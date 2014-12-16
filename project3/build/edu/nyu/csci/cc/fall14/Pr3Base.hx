@@ -52,8 +52,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ ⟨Declaration⟩ ⟨Declarations⟩ ⟧
 		|	⟦⟧ ;
 
+	sort ArgState 
+		|	⟦ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
+
 	sort Declaration
-		|	⟦ function ⟨Type⟩ ⟨Identifier⟩ ⟨ArgumentSignature⟩ { ⟨Statements⟩ } ⟧ ;
+		|	⟦ function ⟨Type⟩ ⟨Identifier⟩ ⟨ArgState⟩ ⟧ ;
 
 	sort ArgumentSignature
 		|	⟦ ( ) ⟧
@@ -210,21 +213,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Symbol
 		|	symbol ⟦⟨SYMBOL⟩⟧ ;
 
-	// Helper Subst structure: lists of Identifer and Reg pairs.
-	sort Subst
-		|	MoreSubst(Identifier, Reg, Subst)
-		|	NoSubst ;
-
-	// Append operation for Subst structures.
-		|	scheme SubstAppend(Subst, Subst) ;
-
-	SubstAppend(MoreSubst(#variable, #nat, #subst1), #subst2) → MoreSubst(#variable, #nat, SubstAppend(#subst1, #subst2)) ;
-	SubstAppend(NoSubst, #subst2) → #subst2 ;
-
-	// Attributes.
-	attribute ↑subst(Subst) ;        // collected Subst structure
-	attribute ↓env{Identifer:Reg} ;   // mappings to apply
-
 	////////////////////////////////////////////////////////////////////////
 	// 5. INSTRUCTIONS
 	// ↓idToReg answers the question of Allocation: what variables are in registers?
@@ -256,42 +244,56 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme CompileDeclaration(Declaration) ;
 
-	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgumentSignature#3⟩ { ⟨Statements#4⟩ } ⟧ )
+	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgState#3⟩ ⟧ )
 		→	
 		⟦
+			name2
 			{
 				{STMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, LR}}
 				⟨Instructions Argument(#3)⟩
 			}
 			{
-				{⟨Instructions AllStatements(#4)⟩}
 				LDMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, PC}
 			}
 		⟧ ;
 
+	attribute ↓e { Identifier : Reg } ;
+
 	// HANDLING ARGUMENTS
 	sort Instructions
-		|	scheme Argument(ArgumentSignature) ;
+		|	scheme Argument(ArgState) ↓e ;
 
 	// No Arguments Handling
-	Argument( ⟦ ( ) ⟧ )
-		→ ⟦ ⟧ ;
+	Argument( ⟦ ( ) { ⟨Statements#1⟩ } ⟧ )
+		→ 
+		⟦
+			{⟨Instructions AllStatements(#1)⟩}
+		⟧ ;
 
 	// 1 Argument Handling
-	Argument( ⟦ ( ⟨Type#1⟩ name1 ) ⟧ )
-		→ ⟦ ⟧ ;
+	Argument( ⟦ ( ⟨Type#1⟩ name1 ) { ⟨Statements#3⟩ } ⟧ )
+		→ 
+		⟦ 
+			{⟨Instructions AllStatements(#3)⟩}
+		⟧ ↓e{name1: ⟦R0⟧} ;
 
-	// 2 Argument Handling
-	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2 ) ⟧ )
-		→ ⟦ ⟧ ;
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2 ) { ⟨Statements#3⟩ } ⟧ )
+		→ 
+		⟦ 
+			{⟨Instructions AllStatements(#3)⟩}
+		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ;
 
-	// 3 Argument Handling
-	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2, ⟨Type#5⟩ name3 ) ⟧ )
-		→ ⟦ ⟧ ;
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#3⟩ } ⟧ )
+		→ 
+		⟦ 
+			{⟨Instructions AllStatements(#3)⟩}
+		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ;
 
-	// 4 Argument Handling
-	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#3⟩ name2, ⟨Type#5⟩ name3, ⟨Type#7⟩ name4 ) ⟧ )
-		→ ⟦ ⟧ ;
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#3⟩ } ⟧ )
+		→ 
+		⟦ 
+			{⟨Instructions AllStatements(#3)⟩}
+		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ↓e{name4: ⟦R3⟧} ;
 
 	sort Instructions
 		|	scheme AllStatements(Statements) ;
@@ -315,10 +317,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	AllStatements(⟦ ⟧)
 		→ ⟦ ⟧ ;
 
-	attribute ↓r(Reg) ;
-
 	sort Instructions
-		|	scheme SingleStatement(Statement) ↓idToReg;
+		|	scheme SingleStatement(Statement) ;
 
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
 		→ 
@@ -333,7 +333,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧)
-		→ ⟦ ⟧ ↓idToReg{name2: ⟦R0⟧} ;
+		→ ⟦ ⟧ ;
 
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ else ⟨Statement#3⟩ ⟧)
 		→ 
@@ -543,21 +543,4 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B t ⟧ ;
 	T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B f ⟧ ;
-
-	// EXTRAS:
-	// For SubArguments -- NOT REQUIRED because we assume that functions never have more than four arguments
-	// Will replace later if have the time
-	sort Instructions
-		|	scheme SubArguments(TypeIdentifierTail) ;
-
-	// Just puts everything into R0
-	SubArguments( ⟦, ⟨Type#1⟩ name1 ⟨TypeIdentifierTail#3⟩ ⟧ )
-		→
-		⟦
-			{MOV R0, &name1}
-			⟨Instructions SubArguments(#3)⟩
-		⟧ ;
-
-	SubArguments( ⟦ ⟧ )
-		→ ⟦ ⟧ ;
 }
