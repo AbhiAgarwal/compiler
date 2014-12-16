@@ -381,7 +381,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme SingleExpression(Expression) ;
+		|	scheme SingleExpression(Expression) ↓e;
 
 	SingleExpression(⟦ ⟨Integer#i⟩ ⟧) 
 		→ 
@@ -389,10 +389,10 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{MOV R0, #⟨Integer#i⟩}
 		⟧ ;
 
-	SingleExpression(⟦ ⟨Identifier#i⟩ ⟧)
+	SingleExpression(⟦ ⟨Identifier#i⟩ ⟧) ↓e{#i:#reg}
 		→ 
 		⟦
-			{MOV R0, &⟨Identifier#i⟩}
+			{MOV R0, ⟨Reg#reg⟩}
 		⟧ ;	
 
 	SingleExpression(⟦ ⟨Expression#1⟩ ( ) ⟧)
