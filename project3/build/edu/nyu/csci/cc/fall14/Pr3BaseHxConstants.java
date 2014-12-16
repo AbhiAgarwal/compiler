@@ -11,139 +11,139 @@ public interface Pr3BaseHxConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int T_HX_CONCRETE = 42;
+  int T_HX_CONCRETE = 43;
   /** RegularExpression Id. */
-  int T_HX_PP_UNCONCRETE = 52;
+  int T_HX_PP_UNCONCRETE = 53;
   /** RegularExpression Id. */
-  int T_HX_SEMI = 55;
+  int T_HX_SEMI = 56;
   /** RegularExpression Id. */
-  int T_HX_BAR = 56;
+  int T_HX_BAR = 57;
   /** RegularExpression Id. */
-  int T_HX_LPAREN = 57;
+  int T_HX_LPAREN = 58;
   /** RegularExpression Id. */
-  int T_HX_RPAREN = 58;
+  int T_HX_RPAREN = 59;
   /** RegularExpression Id. */
-  int T_HX_STAR = 59;
+  int T_HX_STAR = 60;
   /** RegularExpression Id. */
-  int T_HX_PLUS = 60;
+  int T_HX_PLUS = 61;
   /** RegularExpression Id. */
-  int T_HX_QUEST = 61;
+  int T_HX_QUEST = 62;
   /** RegularExpression Id. */
-  int T_HX_SUB = 62;
+  int T_HX_SUB = 63;
   /** RegularExpression Id. */
-  int T_HX_DOT = 63;
+  int T_HX_DOT = 64;
   /** RegularExpression Id. */
-  int T_HX_COLON = 64;
+  int T_HX_COLON = 65;
   /** RegularExpression Id. */
-  int T_HX_LBRACE = 65;
+  int T_HX_LBRACE = 66;
   /** RegularExpression Id. */
-  int T_HX_RBRACE = 66;
+  int T_HX_RBRACE = 67;
   /** RegularExpression Id. */
-  int T_HX_LBRACKET = 67;
+  int T_HX_LBRACKET = 68;
   /** RegularExpression Id. */
-  int T_HX_RBRACKET = 68;
+  int T_HX_RBRACKET = 69;
   /** RegularExpression Id. */
-  int T_HX_COMMA = 69;
+  int T_HX_COMMA = 70;
   /** RegularExpression Id. */
-  int T_HX_FORALL = 70;
+  int T_HX_FORALL = 71;
   /** RegularExpression Id. */
-  int T_HX_ARROW = 71;
+  int T_HX_ARROW = 72;
   /** RegularExpression Id. */
-  int T_HX_UP = 72;
+  int T_HX_UP = 73;
   /** RegularExpression Id. */
-  int T_HX_DOWN = 73;
+  int T_HX_DOWN = 74;
   /** RegularExpression Id. */
-  int T_HX_NOT = 74;
+  int T_HX_NOT = 75;
   /** RegularExpression Id. */
-  int T_HX_AT = 75;
+  int T_HX_AT = 76;
   /** RegularExpression Id. */
-  int T_HX_DOTTEDNAME = 76;
+  int T_HX_DOTTEDNAME = 77;
   /** RegularExpression Id. */
-  int T_HX_MODULE = 77;
+  int T_HX_MODULE = 78;
   /** RegularExpression Id. */
-  int T_HX_SORT = 78;
+  int T_HX_SORT = 79;
   /** RegularExpression Id. */
-  int T_HX_MAIN = 79;
+  int T_HX_MAIN = 80;
   /** RegularExpression Id. */
-  int T_HX_DATA = 80;
+  int T_HX_DATA = 81;
   /** RegularExpression Id. */
-  int T_HX_SCHEME = 81;
+  int T_HX_SCHEME = 82;
   /** RegularExpression Id. */
-  int T_HX_AUTOMATIC = 82;
+  int T_HX_AUTOMATIC = 83;
   /** RegularExpression Id. */
-  int T_HX_SYMBOL = 83;
+  int T_HX_SYMBOL = 84;
   /** RegularExpression Id. */
-  int T_HX_STATIC = 84;
+  int T_HX_STATIC = 85;
   /** RegularExpression Id. */
-  int T_HX_ATTRIBUTE = 85;
+  int T_HX_ATTRIBUTE = 86;
   /** RegularExpression Id. */
-  int T_HX_COMPOSE = 86;
+  int T_HX_COMPOSE = 87;
   /** RegularExpression Id. */
-  int T_HX_SUGAR = 87;
+  int T_HX_SUGAR = 88;
   /** RegularExpression Id. */
-  int T_HX_RULE = 88;
+  int T_HX_RULE = 89;
   /** RegularExpression Id. */
-  int T_HX_PRIORITY = 89;
+  int T_HX_PRIORITY = 90;
   /** RegularExpression Id. */
-  int T_HX_DEFAULT = 90;
+  int T_HX_DEFAULT = 91;
   /** RegularExpression Id. */
-  int T_HX_IMPORT = 91;
+  int T_HX_IMPORT = 92;
   /** RegularExpression Id. */
-  int T_HX_TAG = 92;
+  int T_HX_TAG = 93;
   /** RegularExpression Id. */
-  int T_HX_BINDS = 93;
+  int T_HX_BINDS = 94;
   /** RegularExpression Id. */
-  int T_HX_AS = 94;
+  int T_HX_AS = 95;
   /** RegularExpression Id. */
-  int T_HX_SPACE = 95;
+  int T_HX_SPACE = 96;
   /** RegularExpression Id. */
-  int T_HX_TOKEN = 96;
+  int T_HX_TOKEN = 97;
   /** RegularExpression Id. */
-  int T_HX_FRAGMENT = 97;
+  int T_HX_FRAGMENT = 98;
   /** RegularExpression Id. */
-  int T_HX_NESTED = 98;
+  int T_HX_NESTED = 99;
   /** RegularExpression Id. */
-  int T_HX_FRAGMENT_REF = 99;
+  int T_HX_FRAGMENT_REF = 100;
   /** RegularExpression Id. */
-  int T_HX_RE_NAME = 100;
+  int T_HX_RE_NAME = 101;
   /** RegularExpression Id. */
-  int T_HX_RE_WORD = 101;
+  int T_HX_RE_WORD = 102;
   /** RegularExpression Id. */
-  int T_HX_META = 102;
+  int T_HX_META = 103;
   /** RegularExpression Id. */
-  int T_HX_VAR = 103;
+  int T_HX_VAR = 104;
   /** RegularExpression Id. */
-  int T_HX_NATURAL = 104;
+  int T_HX_NATURAL = 105;
   /** RegularExpression Id. */
-  int T_HX_INTEGER = 105;
+  int T_HX_INTEGER = 106;
   /** RegularExpression Id. */
-  int T_HX_UNNATURAL = 106;
+  int T_HX_UNNATURAL = 107;
   /** RegularExpression Id. */
-  int T_HX_STRING = 107;
+  int T_HX_STRING = 108;
   /** RegularExpression Id. */
-  int T_HX_STRING1CHAR = 108;
+  int T_HX_STRING1CHAR = 109;
   /** RegularExpression Id. */
-  int T_HX_STRING2CHAR = 109;
+  int T_HX_STRING2CHAR = 110;
   /** RegularExpression Id. */
-  int T_HX_ESCAPEDCHAR = 110;
+  int T_HX_ESCAPEDCHAR = 111;
   /** RegularExpression Id. */
-  int T_HX_HEX = 111;
+  int T_HX_HEX = 112;
   /** RegularExpression Id. */
-  int T_HX_CHAR_CLASS = 112;
+  int T_HX_CHAR_CLASS = 113;
   /** RegularExpression Id. */
-  int T_HX_CC_NOT = 113;
+  int T_HX_CC_NOT = 114;
   /** RegularExpression Id. */
-  int T_HX_CC_RBRACKET = 114;
+  int T_HX_CC_RBRACKET = 115;
   /** RegularExpression Id. */
-  int T_HX_CC_DASH = 115;
+  int T_HX_CC_DASH = 116;
   /** RegularExpression Id. */
-  int T_HX_CC_OTHER = 116;
+  int T_HX_CC_OTHER = 117;
   /** RegularExpression Id. */
-  int T_HX_CC_SKIP = 117;
+  int T_HX_CC_SKIP = 118;
   /** RegularExpression Id. */
-  int T_HX_PP_CONCRETE_SPACE = 118;
+  int T_HX_PP_CONCRETE_SPACE = 119;
   /** RegularExpression Id. */
-  int T_HX_PP_CONCRETE_WORD = 119;
+  int T_HX_PP_CONCRETE_WORD = 120;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -200,6 +200,7 @@ public interface Pr3BaseHxConstants {
     "\"AllStatements\"",
     "\"SingleStatement\"",
     "\"SingleExpression\"",
+    "\"T\"",
     "\"SubArguments\"",
     "\"Find\"",
     "\"RegsGivenIdentifier\"",
@@ -209,18 +210,18 @@ public interface Pr3BaseHxConstants {
     "\"\\u27e6\"",
     "\"\\u27e7\"",
     "\"\\u27e7\"",
-    "<token of kind 43>",
+    "<token of kind 44>",
     "\"/*\"",
     "\"/*\"",
     "\"*/\"",
-    "<token of kind 47>",
+    "<token of kind 48>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 53>",
     "<token of kind 54>",
+    "<token of kind 55>",
     "\";\"",
     "\"|\"",
     "\"(\"",

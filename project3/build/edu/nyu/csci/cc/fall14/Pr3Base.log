@@ -63,7 +63,7 @@ Note: Recompile with -Xlint:deprecation for details.
 Java Compiler Compiler Version 6.0_1 (Parser Generator)
 (type "javacc" with no arguments for help)
 Reading from file Pr3BaseHx.jj . . .
-Warning: Line 5157, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+Warning: Line 5212, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
 File "TokenMgrError.java" is being rebuilt.
 File "ParseException.java" is being rebuilt.
 File "Token.java" is being rebuilt.

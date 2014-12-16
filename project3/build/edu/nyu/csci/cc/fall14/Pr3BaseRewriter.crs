@@ -118,7 +118,7 @@ Pr3Base[(
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_4255]]: '$Print2-Pr3Base$Identifier' [y_4255, #prec] → %n⟪‹y_4255›⟫ ;
+-[Free[y_4621]]: '$Print2-Pr3Base$Identifier' [y_4621, #prec] → %n⟪‹y_4621›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -1159,7 +1159,7 @@ $[If, $[GreaterThan, #prec, 0],
 
 '$Print2-Pr3Base$SYMBOL' [Pr3Base$SYMBOL, $Numeric] :: Text ;
 '$Print2-Pr3Base$SYMBOL' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_8509]]: '$Print2-Pr3Base$Symbol' [y_8509, #prec] → %n⟪‹y_8509›⟫ ;
+-[Free[y_8875]]: '$Print2-Pr3Base$Symbol' [y_8875, #prec] → %n⟪‹y_8875›⟫ ;
 
 
 
@@ -1228,6 +1228,14 @@ $[If, $[GreaterThan, #prec, 0],
 →
 '$Print2-Pr3Base$Instructions' [
  'Pr3Base$Instructions_SingleExpression' [#1],
+ 0]
+;
+
+
+'$Print-T' [#1, #2, #3]
+→
+'$Print2-Pr3Base$Instructions' [
+ 'Pr3Base$Instructions_T' [#1, #2, #3],
  0]
 ;
 
@@ -1307,6 +1315,7 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 
+
 - :
   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_' ,   # ]
 →
@@ -1359,28 +1368,28 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 - [Free[name1_3::Identifier]]:
   'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_' ]]
 →
-  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]
+  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name2_2::Identifier,name1_3::Identifier]]:
   'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_' ]]]
 →
-  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
+  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name3_4::Identifier,name2_2::Identifier,name1_3::Identifier]]:
   'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #5 ,   name3_4 ,   'Pr3Base$TypeIdentifierTail_' ]]]]
 →
-  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R2' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name3_4 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]]
+  'Pr3Base$Instructions_' 
 ;
 
 
-- [Free[name2_2::Identifier,name3_4::Identifier,name4_5::Identifier,name1_3::Identifier]]:
+- [Free[name2_2::Identifier,name4_5::Identifier,name1_3::Identifier,name3_4::Identifier]]:
   'Pr3Base$Instructions_Argument' [  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [  #1 ,   name1_3 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #3 ,   name2_2 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #5 ,   name3_4 ,   'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [  #7 ,   name4_5 ,   'Pr3Base$TypeIdentifierTail_' ]]]]]
 →
-  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R0' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name1_3 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R1' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name2_2 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R2' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name3_4 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R3' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_&_Identifier_' [  name4_5 ]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]]]
+  'Pr3Base$Instructions_' 
 ;
 
 
@@ -1419,10 +1428,17 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- :
- { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  #2 ]]
+- [Fresh[l3_9::Identifier,t_7::Identifier,f_8::Identifier,true_6::Identifier]]:
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_else_Statement_' [ {  }  #2 ,  {  }  #3 ]]]
 →
- {  }  'Pr3Base$Instructions_' 
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_6 ,  {  }  t_7 ,  {  }  f_8 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_7 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_9 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_8 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #3 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_9 ],  {  }  'Pr3Base$Instructions_' ]]]]]]]
+;
+
+
+- [Fresh[true_6::Identifier,t_7::Identifier,f_8::Identifier]]:
+ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_' [ {  }  #2 ]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_6 ,  {  }  t_7 ,  {  }  f_8 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_7 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions_' ]]]
 ;
 
 
@@ -1513,14 +1529,14 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 - :
   'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_+_Expression_' [  #1 ,   #2 ]]
 →
-  'Pr3Base$Instructions_' 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_SingleExpression' [  #1 ],   'Pr3Base$Instructions_SingleExpression' [  #2 ]],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_ADD_Reg_,_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Reg_' [  'Pr3Base$Reg_R5' ]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
   'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_-_Expression_' [  #1 ,   #2 ]]
 →
-  'Pr3Base$Instructions_' 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_SingleExpression' [  #1 ],   'Pr3Base$Instructions_SingleExpression' [  #2 ]],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_SUB_Reg_,_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Reg_' [  'Pr3Base$Reg_R5' ]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]
 ;
 
 
@@ -1580,10 +1596,17 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Free[arg_6::Identifier]]:
-  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_=_Expression_' [  'Pr3Base$Expression__Identifier_' [  arg_6 ],   #2 ]]
+- [Free[arg_10::Identifier]]:
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_=_Expression_' [  'Pr3Base$Expression__Identifier_' [  arg_10 ],   #2 ]]
 →
   'Pr3Base$Instructions_' 
+;
+
+
+- [Free[f_8::Identifier,t_7::Identifier,true_6::Identifier]]:
+  'Pr3Base$Instructions_T' [  true_6 ,   t_7 ,   f_8 ]
+→
+  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  t_7 ]],   'Pr3Base$Instructions_' ]
 ;
 
 
