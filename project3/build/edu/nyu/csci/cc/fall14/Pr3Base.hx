@@ -320,6 +320,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme SingleStatement(Statement) ↓idToReg;
 
+	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
+		→ 
+		⟦
+			⟨Instructions AllStatements(#1)⟩
+		⟧ ;
+
 	SingleStatement(⟦ ⟨Expression#1⟩ ; ⟧)
 		→ 
 		⟦
@@ -382,6 +388,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟦
 			{MOV R0, #⟨Integer#i⟩}
 		⟧ ;
+
+	SingleExpression(⟦ ⟨Identifier#i⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, &⟨Identifier#i⟩}
+		⟧ ;	
 
 	SingleExpression(⟦ ⟨Expression#1⟩ ( ) ⟧)
 		→ ⟦ ⟧ ;
@@ -463,22 +475,64 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ <= ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ >= ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ == ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ != ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ && ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ || ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	// ⟨Reg RegsGivenIdentifier(⟦arg⟧)⟩ 
 	SingleExpression(⟦ arg = ⟨Expression#2⟩ ⟧)
