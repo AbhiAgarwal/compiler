@@ -118,7 +118,7 @@ Pr3Base[(
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_4621]]: '$Print2-Pr3Base$Identifier' [y_4621, #prec] → %n⟪‹y_4621›⟫ ;
+-[Free[y_4666]]: '$Print2-Pr3Base$Identifier' [y_4666, #prec] → %n⟪‹y_4666›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -1159,7 +1159,7 @@ $[If, $[GreaterThan, #prec, 0],
 
 '$Print2-Pr3Base$SYMBOL' [Pr3Base$SYMBOL, $Numeric] :: Text ;
 '$Print2-Pr3Base$SYMBOL' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_8875]]: '$Print2-Pr3Base$Symbol' [y_8875, #prec] → %n⟪‹y_8875›⟫ ;
+-[Free[y_8920]]: '$Print2-Pr3Base$Symbol' [y_8920, #prec] → %n⟪‹y_8920›⟫ ;
 
 
 
@@ -1442,17 +1442,17 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- :
+- [Fresh[true_6::Identifier,t_7::Identifier,f_8::Identifier,test_10::Identifier]]:
  { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_while(_Expression_)_Statement_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_' 
+ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  test_10 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_7 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  test_10 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_6 ,  {  }  t_7 ,  {  }  f_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]
 ;
 
 
 - :
  { "idToReg" : {##idToReg}A_idToReg  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return_Expression_;' [ {  }  #1 ]]
 →
- {  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R4' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
@@ -1498,10 +1498,190 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- :
+- [Fresh[l3_9::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#1", '$Nil']]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], l3_9],f_8::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#1", '$Nil']]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], f_8],false_11::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#1", '$Nil']]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], false_11],t_7::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#1", '$Nil']]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], t_7]]]:
   'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression_!_Expression_' [  #1 ]]
 →
-  'Pr3Base$Instructions_' 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_T' [  false_11 ,   t_7 ,   f_8 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "1"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  l3_9 ]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  f_8 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "0"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  l3_9 ],   'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
@@ -1540,17 +1720,385 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- :
+- [Fresh[l3_9::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], l3_9],f_8::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], f_8],false_11::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], false_11],t_7::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", f_8]], "Identifier", l3_9], t_7]]]:
   'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_<_Expression_' [  #1 ,   #2 ]]
 →
-  'Pr3Base$Instructions_' 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_T' [  false_11 ,   t_7 ,   f_8 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "1"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  l3_9 ]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  f_8 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "0"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  l3_9 ],   'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
-- :
+- [Fresh[l3_9::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", false_11]], "Identifier", l3_9], l3_9],false_11::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", false_11]], "Identifier", l3_9], false_11],t_7::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", false_11]], "Identifier", l3_9], t_7],f_8::C-SortMap-then-GetFreeVariableSort$1[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["0", '$Nil', '$Cons'["INTEGER", '$Nil'], C-ExtendSortMap-AddVariable$5[C-ExtendSortMap-AddVariable$5[{"All$Constructor2Sort" : DME_N2N[{"Sum2" : "Computed";
+"Sub" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sum2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Sub" : "Computed";
+"BitOr" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"Sub" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitOr" : "Computed";
+"BitXor" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitOr" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitXor" : "Computed";
+"BitMinus" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitXor" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"BitMinus" : "Computed";
+"Prod2" : "Computed"}N2N];
+"All$Constructor2ScopeSorts" : DME_N2SS[{"BitMinus" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']];
+"Prod2" : '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Cons'[Hx_ScopeSort[Hx_Sort[Hx_SortName["Computed", '$Nil'], '$Nil'], Hx_RepeatSingle, '$Nil'], '$Nil']]}N2SS];
+"All$Constructor2Sort" : DME_N2N[{"Prod2" : "Computed";
+"Div" : "Computed"}N2N]}C-ExtendSortMap-Terms$1["1", '$Nil', '$Cons'["INTEGER", '$Nil'], {"#2" : '$Nil';
+"#1" : '$Nil';
+f_8 : "Identifier";
+t_7 : "Identifier";
+false_11 : "Identifier"}SM['$Cons'[f_8, '$Cons'[t_7, '$Cons'[false_11, '$Nil']]], '$Cons'["#2", '$Cons'["#1", '$Nil']]]], "Identifier", l3_9], "Identifier", false_11]], "Identifier", l3_9], f_8]]]:
   'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_>_Expression_' [  #1 ,   #2 ]]
 →
-  'Pr3Base$Instructions_' 
+  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_T' [  false_11 ,   t_7 ,   f_8 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "1"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  l3_9 ]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  false_11 ],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_MOV_Reg_,_Arg_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Arg__Constant_' [  'Pr3Base$Constant_#_Sign__Integer_' [  'Pr3Base$Sign_' ,   'Pr3Base$Integer__INTEGER_' [ "0"]]]]],   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  l3_9 ],   'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
@@ -1596,8 +2144,8 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
-- [Free[arg_10::Identifier]]:
-  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_=_Expression_' [  'Pr3Base$Expression__Identifier_' [  arg_10 ],   #2 ]]
+- [Free[arg_12::Identifier]]:
+  'Pr3Base$Instructions_SingleExpression' [  'Pr3Base$Expression__Expression_=_Expression_' [  'Pr3Base$Expression__Identifier_' [  arg_12 ],   #2 ]]
 →
   'Pr3Base$Instructions_' 
 ;
@@ -1607,6 +2155,13 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
   'Pr3Base$Instructions_T' [  true_6 ,   t_7 ,   f_8 ]
 →
   'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  t_7 ]],   'Pr3Base$Instructions_' ]
+;
+
+
+- [Free[f_8::Identifier,t_7::Identifier,false_11::Identifier]]:
+  'Pr3Base$Instructions_T' [  false_11 ,   t_7 ,   f_8 ]
+→
+  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_B_Identifier_' [  f_8 ]],   'Pr3Base$Instructions_' ]
 ;
 
 

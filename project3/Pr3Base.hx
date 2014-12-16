@@ -357,7 +357,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	SingleStatement(⟦ return ⟨Expression#1⟩ ; ⟧)
 		→ 
 		⟦
-			⟨Instructions SingleExpression(#1)⟩
+			{⟨Instructions SingleExpression(#1)⟩}
 			{MOV R0, R4}
 		⟧ ;
 
@@ -390,7 +390,14 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	SingleExpression(⟦ ! ⟨Expression#1⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+	        MOV R4, #1
+	        B l3
+			f  MOV R4, #0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ - ⟨Expression#1⟩ ⟧)
 		→ 
@@ -436,28 +443,84 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ < ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+	        MOV R4, #1
+	        B l3
+			f  MOV R4, #0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ > ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ <= ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ >= ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ == ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ != ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ && ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	SingleExpression(⟦ ⟨Expression#1⟩ || ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+		→ 
+		⟦ 
+			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			MOV R4,#1
+			B l3
+			false  MOV R4,#0
+			l3
+		⟧ ;
 
 	// ⟨Reg RegsGivenIdentifier(⟦arg⟧)⟩ 
 	SingleExpression(⟦ arg = ⟨Expression#2⟩ ⟧)
@@ -467,6 +530,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	scheme T(Identifier, Identifier, Identifier) ;
 
 	T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B t ⟧ ;
+	T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B f ⟧ ;
 
 	// EXTRAS:
 	// For SubArguments -- NOT REQUIRED because we assume that functions never have more than four arguments
