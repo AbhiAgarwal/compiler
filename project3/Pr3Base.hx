@@ -273,24 +273,6 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme Argument(ArgumentSignature) ;
 
-	Argument(#args) → Argument1(#args) ;
-
-	sort Instructions
-		|	scheme Argument1(ArgumentSignature) ;
-
-	Argument1(#units ↑subst(#subst)) → Argument2(#units, #subst) ;
-
-	sort Instructions
-		| scheme Argument2(ArgumentSignature, Subst) ↓env ;
-
-	Argument2(#args, MoreSubst(#variable, #nat, #subst)) → Argument2(#args, #subst) ↓env{#variable : #nat} ;
-	Argument2(#args, NoSubst) → ArgsEnv(#args) ;
-
-	sort Instructions 
-		|	scheme ArgsEnv(ArgumentSignature) ↓env ;
-
-	
-
 	// No Arguments Handling
 	Argument( ⟦ ( ) ⟧ )
 		→ ⟦ ⟧ ;
