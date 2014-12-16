@@ -296,7 +296,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ↓e{name4: ⟦R3⟧} ;
 
 	sort Instructions
-		|	scheme AllStatements(Statements) ;
+		|	scheme AllStatements(Statements) ↓e;
 
 	AllStatements(⟦ ⟨Statement#1⟩ ⟨Statements#2⟩ ⟧)
 		→
@@ -318,7 +318,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme SingleStatement(Statement) ;
+		|	scheme SingleStatement(Statement) ↓e ;
 
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
 		→ 
@@ -383,7 +383,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Instructions
 		|	scheme SingleExpression(Expression) ;
 
-	SingleExpression(⟦ ⟨Integer#i⟩ ⟧)
+	SingleExpression(⟦ ⟨Integer#i⟩ ⟧) 
 		→ 
 		⟦
 			{MOV R0, #⟨Integer#i⟩}
@@ -535,8 +535,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	// ⟨Reg RegsGivenIdentifier(⟦arg⟧)⟩ 
-	SingleExpression(⟦ arg = ⟨Expression#2⟩ ⟧)
-		→ ⟦ ⟧ ;
+	SingleExpression(⟦ ⟨Expression#1⟩ = ⟨Expression#2⟩ ⟧)
+		→ 
+		⟦ 
+			{ ⟨ Instructions SingleExpression(#2) ⟩ }
+			{ ⟨ Instructions SingleExpression(#1) ⟩ }
+		⟧ ;
 
 	sort Instructions
 		|	scheme T(Identifier, Identifier, Identifier) ;
