@@ -8,6 +8,10 @@
 // 5. Instructions
 // See http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr3/pr3.pdf
 
+
+// STEPS
+// NEXT STEPS IS TO SYNTHESIZE REGISTER TO USE
+
 module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	////////////////////////////////////////////////////////////////////////
