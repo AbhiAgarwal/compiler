@@ -210,20 +210,20 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Symbol
 		|	symbol ⟦⟨SYMBOL⟩⟧ ;
 
-	// Keeping track of the register we are using
-	attribute ↓idToReg {Identifier:Regs} ;
+	// Helper Subst structure: lists of Identifer and Reg pairs.
+	sort Subst
+		|	MoreSubst(Identifier, Reg, Subst)
+		|	NoSubst ;
 
-	// Find
-	// RegGivenIdentifier: Given an Identifier - find what register it is in
-	sort Reg
-		|	Find(Regs) ↓idToReg
-		| 	RegsGivenIdentifier(Identifier) ↓idToReg ;
+	// Append operation for Subst structures.
+		|	scheme SubstAppend(Subst, Subst) ;
 
-	Find(⟦⟨Reg#r⟩, ⟨Regs#rs⟩⟧)
-		→ Reg#r ;
+	SubstAppend(MoreSubst(#variable, #nat, #subst1), #subst2) → MoreSubst(#variable, #nat, SubstAppend(#subst1, #subst2)) ;
+	SubstAppend(NoSubst, #subst2) → #subst2 ;
 
-	RegsGivenIdentifier(⟦id⟧)↓idToReg{⟦id⟧:Regs#rs} 
-		→ Find(Regs#rs) ;
+	// Attributes.
+	attribute ↑subst(Subst) ;        // collected Subst structure
+	attribute ↓env{Identifer:Reg} ;   // mappings to apply
 
 	////////////////////////////////////////////////////////////////////////
 	// 5. INSTRUCTIONS
