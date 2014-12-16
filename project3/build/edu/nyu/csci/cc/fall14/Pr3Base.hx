@@ -277,18 +277,21 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{⟨Instructions AllStatements(#3)⟩}
 		⟧ ↓e{name1: ⟦R0⟧} ;
 
+	// 2
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
 		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ;
 
+	// 3
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
 		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ;
 
+	// 4
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
