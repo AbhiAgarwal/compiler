@@ -239,7 +239,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	scheme Compile(Program) ;
 
 	Compile( ⟦ ⟨Declarations#1⟩ ⟧ )
-		→	CompileDeclarations(#1) ;
+		→	
+		⟦ 
+				{⟨Instructions CompileDeclarations(#1)⟩}
+			{BL main}
+		⟧ ;
 
 	sort Instructions
 		|	scheme CompileDeclarations(Declarations) ↓e ↓regAval ;
