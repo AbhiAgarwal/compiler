@@ -68,10 +68,10 @@ Java Compiler Compiler Version 6.0_1 (Parser Generator)
 (type "javacc" with no arguments for help)
 Reading from file Pr3BaseHx.jj . . .
 Warning: Choice conflict involving two expansions at
-         line 3269, column 31 and line 3271, column 7 respectively.
+         line 3259, column 31 and line 3261, column 7 respectively.
          A common prefix is: "{" <T_HX_VAR>
          Consider using a lookahead of 3 or more for earlier expansion.
-Warning: Line 5459, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+Warning: Line 5428, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
 File "TokenMgrError.java" is being rebuilt.
 File "ParseException.java" is being rebuilt.
 File "Token.java" is being rebuilt.

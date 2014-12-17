@@ -308,14 +308,14 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	Argument( ⟦ ( ) { ⟨Statements#1⟩ } ⟧ )
 		→ 
 		⟦
-			{⟨Instructions AllStatements(#1)⟩}
+			{⟨Instructions SingleStatement(#1)⟩}
 		⟧ ;
 
 	// 1 Argument Handling
-	Argument( ⟦ ( ⟨Type#1⟩ name1 ) { ⟨Statements#3⟩ } ⟧ )
+	Argument( ⟦ ( ⟨Type#1⟩ name1 ) { ⟨Statements#2⟩ } ⟧ )
 		→ 
 		⟦ 
-			{⟨Instructions AllStatements(#3)⟩}
+			{⟨Instructions SingleStatement(#2)⟩}
 		⟧ 
 			↓e{name1: ⟦R0⟧} 
 			↓r{⟦R0⟧: ⟦trueBool⟧} ;
@@ -324,7 +324,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
-			{⟨Instructions AllStatements(#3)⟩}
+			{⟨Instructions SingleStatement(#3)⟩}
 		⟧ 
 			↓e{name1: ⟦R0⟧} 
 			↓r{⟦R0⟧: ⟦trueBool⟧}
@@ -332,10 +332,10 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓r{⟦R1⟧: ⟦trueBool⟧} ;
 
 	// 3
-	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#3⟩ } ⟧ )
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#4⟩ } ⟧ )
 		→ 
 		⟦ 
-			{⟨Instructions AllStatements(#3)⟩}
+			{⟨Instructions SingleStatement(#4)⟩}
 		⟧ 
 			↓e{name1: ⟦R0⟧} 
 			↓r{⟦R0⟧: ⟦trueBool⟧}
@@ -345,12 +345,12 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓r{⟦R2⟧: ⟦trueBool⟧} ;
 
 	// 4
-	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#3⟩ } ⟧ )
+	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#5⟩ } ⟧ )
 		→ 
 		⟦ 
-			{⟨Instructions AllStatements(#3)⟩}
+			{⟨Instructions SingleStatement(#5)⟩}
 		⟧ 
-			↓e{name1: ⟦R0⟧} 
+			↓e{name1: ⟦R0⟧}
 			↓r{⟦R0⟧: ⟦trueBool⟧}
 			↓e{name2: ⟦R1⟧} 
 			↓r{⟦R1⟧: ⟦trueBool⟧}
@@ -360,37 +360,29 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓r{⟦R3⟧: ⟦trueBool⟧} ;
 
 	sort Instructions
-		|	scheme AllStatements(Statements) ↓e ↓r ;
+		|	scheme SingleStatement(Statements) ↓e ↓r ;
 
-	AllStatements(⟦ ⟨Statement#1⟩ ⟨Statements#2⟩ ⟧)
-		→
+	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟨Statements#2⟩ ⟧)
+		→ 
 		⟦
 			{⟨Instructions SingleStatement(#1)⟩}
-			⟨Instructions AllStatements(#2)⟩
+			{⟨Instructions SingleStatement(#2)⟩}
 		⟧ ;
 
-	AllStatements(⟦ ⟧)
-		→ ⟦ ⟧ ;
-
-	sort Instructions
-		|	scheme SingleStatement(Statement) ↓e ↓r ;
-
-	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
+	SingleStatement(⟦ ⟨Expression#1⟩ ; ⟨Statements#2⟩ ⟧)
 		→ 
 		⟦
-			⟨Instructions AllStatements(#1)⟩
+			{⟨Instructions SingleExpression(#1)⟩}
+			{⟨Instructions SingleStatement(#2)⟩}
 		⟧ ;
 
-	SingleStatement(⟦ ⟨Expression#1⟩ ; ⟧)
+	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟨Statements#3⟩ ⟧)
 		→ 
-		⟦
-			⟨Instructions SingleExpression(#1)⟩
-		⟧ ;
+		⟦ 
+			⟨Instructions SingleStatement(#3)⟩
+		⟧ ↓e{name2: ⟦R1⟧} ;
 
-	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧) ↓r{#regName: ⟦falseBool⟧}
-		→ ⟦ ⟧ ↓e{name2: #regName} ↓r{#regName: ⟦trueBool⟧} ;
-
-	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ else ⟨Statement#3⟩ ⟧)
+	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) { ⟨Statements#2⟩ } else { ⟨Statements#3⟩ } ⟨Statements#4⟩ ⟧)
 		→ 
 		⟦
 			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
@@ -398,42 +390,45 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
         	B l3
         	f { ⟨ Instructions SingleStatement(#3) ⟩ }
         	l3
+        	⟨Instructions SingleStatement(#4)⟩
 		⟧ ;
 
-	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ ⟧)
+	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) { ⟨Statements#2⟩ } ⟨Statements#3⟩ ⟧)
 		→ 
 		⟦
 			{ ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
         	t { ⟨ Instructions SingleStatement(#2) ⟩ }
+        	⟨Instructions SingleStatement(#3)⟩
 		⟧ ;
 
-	SingleStatement(⟦ while ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ ⟧)
+	SingleStatement(⟦ while ( ⟨Expression#1⟩ ) { ⟨Statements#2⟩ } ⟨Statements#3⟩ ⟧)
 		→ 
 		⟦
 			B test
 			t   { ⟨ Instructions SingleStatement(#2) ⟩ }
 			test   { ⟨ Instructions T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			⟨Instructions SingleStatement(#3)⟩
 		⟧ ;
 
-	SingleStatement(⟦ return ⟨Expression#1⟩ ; ⟧)
+	SingleStatement(⟦ return ⟨Expression#1⟩ ; ⟨Statements#2⟩ ⟧)
 		→ 
 		⟦
 			{⟨Instructions SingleExpression(#1)⟩}
 			{MOV R0, R4}
+			⟨Instructions SingleStatement(#2)⟩
 		⟧ ;
 
-	SingleStatement(⟦ return ; ⟧)
-		→ ⟦ ⟧ ;
-
-	// This shouldn't have to be dealt with.
-	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
+	SingleStatement(⟦ return ; ⟨Statements#2⟩ ⟧)
 		→ 
-		⟦
-			⟨Instructions AllStatements(#1)⟩
+		⟦ 
+			⟨Instructions SingleStatement(#2)⟩
 		⟧ ;
 
-	SingleStatement(⟦ ; ⟧)
-		→ ⟦ ⟧ ;
+	SingleStatement(⟦ ; ⟧) 
+		→	⟦ ⟧ ;
+
+	SingleStatement(⟦ ⟧) 
+		→	⟦ ⟧ ;
 
 	sort Instructions
 		|	scheme SingleExpression(Expression) ↓e ↓r ;
@@ -441,13 +436,13 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	SingleExpression(⟦ ⟨Integer#i⟩ ⟧) 
 		→ 
 		⟦
-			{MOV R0, #⟨Integer#i⟩}
+			{MOV R10, #⟨Integer#i⟩}
 		⟧ ;
 
 	SingleExpression(⟦ ⟨Identifier#i⟩ ⟧) ↓e{#i:#reg}
 		→ 
 		⟦
-			{MOV R0, ⟨Reg#reg⟩}
+			{MOV ⟨Reg#reg⟩, R10}
 		⟧ ;	
 
 	SingleExpression(⟦ ⟨Identifier#i⟩ ( ) ⟧)
