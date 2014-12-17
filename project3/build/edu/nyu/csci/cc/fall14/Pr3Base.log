@@ -68,10 +68,10 @@ Java Compiler Compiler Version 6.0_1 (Parser Generator)
 (type "javacc" with no arguments for help)
 Reading from file Pr3BaseHx.jj . . .
 Warning: Choice conflict involving two expansions at
-         line 3259, column 31 and line 3261, column 7 respectively.
+         line 3212, column 31 and line 3214, column 7 respectively.
          A common prefix is: "{" <T_HX_VAR>
          Consider using a lookahead of 3 or more for earlier expansion.
-Warning: Line 5428, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+Warning: Line 5232, Column 18: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
 File "TokenMgrError.java" is being rebuilt.
 File "ParseException.java" is being rebuilt.
 File "Token.java" is being rebuilt.
@@ -103,10 +103,10 @@ Java Compiler Compiler Version 6.0_1 (Parser Generator)
 (type "javacc" with no arguments for help)
 Reading from file Pr3BaseEmbed.jj . . .
 Warning: Choice conflict involving two expansions at
-         line 3256, column 18 and line 3267, column 18 respectively.
+         line 3220, column 18 and line 3231, column 18 respectively.
          A common prefix is: ")" "("
          Consider using a lookahead of 3 or more for earlier expansion.
-Warning: Line 2323, Column 34: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
+Warning: Line 2322, Column 34: Non-ASCII characters used in regular expression.Please make sure you use the correct Reader when you create the parser, one that can handle your character set.
 File "TokenMgrError.java" is being rebuilt.
 File "ParseException.java" is being rebuilt.
 File "Token.java" is being rebuilt.
@@ -131,7 +131,7 @@ Note: Recompile with -Xlint:deprecation for details.
 + MODULE=edu.nyu.csci.cc.fall14.Pr3Base
 + NAME=Pr3Base
 + SORT=Program
-+ SORTS='Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol Subste IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
++ SORTS='Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
 + SINKCLASS=net.sf.crsx.text.TextSink
 + PARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseParser
 + PREFIX=pr3base_
@@ -156,10 +156,22 @@ Note: Recompile with -Xlint:deprecation for details.
 + LD_LIBRARY_PATH=/home/abhi/.hacs/lib/hacs/icu4c/lib
 + /home/abhi/.hacs/lib/hacs/HacsRewriter crsx-debug-steps wrapper=Cook input=/home/abhi/Desktop/compiler/project3/build/edu/nyu/csci/cc/fall14/Pr3Base.hxprep output=/home/abhi/Desktop/compiler/project3/build/edu/nyu/csci/cc/fall14/Pr3BaseRewriter.crs.tmp
 + sed s/222222222/9/g /home/abhi/Desktop/compiler/project3/build/edu/nyu/csci/cc/fall14/Pr3BaseRewriter.crs.tmp
++ java -ea -cp /home/abhi/Desktop/compiler/project3/build:/home/abhi/.hacs/share/java/hacs.jar:/home/abhi/.hacs/share/java/crsx.jar -Dfile.encoding=UTF-8 -Xss20000K -Xmx2000m net.sf.crsx.run.Crsx allow-unnamed-rules allow-missing-cases sortify verbose=1 'grammar=('\''org.crsx.hacs.HxRaw'\'';'\''net.sf.crsx.text.Text'\'';)' input=Pr3Base.hx category=rawHxModule output=Pr3Base.hxraw.tmp simple-terms max-indent=10 width=255
+// $Sortify
+// $[Load, "Pr3Base.hx", "rawHxModule"]
+
+// Normalizing with 0 rules
+// Normal form with null after 0 rewrites
+
++ mv Pr3Base.hxraw.tmp Pr3Base.hxraw
++ '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
++ LD_LIBRARY_PATH=/home/abhi/.hacs/lib/hacs/icu4c/lib
++ /home/abhi/.hacs/lib/hacs/HacsRewriter wrapper=P-PrintEnvironment input=Pr3Base.hxraw output=Pr3Base.env.tmp
++ mv Pr3Base.env.tmp Pr3Base.env
 + MODULE=edu.nyu.csci.cc.fall14.Pr3Base
 + NAME=Pr3Base
 + SORT=Program
-+ SORTS='Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol Subste IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
++ SORTS='Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
 + SINKCLASS=net.sf.crsx.text.TextSink
 + PARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseParser
 + PREFIX=pr3base_
@@ -175,5 +187,5 @@ Note: Recompile with -Xlint:deprecation for details.
 + '[' -x /home/abhi/.hacs/lib/hacs/HacsRewriter -a -z '' ']'
 ++ unzip -q -p /home/abhi/.hacs/share/java/hacs.jar org/crsx/hacs/VERSION
 + LD_LIBRARY_PATH=/home/abhi/.hacs/lib/hacs/icu4c/lib
-+ /home/abhi/.hacs/lib/hacs/HacsRewriter term=MakeRun output=Pr3Base.run.tmp MODULE=edu.nyu.csci.cc.fall14.Pr3Base NAME=Pr3Base SORT=Program 'SORTS=Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol Subste IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER' SINKCLASS=net.sf.crsx.text.TextSink PARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseParser PREFIX=pr3base_ METAPARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseHx METAPREFIX=pr3baseMeta_ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseEmbed EMBEDPREFIX=pr3baseEmbed_ PACKAGE=edu.nyu.csci.cc.fall14 PACKAGEDIR=edu/nyu/csci/cc/fall14 BUILD=/home/abhi/Desktop/compiler/project3/build HACSVERSION=0.9.15 CRSXJAR=/home/abhi/.hacs/share/java/crsx.jar HACSJAR=/home/abhi/.hacs/share/java/hacs.jar CRSXC=/home/abhi/.hacs/lib/hacs/crsxc ICU4CINCLUDE=/home/abhi/.hacs/lib/hacs/icu4c/include ICU4CDIR=/home/abhi/.hacs/lib/hacs/icu4c/lib LIBDIR=/home/abhi/.hacs/lib/hacs BINDIR=/home/abhi/.hacs/bin DOCDIR= SHAREDIR=/home/abhi/.hacs/share/hacs SHAREJAVA=/home/abhi/.hacs/share/java SHELL=/bin/bash JAVA=java JAVAC=javac
++ /home/abhi/.hacs/lib/hacs/HacsRewriter term=MakeRun output=Pr3Base.run.tmp MODULE=edu.nyu.csci.cc.fall14.Pr3Base NAME=Pr3Base SORT=Program 'SORTS=Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER' SINKCLASS=net.sf.crsx.text.TextSink PARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseParser PREFIX=pr3base_ METAPARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseHx METAPREFIX=pr3baseMeta_ EMBEDPARSERCLASS=edu.nyu.csci.cc.fall14.Pr3BaseEmbed EMBEDPREFIX=pr3baseEmbed_ PACKAGE=edu.nyu.csci.cc.fall14 PACKAGEDIR=edu/nyu/csci/cc/fall14 BUILD=/home/abhi/Desktop/compiler/project3/build HACSVERSION=0.9.15 CRSXJAR=/home/abhi/.hacs/share/java/crsx.jar HACSJAR=/home/abhi/.hacs/share/java/hacs.jar CRSXC=/home/abhi/.hacs/lib/hacs/crsxc ICU4CINCLUDE=/home/abhi/.hacs/lib/hacs/icu4c/include ICU4CDIR=/home/abhi/.hacs/lib/hacs/icu4c/lib LIBDIR=/home/abhi/.hacs/lib/hacs BINDIR=/home/abhi/.hacs/bin DOCDIR= SHAREDIR=/home/abhi/.hacs/share/hacs SHAREJAVA=/home/abhi/.hacs/share/java SHELL=/bin/bash JAVA=java JAVAC=javac
 + mv Pr3Base.run.tmp Pr3Base.run
