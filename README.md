@@ -5,10 +5,10 @@ Compiler Construction labs:
 
 The descriptions, and percentages are made up by me. The three labs are worth 45% so it's my prediction.
 
-1. Project 1 (15%): Lexical analysis, Top-down syntax analysis in HACS (v0.9.0)
-2. Project 2a (10%): Outling Syntax-directed translation (SDT), Name analysis, Type analysis
-3. Project 2b (5%): Implementing 2a into HACS (v0.9.5)
-4. Project 3 (15%): Direct code generator - ARM32 assembly subset
+1. [Project 1](http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr1/pr1.pdf) (15%): Lexical analysis, Top-down syntax analysis in HACS (v0.9.0)
+2. [Project 2a](http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr2/pr2a.pdf) (10%): Outling Syntax-directed translation (SDT), Name analysis, Type analysis
+3. [Project 2b](http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr2/pr2b.pdf) (5%): Implementing 2a into HACS (v0.9.5)
+4. [Project 3](http://cs.nyu.edu/courses/fall14/CSCI-GA.2130-001/pr3/pr3.pdf) (15%): Direct code generator - ARM32 assembly subset
 
 Compiler Construction homework:
 	- There are 11 homeworks that I have done.
