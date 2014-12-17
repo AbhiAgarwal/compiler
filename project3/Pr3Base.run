@@ -12,7 +12,7 @@ usage () {
 MODULE='edu.nyu.csci.cc.fall14.Pr3Base'
 NAME='Pr3Base'
 SORT='Program'
-SORTS='Program Arg Integers Integer Constant ArgState ArgumentSignature TypeIdentifierTail Instructions Instruction Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
+SORTS='Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER'
 SINKCLASS='net.sf.crsx.text.TextSink'
 PARSERCLASS='edu.nyu.csci.cc.fall14.Pr3BaseParser'
 PREFIX='pr3base_'
@@ -92,7 +92,7 @@ if [ -z "$BUILD" -o ! -d "$BUILD" ]; then
 
 # Check options.
 if [ -z "$SORT" ]; then
-   fail=true; echo "${0}: SORT must be correctly specified (use default or one of "Program Arg Integers Integer Constant ArgState ArgumentSignature TypeIdentifierTail Instructions Instruction Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER")" >&2
+   fail=true; echo "${0}: SORT must be correctly specified (use default or one of "Program Arg Integers Integer Constant ArgState Boolean ArgumentSignature TypeIdentifierTail Instructions Instruction Identifiers Op Declarations Declaration Symbol IfTail Expression Statements Statement Identifier Type Sign Mem Regs Reg SYMBOL IDENTIFIER INTEGER")" >&2
 elif [ -z "$SCHEME" ]; then
    SCHEME="$NAME"'$'"$SORT";
 fi

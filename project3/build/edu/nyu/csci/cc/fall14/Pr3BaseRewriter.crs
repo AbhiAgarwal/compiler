@@ -45,6 +45,10 @@ Pr3Base[(
 -[Data[#]]: '$Print-Pr3Base$Computed' [#] → '$Print2-Pr3Base$Computed' [#, 0] ;
 
 
+'$Print-Pr3Base$Boolean' [Pr3Base$Boolean] :: Text ;
+-[Data[#]]: '$Print-Pr3Base$Boolean' [#] → '$Print2-Pr3Base$Boolean' [#, 0] ;
+
+
 '$Print-Pr3Base$ArgumentSignature' [Pr3Base$ArgumentSignature] :: Text ;
 -[Data[#]]: '$Print-Pr3Base$ArgumentSignature' [#] → '$Print2-Pr3Base$ArgumentSignature' [#, 0] ;
 
@@ -59,6 +63,10 @@ Pr3Base[(
 
 '$Print-Pr3Base$Instruction' [Pr3Base$Instruction] :: Text ;
 -[Data[#]]: '$Print-Pr3Base$Instruction' [#] → '$Print2-Pr3Base$Instruction' [#, 0] ;
+
+
+'$Print-Pr3Base$Identifiers' [Pr3Base$Identifiers] :: Text ;
+-[Data[#]]: '$Print-Pr3Base$Identifiers' [#] → '$Print2-Pr3Base$Identifiers' [#, 0] ;
 
 
 '$Print-Pr3Base$Op' [Pr3Base$Op] :: Text ;
@@ -122,7 +130,7 @@ Pr3Base[(
 
 '$Print2-Pr3Base$IDENTIFIER' [Pr3Base$IDENTIFIER, $Numeric] :: Text ;
 '$Print2-Pr3Base$IDENTIFIER' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_4385]]: '$Print2-Pr3Base$Identifier' [y_4385, #prec] → %n⟪‹y_4385›⟫ ;
+-[Free[y_3645]]: '$Print2-Pr3Base$Identifier' [y_3645, #prec] → %n⟪‹y_3645›⟫ ;
 
 
 '$Print-Pr3Base$INTEGER' [Pr3Base$INTEGER] :: Text ;
@@ -363,6 +371,26 @@ $[If, $[GreaterThan, #prec, 0],
 
 
 -[Data[#prec]] :
+'$Print2-Pr3Base$Boolean' [ 'Pr3Base$Boolean_trueBool' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+ %n⟪( trueBool )⟫,
+ %n⟪ trueBool ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr3Base$Boolean' [ 'Pr3Base$Boolean_falseBool' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+ %n⟪( falseBool )⟫,
+ %n⟪ falseBool ⟫
+]
+;
+
+
+-[Data[#prec]] :
 '$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Integer_' [#1], #prec ]
 →
 $[If, $[GreaterThan, #prec, 10],
@@ -393,11 +421,21 @@ $[If, $[GreaterThan, #prec, 9],
 
 
 -[Data[#prec]] :
-'$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_(_Expression_)' [#1, #2], #prec ]
+'$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_(_Integers_)' [#1, #2], #prec ]
 →
 $[If, $[GreaterThan, #prec, 9],
- %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) )⟫,
- %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Expression' [#2, 0] › ) ⟫
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Integers' [#2, 0] › ) )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Integers' [#2, 0] › ) ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr3Base$Expression' [ 'Pr3Base$Expression__Expression_(_Identifiers_)' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 9],
+ %n⟪( ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Identifiers' [#2, 0] › ) )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Expression' [#1, 9] › ( ‹ '$Print2-Pr3Base$Identifiers' [#2, 0] › ) ⟫
 ]
 ;
 
@@ -654,6 +692,36 @@ $[If, $[GreaterThan, #prec, 0],
 $[If, $[GreaterThan, #prec, 0],
  %n⟪( ‹ '$Print2-Pr3Base$Integer' [#1, 0] › )⟫,
  %n⟪ ‹ '$Print2-Pr3Base$Integer' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr3Base$Identifiers' [ 'Pr3Base$Identifiers__Identifier_,_Identifiers_' [#1, #2], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+ %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›, ‹ '$Print2-Pr3Base$Identifiers' [#2, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] ›, ‹ '$Print2-Pr3Base$Identifiers' [#2, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr3Base$Identifiers' [ 'Pr3Base$Identifiers__Identifier_' [#1], #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+ %n⟪( ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › )⟫,
+ %n⟪ ‹ '$Print2-Pr3Base$Identifier' [#1, 0] › ⟫
+]
+;
+
+
+-[Data[#prec]] :
+'$Print2-Pr3Base$Identifiers' [ 'Pr3Base$Identifiers_' , #prec ]
+→
+$[If, $[GreaterThan, #prec, 0],
+ %n⟪( )⟫,
+ %n⟪ ⟫
 ]
 ;
 
@@ -1173,7 +1241,7 @@ $[If, $[GreaterThan, #prec, 0],
 
 '$Print2-Pr3Base$SYMBOL' [Pr3Base$SYMBOL, $Numeric] :: Text ;
 '$Print2-Pr3Base$SYMBOL' [#, #prec] → %n⟪‹StringToText[#]›⟫ ;
--[Free[y_8677]]: '$Print2-Pr3Base$Symbol' [y_8677, #prec] → %n⟪‹y_8677›⟫ ;
+-[Free[y_8152]]: '$Print2-Pr3Base$Symbol' [y_8152, #prec] → %n⟪‹y_8152›⟫ ;
 
 
 '$Print-Compile' [#1]
@@ -1239,6 +1307,22 @@ $[If, $[GreaterThan, #prec, 0],
  0]
 ;
 
+
+'$Print-ArgumentIDSearching' [#1]
+→
+'$Print2-Pr3Base$Instructions' [
+ 'Pr3Base$Instructions_ArgumentIDSearching' [#1],
+ 0]
+;
+
+
+'$Print-ArgumentIntSearching' [#1]
+→
+'$Print2-Pr3Base$Instructions' [
+ 'Pr3Base$Instructions_ArgumentIntSearching' [#1],
+ 0]
+;
+
 $Print2-Pr3Base$Computed[$Numeric, $Numeric] :: Text ;
 $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]›⟫ ;
 
@@ -1286,6 +1370,12 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 
+<!--RULES FOR SORT Pr3Base$Boolean.-->
+
+
+
+
+
 <!--RULES FOR SORT Pr3Base$ArgumentSignature.-->
 
 
@@ -1299,6 +1389,8 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 <!--RULES FOR SORT Pr3Base$Instructions.-->
+
+
 
 
 
@@ -1329,287 +1421,287 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 - :
   'Pr3Base$Instructions_Compile' [  'Pr3Base$Program__Declarations_' [  #1 ]]
 →
-  'Pr3Base$Instructions_CompileDeclarations' [  #1 ]
+ { "regAval" : A_regAval[A_regAval_null] ; "e" : {}A_e  }  'Pr3Base$Instructions_CompileDeclarations' [  #1 ]
 ;
 
 
 - :
-  'Pr3Base$Instructions_CompileDeclarations' [  'Pr3Base$Declarations__Declaration__Declarations_' [  #1 ,   #2 ]]
+ { "regAval" : A_regAval[#_regAval] ; "e" : {##e}A_e  }  'Pr3Base$Instructions_CompileDeclarations' [ {  }  'Pr3Base$Declarations__Declaration__Declarations_' [ {  }  #1 ,  {  }  #2 ]]
 →
-  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_CompileDeclaration' [  #1 ],   'Pr3Base$Instructions_CompileDeclarations' [  #2 ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_CompileDeclaration' [ {  }  #1 ],  { "regAval" : A_regAval[#_regAval] ; "e" : {##e}A_e  }  'Pr3Base$Instructions_CompileDeclarations' [ {  }  #2 ]]
 ;
 
 
 - :
-  'Pr3Base$Instructions_CompileDeclarations' [  'Pr3Base$Declarations_' ]
+ { "regAval" : A_regAval[#_regAval] ; "e" : {##e}A_e  }  'Pr3Base$Instructions_CompileDeclarations' [ {  }  'Pr3Base$Declarations_' ]
 →
-  'Pr3Base$Instructions_' 
+ {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - [Free[name2_1::Identifier]]:
-  'Pr3Base$Instructions_CompileDeclaration' [  'Pr3Base$Declaration_function_Type__Identifier__ArgState_' [  #1 ,   name2_1 ,   #3 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_CompileDeclaration' [ {  }  'Pr3Base$Declaration_function_Type__Identifier__ArgState_' [ {  }  #1 ,  {  }  name2_1 ,  {  }  #3 ]]
 →
-  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Identifier_' [  name2_1 ],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [  'Pr3Base$Reg_SP' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R5' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R6' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R7' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R8' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R9' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R10' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R11' ,   'Pr3Base$Regs__Reg_' [  'Pr3Base$Reg_LR' ]]]]]]]]]]],   'Pr3Base$Instructions_' ],  { "e" : {}A_e  }  'Pr3Base$Instructions_Argument' [  #3 ]],   'Pr3Base$Instructions_{_Instructions_}_Instructions_' [  'Pr3Base$Instructions__Instruction__Instructions_' [  'Pr3Base$Instruction__Op_' [  'Pr3Base$Op_LDMFD_Reg_!,{_Regs_}' [  'Pr3Base$Reg_SP' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R4' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R5' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R6' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R7' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R8' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R9' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R10' ,   'Pr3Base$Regs__Reg_,_Regs_' [  'Pr3Base$Reg_R11' ,   'Pr3Base$Regs__Reg_' [  'Pr3Base$Reg_PC' ]]]]]]]]]]],   'Pr3Base$Instructions_' ],   'Pr3Base$Instructions_' ]]]
+ { "r" : {##r;  'Pr3Base$Reg_R12'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R11'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R10'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R9'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R8'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R7'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R6'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R5'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R4'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R3'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R2'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R1'  : {  }  'Pr3Base$Boolean_falseBool' ;  'Pr3Base$Reg_R0'  : {  }  'Pr3Base$Boolean_falseBool' }A_r  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  name2_1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_STMFD_Reg_!,{_Regs_}' [ {  }  'Pr3Base$Reg_SP' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R5' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R6' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R7' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R8' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R9' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R10' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R11' ,  {  }  'Pr3Base$Regs__Reg_' [ {  }  'Pr3Base$Reg_LR' ]]]]]]]]]]],  {  }  'Pr3Base$Instructions_' ],  { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  #3 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_LDMFD_Reg_!,{_Regs_}' [ {  }  'Pr3Base$Reg_SP' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R5' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R6' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R7' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R8' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R9' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R10' ,  {  }  'Pr3Base$Regs__Reg_,_Regs_' [ {  }  'Pr3Base$Reg_R11' ,  {  }  'Pr3Base$Regs__Reg_' [ {  }  'Pr3Base$Reg_PC' ]]]]]]]]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_()' ,  {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_()' ,  {  }  #1 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - [Free[name1_2::Pr3Base$Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_' ],  {  }  #3 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_' ],  {  }  #3 ]]
 →
- { "e" : {##e;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
+ { "e" : {##e;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e ; "r" : {##r;  'Pr3Base$Reg_R0'  : {  }  'Pr3Base$Boolean_trueBool' }A_r  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - [Free[name2_1::Pr3Base$Identifier,name1_2::Pr3Base$Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]],  {  }  #3 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]],  {  }  #3 ]]
 →
- { "e" : {##e;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
+ { "e" : {##e;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e ; "r" : {##r;  'Pr3Base$Reg_R1'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R0'  : {  }  'Pr3Base$Boolean_trueBool' }A_r  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - [Free[name3_3::Pr3Base$Identifier,name2_1::Pr3Base$Identifier,name1_2::Pr3Base$Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #3 ,  {  }  name3_3 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]]],  {  }  #3 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #3 ,  {  }  name3_3 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]]],  {  }  #3 ]]
 →
- { "e" : {##e;  name3_3  : {  }  'Pr3Base$Reg_R2' ;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
+ { "e" : {##e;  name3_3  : {  }  'Pr3Base$Reg_R2' ;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e ; "r" : {##r;  'Pr3Base$Reg_R2'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R1'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R0'  : {  }  'Pr3Base$Boolean_trueBool' }A_r  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - [Free[name2_1::Pr3Base$Identifier,name3_3::Pr3Base$Identifier,name4_4::Pr3Base$Identifier,name1_2::Pr3Base$Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #3 ,  {  }  name3_3 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #4 ,  {  }  name4_4 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]]]],  {  }  #3 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_Argument' [ {  }  'Pr3Base$ArgState__ArgumentSignature_{_Statements_}' [ {  }  'Pr3Base$ArgumentSignature_(_Type__Identifier__TypeIdentifierTail_)' [ {  }  #1 ,  {  }  name1_2 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #2 ,  {  }  name2_1 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #3 ,  {  }  name3_3 ,  {  }  'Pr3Base$TypeIdentifierTail_,_Type__Identifier__TypeIdentifierTail_' [ {  }  #4 ,  {  }  name4_4 ,  {  }  'Pr3Base$TypeIdentifierTail_' ]]]],  {  }  #3 ]]
 →
- { "e" : {##e;  name4_4  : {  }  'Pr3Base$Reg_R3' ;  name3_3  : {  }  'Pr3Base$Reg_R2' ;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
+ { "e" : {##e;  name4_4  : {  }  'Pr3Base$Reg_R3' ;  name3_3  : {  }  'Pr3Base$Reg_R2' ;  name2_1  : {  }  'Pr3Base$Reg_R1' ;  name1_2  : {  }  'Pr3Base$Reg_R0' }A_e ; "r" : {##r;  'Pr3Base$Reg_R3'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R2'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R1'  : {  }  'Pr3Base$Boolean_trueBool' ;  'Pr3Base$Reg_R0'  : {  }  'Pr3Base$Boolean_trueBool' }A_r  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #3 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  'Pr3Base$Statements__Statement__Statements_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  'Pr3Base$Statements__Statement__Statements_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #1 ],  { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #2 ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #1 ],  { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #2 ]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  'Pr3Base$Statements__Statement__Statements_' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  'Pr3Base$Statements__Statement__Statements_' [ {  }  #1 ,  {  }  #2 ]],  {  }  'Pr3Base$Statements_' ]]
-→
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #1 ],  { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #2 ]]
-;
-
-
-- :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  'Pr3Base$Statements_' ]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  'Pr3Base$Statements_' ]
 →
  {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  #1 ]]
 →
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement__Expression_;' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement__Expression_;' [ {  }  #1 ]]
 →
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ]
 ;
 
 
-- [Free[name2_1::Identifier], Fresh[name4_4::Pr3Base$Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_var_Type__Identifier_;' [ {  }  #1 ,  {  }  name2_1 ]]
+- [Free[name2_1::Pr3Base$Identifier]]:
+ { "r" : {##r;  #regName  : {  }  'Pr3Base$Boolean_falseBool' }A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_var_Type__Identifier_;' [ {  }  #1 ,  {  }  name2_1 ]]
 →
- { "e" : {##e;  name4_4  : {  }  'Pr3Base$Reg_R4' }A_e  }  'Pr3Base$Instructions_' 
+ { "e" : {##e;  name2_1  : {  }  #regName }A_e ; "r" : {##r;  #regName  : {  }  'Pr3Base$Boolean_trueBool' }A_r  }  'Pr3Base$Instructions_' 
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,true_5::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_else_Statement_' [ {  }  #2 ,  {  }  #3 ]]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_else_Statement_' [ {  }  #2 ,  {  }  #3 ]]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #3 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #3 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]]
 ;
 
 
 - [Fresh[true_5::Identifier,t_6::Identifier,f_7::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_' [ {  }  #2 ]]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_if(_Expression_)_IfTail_' [ {  }  #1 ,  {  }  'Pr3Base$IfTail__Statement_' [ {  }  #2 ]]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions_' ]]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions_' ]]]
 ;
 
 
 - [Fresh[true_5::Identifier,t_6::Identifier,f_7::Identifier,test_9::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_while(_Expression_)_Statement_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_while(_Expression_)_Statement_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  test_9 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  test_9 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions_' ]]]]]
+ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  test_9 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  t_6 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  #2 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  test_9 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  true_5 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions_' ]]]]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return_Expression_;' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return_Expression_;' [ {  }  #1 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R4' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R4' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return;' ]
-→
- {  }  'Pr3Base$Instructions_' 
-;
-
-
-- :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  #1 ]]
-→
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ]
-;
-
-
-- :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_;' ]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_return;' ]
 →
  {  }  'Pr3Base$Instructions_' 
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Integer_' [ {  }  #i ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_{_Statements_}' [ {  }  #1 ]]
+→
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_AllStatements' [ {  }  #1 ]
+;
+
+
+- :
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleStatement' [ {  }  'Pr3Base$Statement_;' ]
+→
+ {  }  'Pr3Base$Instructions_' 
+;
+
+
+- :
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Integer_' [ {  }  #i ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #i ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - :
- { "e" : {##e;  #i  : {  }  #reg }A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Identifier_' [ {  }  #i ]]
+ { "r" : {##r}A_r ; "e" : {##e;  #i  : {  }  #reg }A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Identifier_' [ {  }  #i ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_()' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_()' [ {  }  'Pr3Base$Expression__Identifier_' [ {  }  #i ]]]
 →
- {  }  'Pr3Base$Instructions_' 
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_BL_Identifier_' [ {  }  #i ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_(_Expression_)' [ {  }  #1 ,  {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_(_Identifiers_)' [ {  }  'Pr3Base$Expression__Identifier_' [ {  }  #i ],  {  }  #1 ]]
 →
- {  }  'Pr3Base$Instructions_' 
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIDSearching' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_BL_Identifier_' [ {  }  #i ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+;
+
+
+- :
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_(_Integers_)' [ {  }  'Pr3Base$Expression__Identifier_' [ {  }  #i ],  {  }  #1 ]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIntSearching' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_BL_Identifier_' [ {  }  #i ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - [Fresh[f_7::Identifier,t_6::Identifier,l3_8::Identifier,false_10::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_!_Expression_' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_!_Expression_' [ {  }  #1 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_-_Expression_' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_-_Expression_' [ {  }  #1 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R5' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_-' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R5' ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_+_Expression_' [ {  }  #1 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression_+_Expression_' [ {  }  #1 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_*_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_*_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R5' ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MUL_Reg_,_Reg_,_Reg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R5' ]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_+_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_+_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_ADD_Reg_,_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R5' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_ADD_Reg_,_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R5' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_-_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_-_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_SUB_Reg_,_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R5' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ]],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_SUB_Reg_,_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  'Pr3Base$Reg_R5' ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
 - [Fresh[f_7::Identifier,t_6::Identifier,l3_8::Identifier,false_10::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_<=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_>=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_==_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_==_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_!=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_!=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_&&_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_&&_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - [Fresh[t_6::Identifier,f_7::Identifier,false_10::Identifier,l3_8::Identifier]]:
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_||_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_||_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions_T' [ {  }  false_10 ,  {  }  t_6 ,  {  }  f_7 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "1"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_B_Identifier_' [ {  }  l3_8 ]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  false_10 ],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R4' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  'Pr3Base$Integer__INTEGER_' [ "0"]]]]],  {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Identifier_' [ {  }  l3_8 ],  {  }  'Pr3Base$Instructions_' ]]]]]]
 ;
 
 
 - :
- { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
+ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  'Pr3Base$Expression__Expression_=_Expression_' [ {  }  #1 ,  {  }  #2 ]]
 →
- {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]]
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #2 ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ { "r" : {##r}A_r ; "e" : {##e}A_e  }  'Pr3Base$Instructions_SingleExpression' [ {  }  #1 ],  {  }  'Pr3Base$Instructions_' ]]
 ;
 
 
@@ -1627,9 +1719,72 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 ;
 
 
+- :
+ { "e" : {##e;  #1  : {  }  #reg1 }A_e  }  'Pr3Base$Instructions_ArgumentIDSearching' [ {  }  'Pr3Base$Identifiers__Identifier_' [ {  }  #1 ]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg1 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]
+;
+
+
+- :
+ { "e" : {##e;  #2  : {  }  #reg2 ;  #1  : {  }  #reg1 }A_e  }  'Pr3Base$Instructions_ArgumentIDSearching' [ {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #1 ,  {  }  'Pr3Base$Identifiers__Identifier_' [ {  }  #2 ]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg1 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg2 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+;
+
+
+- :
+ { "e" : {##e;  #3  : {  }  #reg3 ;  #2  : {  }  #reg2 ;  #1  : {  }  #reg1 }A_e  }  'Pr3Base$Instructions_ArgumentIDSearching' [ {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #1 ,  {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #2 ,  {  }  'Pr3Base$Identifiers__Identifier_' [ {  }  #3 ]]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg1 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg2 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R2' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg3 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]]
+;
+
+
+- :
+ { "e" : {##e;  #4  : {  }  #reg4 ;  #3  : {  }  #reg3 ;  #2  : {  }  #reg2 ;  #1  : {  }  #reg1 }A_e  }  'Pr3Base$Instructions_ArgumentIDSearching' [ {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #1 ,  {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #2 ,  {  }  'Pr3Base$Identifiers__Identifier_,_Identifiers_' [ {  }  #3 ,  {  }  'Pr3Base$Identifiers__Identifier_' [ {  }  #4 ]]]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg1 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg2 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R2' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg3 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R3' ,  {  }  'Pr3Base$Arg__Reg_' [ {  }  #reg4 ]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]]]
+;
+
+
+- :
+ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIntSearching' [ {  }  'Pr3Base$Integers__Integer_' [ {  }  #1 ]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #1 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]
+;
+
+
+- :
+ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIntSearching' [ {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #1 ,  {  }  'Pr3Base$Integers__Integer_' [ {  }  #2 ]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #1 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #2 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]
+;
+
+
+- :
+ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIntSearching' [ {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #1 ,  {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #2 ,  {  }  'Pr3Base$Integers__Integer_' [ {  }  #3 ]]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #1 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #2 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R2' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #3 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]]
+;
+
+
+- :
+ { "e" : {##e}A_e  }  'Pr3Base$Instructions_ArgumentIntSearching' [ {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #1 ,  {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #2 ,  {  }  'Pr3Base$Integers__Integer_,_Integers_' [ {  }  #3 ,  {  }  'Pr3Base$Integers__Integer_' [ {  }  #4 ]]]]]
+→
+ {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R0' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #1 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R1' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #2 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R2' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #3 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_{_Instructions_}_Instructions_' [ {  }  'Pr3Base$Instructions__Instruction__Instructions_' [ {  }  'Pr3Base$Instruction__Op_' [ {  }  'Pr3Base$Op_MOV_Reg_,_Arg_' [ {  }  'Pr3Base$Reg_R3' ,  {  }  'Pr3Base$Arg__Constant_' [ {  }  'Pr3Base$Constant_#_Sign__Integer_' [ {  }  'Pr3Base$Sign_' ,  {  }  #4 ]]]],  {  }  'Pr3Base$Instructions_' ],  {  }  'Pr3Base$Instructions_' ]]]]
+;
+
+
 
 <!--RULES FOR SORT Pr3Base$Instruction.-->
 
+
+
+
+
+
+
+<!--RULES FOR SORT Pr3Base$Identifiers.-->
 
 
 
@@ -1681,6 +1836,7 @@ $Print2-Pr3Base$Computed[#n, #pr] → %n⟪‹StringToText[NumericToString[#n]]�
 
 
 <!--RULES FOR SORT Pr3Base$Expression.-->
+
 
 
 

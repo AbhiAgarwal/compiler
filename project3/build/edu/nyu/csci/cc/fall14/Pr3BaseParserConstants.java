@@ -11,17 +11,17 @@ public interface Pr3BaseParserConstants {
   /** End of File. */
   int EOF = 0;
   /** RegularExpression Id. */
-  int T_IDENTIFIER = 75;
+  int T_IDENTIFIER = 77;
   /** RegularExpression Id. */
-  int T_INTEGER = 76;
+  int T_INTEGER = 78;
   /** RegularExpression Id. */
-  int T_Letter = 77;
+  int T_Letter = 79;
   /** RegularExpression Id. */
-  int T_LetterEtc = 78;
+  int T_LetterEtc = 80;
   /** RegularExpression Id. */
-  int T_Digit = 79;
+  int T_Digit = 81;
   /** RegularExpression Id. */
-  int T_SYMBOL = 80;
+  int T_SYMBOL = 82;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -36,6 +36,8 @@ public interface Pr3BaseParserConstants {
     "\"&\"",
     "\"{\"",
     "\"}\"",
+    "\"falseBool\"",
+    "\"trueBool\"",
     "\"(\"",
     "\")\"",
     "\"DCI\"",
@@ -102,7 +104,7 @@ public interface Pr3BaseParserConstants {
     "\"R8\"",
     "\"R9\"",
     "\"SP\"",
-    "<token of kind 74>",
+    "<token of kind 76>",
     "<T_IDENTIFIER>",
     "<T_INTEGER>",
     "<T_Letter>",

@@ -90,13 +90,18 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		|	⟦ boolean ⟧
 		|	⟦ int ⟧ ;
 
+	sort Boolean
+		|	⟦ trueBool ⟧
+		|	⟦ falseBool ⟧ ;
+
 	// EXPRESSIONS
 	sort Expression
 		|	sugar ⟦ ( ⟨Expression#e⟩ ) ⟧@10 → #e
 		|	⟦ ⟨Integer⟩ ⟧@10
 		|	⟦ ⟨Identifier⟩ ⟧@10
 		|	⟦ ⟨Expression@9⟩ ( ) ⟧@9
-		|	⟦ ⟨Expression@9⟩ ( ⟨Expression⟩ ) ⟧@9
+		|	⟦ ⟨Expression@9⟩ ( ⟨Integers⟩ ) ⟧@9
+		|	⟦ ⟨Expression@9⟩ ( ⟨Identifiers⟩ ) ⟧@9
 
 		|	⟦ ! ⟨Expression@8⟩ ⟧@8
 		|	⟦ - ⟨Expression@8⟩ ⟧@8
@@ -139,6 +144,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	sort Integers
 		|	⟦ ⟨Integer⟩, ⟨Integers⟩ ⟧
 		|	⟦ ⟨Integer⟩ ⟧ ;
+
+	sort Identifiers
+		|	⟦ ⟨Identifier⟩, ⟨Identifiers⟩ ⟧
+		|	⟦ ⟨Identifier⟩ ⟧ 
+		|	⟦ ⟧ ;
 
 	// Syntax of individual machine instructions.
 	sort Op
@@ -222,6 +232,9 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	// LDMFD sp!, {r4-r11, pc}
 	////////////////////////////////////////////////////////////////////////
 
+	attribute ↓e { Identifier : Reg } ;
+	attribute ↓r { Reg : Boolean } ;
+
 	sort Instructions
 		|	scheme Compile(Program) ;
 
@@ -229,7 +242,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→	CompileDeclarations(#1) ;
 
 	sort Instructions
-		|	scheme CompileDeclarations(Declarations) ;
+		|	scheme CompileDeclarations(Declarations) ↓e ↓regAval ;
 
 	CompileDeclarations( ⟦ ⟨Declaration#1⟩ ⟨Declarations#2⟩ ⟧ )
 		→	
@@ -242,9 +255,9 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→	⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme CompileDeclaration(Declaration) ;
+		|	scheme CompileDeclaration(Declaration) ↓e ↓r ;
 
-	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgState#3⟩ ⟧ )
+	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgState#3⟩ ⟧ ) 
 		→	
 		⟦
 			name2
@@ -255,13 +268,24 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{
 				LDMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, PC}
 			}
-		⟧ ;
-
-	attribute ↓e { Identifier : Reg } ;
+		⟧
+			↓r{⟦R0⟧: ⟦falseBool⟧} 
+			↓r{⟦R1⟧: ⟦falseBool⟧} 
+			↓r{⟦R2⟧: ⟦falseBool⟧}
+			↓r{⟦R3⟧: ⟦falseBool⟧}
+			↓r{⟦R4⟧: ⟦falseBool⟧}
+			↓r{⟦R5⟧: ⟦falseBool⟧}
+			↓r{⟦R6⟧: ⟦falseBool⟧}
+			↓r{⟦R7⟧: ⟦falseBool⟧}
+			↓r{⟦R8⟧: ⟦falseBool⟧}
+			↓r{⟦R9⟧: ⟦falseBool⟧}
+			↓r{⟦R10⟧: ⟦falseBool⟧}
+			↓r{⟦R11⟧: ⟦falseBool⟧}
+			↓r{⟦R12⟧: ⟦falseBool⟧} ;
 
 	// HANDLING ARGUMENTS
 	sort Instructions
-		|	scheme Argument(ArgState) ↓e ;
+		|	scheme Argument(ArgState) ↓e ↓r ;
 
 	// No Arguments Handling
 	Argument( ⟦ ( ) { ⟨Statements#1⟩ } ⟧ )
@@ -275,42 +299,53 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
-		⟧ ↓e{name1: ⟦R0⟧} ;
+		⟧ 
+			↓e{name1: ⟦R0⟧} 
+			↓r{⟦R0⟧: ⟦trueBool⟧} ;
 
 	// 2
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
-		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ;
+		⟧ 
+			↓e{name1: ⟦R0⟧} 
+			↓r{⟦R0⟧: ⟦trueBool⟧}
+			↓e{name2: ⟦R1⟧} 
+			↓r{⟦R1⟧: ⟦trueBool⟧} ;
 
 	// 3
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
-		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ;
+		⟧ 
+			↓e{name1: ⟦R0⟧} 
+			↓r{⟦R0⟧: ⟦trueBool⟧}
+			↓e{name2: ⟦R1⟧} 
+			↓r{⟦R1⟧: ⟦trueBool⟧}
+			↓e{name3: ⟦R2⟧} 
+			↓r{⟦R2⟧: ⟦trueBool⟧} ;
 
 	// 4
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#3⟩ } ⟧ )
 		→ 
 		⟦ 
 			{⟨Instructions AllStatements(#3)⟩}
-		⟧ ↓e{name1: ⟦R0⟧} ↓e{name2: ⟦R1⟧} ↓e{name3: ⟦R2⟧} ↓e{name4: ⟦R3⟧} ;
+		⟧ 
+			↓e{name1: ⟦R0⟧} 
+			↓r{⟦R0⟧: ⟦trueBool⟧}
+			↓e{name2: ⟦R1⟧} 
+			↓r{⟦R1⟧: ⟦trueBool⟧}
+			↓e{name3: ⟦R2⟧} 
+			↓r{⟦R2⟧: ⟦trueBool⟧}
+			↓e{name4: ⟦R3⟧}
+			↓r{⟦R3⟧: ⟦trueBool⟧} ;
 
 	sort Instructions
-		|	scheme AllStatements(Statements) ↓e;
+		|	scheme AllStatements(Statements) ↓e ↓r ;
 
 	AllStatements(⟦ ⟨Statement#1⟩ ⟨Statements#2⟩ ⟧)
-		→
-		⟦
-			{⟨Instructions SingleStatement(#1)⟩}
-			⟨Instructions AllStatements(#2)⟩
-		⟧ ;
-
-	// Special Case?
-	// { ⟨Statements⟩ }
-	AllStatements(⟦ { ⟨Statement#1⟩ ⟨Statements#2⟩ } ⟧)
 		→
 		⟦
 			{⟨Instructions SingleStatement(#1)⟩}
@@ -321,7 +356,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme SingleStatement(Statement) ↓e ;
+		|	scheme SingleStatement(Statement) ↓e ↓r ;
 
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟧)
 		→ 
@@ -335,8 +370,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			⟨Instructions SingleExpression(#1)⟩
 		⟧ ;
 
-	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧)
-		→ ⟦ ⟧ ↓e{name4: ⟦R4⟧} ;
+	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟧) ↓r{#regName: ⟦falseBool⟧}
+		→ ⟦ ⟧ ↓e{name2: #regName} ↓r{#regName: ⟦trueBool⟧} ;
 
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) ⟨Statement#2⟩ else ⟨Statement#3⟩ ⟧)
 		→ 
@@ -384,7 +419,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→ ⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme SingleExpression(Expression) ↓e;
+		|	scheme SingleExpression(Expression) ↓e ↓r ;
 
 	SingleExpression(⟦ ⟨Integer#i⟩ ⟧) 
 		→ 
@@ -398,16 +433,31 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{MOV R0, ⟨Reg#reg⟩}
 		⟧ ;	
 
-	SingleExpression(⟦ ⟨Expression#1⟩ ( ) ⟧)
-		→ ⟦ ⟧ ;
+	SingleExpression(⟦ ⟨Identifier#i⟩ ( ) ⟧)
+		→ 
+		⟦ 
+			{BL ⟨Identifier#i⟩}
+		⟧ ;
 	
-	SingleExpression(⟦ ⟨Expression#1⟩ ( ⟨Expression#1⟩ ) ⟧)
-		→ ⟦ ⟧ ;
+	SingleExpression(⟦ ⟨Identifier#i⟩ ( ⟨Identifiers#1⟩ ) ⟧)
+		→ 
+		⟦ 
+			{⟨Instructions ArgumentIDSearching(#1)⟩}
+			{BL ⟨Identifier#i⟩}
+		⟧ ;
+
+	SingleExpression(⟦ ⟨Identifier#i⟩ ( ⟨Integers#1⟩ ) ⟧)
+		→ 
+		⟦ 
+			{⟨Instructions ArgumentIntSearching(#1)⟩}
+			{BL ⟨Identifier#i⟩}
+		⟧ ;
+
 
 	SingleExpression(⟦ ! ⟨Expression#1⟩ ⟧)
 		→ 
 		⟦ 
-			{ ⟨ Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) ⟩ }
+			{ ⟨Instructions T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧)⟩ }
 	        MOV R4, #1
 	        B l3
 			f  MOV R4, #0
@@ -550,4 +600,71 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	T(⟦ true ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B t ⟧ ;
 	T(⟦ false ⟧, ⟦ t ⟧, ⟦ f ⟧) → ⟦ B f ⟧ ;
+
+	sort Instructions
+		|	scheme ArgumentIDSearching(Identifiers) ↓e ;
+
+	ArgumentIDSearching(⟦ ⟨Identifier#1⟩ ⟧) ↓e{#1:#reg1}
+		→ 
+		⟦
+			{MOV R0, ⟨Reg#reg1⟩}
+		⟧ ;
+
+	ArgumentIDSearching(⟦ ⟨Identifier#1⟩, ⟨Identifier#2⟩ ⟧) ↓e{#1:#reg1} ↓e{#2:#reg2}
+		→ 
+		⟦
+			{MOV R0, ⟨Reg#reg1⟩}
+			{MOV R1, ⟨Reg#reg2⟩}
+		⟧ ;
+
+	ArgumentIDSearching(⟦ ⟨Identifier#1⟩, ⟨Identifier#2⟩, ⟨Identifier#3⟩ ⟧) ↓e{#1:#reg1} ↓e{#2:#reg2} ↓e{#3:#reg3}
+		→ 
+		⟦
+			{MOV R0, ⟨Reg#reg1⟩}
+			{MOV R1, ⟨Reg#reg2⟩}
+			{MOV R2, ⟨Reg#reg3⟩}
+		⟧ ;
+
+	ArgumentIDSearching(⟦ ⟨Identifier#1⟩, ⟨Identifier#2⟩, ⟨Identifier#3⟩, ⟨Identifier#4⟩ ⟧) ↓e{#1:#reg1} ↓e{#2:#reg2} ↓e{#3:#reg3} ↓e{#4:#reg4}
+		→ 
+		⟦
+			{MOV R0, ⟨Reg#reg1⟩}
+			{MOV R1, ⟨Reg#reg2⟩}
+			{MOV R2, ⟨Reg#reg3⟩}
+			{MOV R3, ⟨Reg#reg4⟩}
+		⟧ ;
+
+	sort Instructions
+		|	scheme ArgumentIntSearching(Integers) ↓e ;
+
+	ArgumentIntSearching(⟦ ⟨Integer#1⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, #⟨Integer#1⟩}
+		⟧ ;
+
+	ArgumentIntSearching(⟦ ⟨Integer#1⟩, ⟨Integer#2⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, #⟨Integer#1⟩}
+			{MOV R1, #⟨Integer#2⟩}
+		⟧ ;
+
+	ArgumentIntSearching(⟦ ⟨Integer#1⟩, ⟨Integer#2⟩, ⟨Integer#3⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, #⟨Integer#1⟩}
+			{MOV R1, #⟨Integer#2⟩}
+			{MOV R2, #⟨Integer#3⟩}
+		⟧ ;
+
+	ArgumentIntSearching(⟦ ⟨Integer#1⟩, ⟨Integer#2⟩, ⟨Integer#3⟩, ⟨Integer#4⟩ ⟧)
+		→ 
+		⟦
+			{MOV R0, #⟨Integer#1⟩}
+			{MOV R1, #⟨Integer#2⟩}
+			{MOV R2, #⟨Integer#3⟩}
+			{MOV R3, #⟨Integer#4⟩}
+		⟧ ;
+
 }

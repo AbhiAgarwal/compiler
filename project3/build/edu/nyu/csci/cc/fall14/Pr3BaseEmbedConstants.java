@@ -25,57 +25,61 @@ public interface Pr3BaseEmbedConstants {
   /** RegularExpression Id. */
   int T_meta_ArgState = 48;
   /** RegularExpression Id. */
-  int T_meta_ArgumentSignature = 56;
+  int T_meta_Boolean = 56;
   /** RegularExpression Id. */
-  int T_meta_TypeIdentifierTail = 62;
+  int T_meta_ArgumentSignature = 64;
   /** RegularExpression Id. */
-  int T_meta_Instructions = 68;
+  int T_meta_TypeIdentifierTail = 70;
   /** RegularExpression Id. */
-  int T_meta_Instruction = 76;
+  int T_meta_Instructions = 76;
   /** RegularExpression Id. */
-  int T_meta_Op = 106;
+  int T_meta_Instruction = 84;
   /** RegularExpression Id. */
-  int T_meta_Declarations = 112;
+  int T_meta_Identifiers = 90;
   /** RegularExpression Id. */
-  int T_meta_Declaration = 119;
+  int T_meta_Op = 120;
   /** RegularExpression Id. */
-  int T_meta_Symbol = 125;
+  int T_meta_Declarations = 126;
   /** RegularExpression Id. */
-  int T_meta_IDENTIFIER = 131;
+  int T_meta_Declaration = 133;
   /** RegularExpression Id. */
-  int T_meta_IfTail = 138;
+  int T_meta_Symbol = 139;
   /** RegularExpression Id. */
-  int T_meta_Expression = 155;
+  int T_meta_IDENTIFIER = 145;
   /** RegularExpression Id. */
-  int T_meta_Statements = 161;
+  int T_meta_IfTail = 152;
   /** RegularExpression Id. */
-  int T_meta_Statement = 172;
+  int T_meta_Expression = 169;
   /** RegularExpression Id. */
-  int T_meta_Identifier = 178;
+  int T_meta_Statements = 175;
   /** RegularExpression Id. */
-  int T_meta_INTEGER = 184;
+  int T_meta_Statement = 186;
   /** RegularExpression Id. */
-  int T_meta_Type = 192;
+  int T_meta_Identifier = 192;
   /** RegularExpression Id. */
-  int T_meta_Sign = 198;
+  int T_meta_INTEGER = 198;
   /** RegularExpression Id. */
-  int T_meta_Mem = 206;
+  int T_meta_Type = 206;
   /** RegularExpression Id. */
-  int T_meta_Regs = 212;
+  int T_meta_Sign = 212;
   /** RegularExpression Id. */
-  int T_meta_Reg = 234;
+  int T_meta_Mem = 220;
   /** RegularExpression Id. */
-  int T_IDENTIFIER = 237;
+  int T_meta_Regs = 226;
   /** RegularExpression Id. */
-  int T_INTEGER = 238;
+  int T_meta_Reg = 248;
   /** RegularExpression Id. */
-  int T_Letter = 239;
+  int T_IDENTIFIER = 251;
   /** RegularExpression Id. */
-  int T_LetterEtc = 240;
+  int T_INTEGER = 252;
   /** RegularExpression Id. */
-  int T_Digit = 241;
+  int T_Letter = 253;
   /** RegularExpression Id. */
-  int T_SYMBOL = 242;
+  int T_LetterEtc = 254;
+  /** RegularExpression Id. */
+  int T_Digit = 255;
+  /** RegularExpression Id. */
+  int T_SYMBOL = 256;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -108,85 +112,93 @@ public interface Pr3BaseEmbedConstants {
   /** Lexical state. */
   int IN_NESTED_META_ArgState = 14;
   /** Lexical state. */
-  int IN_META_ArgumentSignature = 15;
+  int IN_META_Boolean = 15;
   /** Lexical state. */
-  int IN_NESTED_META_ArgumentSignature = 16;
+  int IN_NESTED_META_Boolean = 16;
   /** Lexical state. */
-  int IN_META_TypeIdentifierTail = 17;
+  int IN_META_ArgumentSignature = 17;
   /** Lexical state. */
-  int IN_NESTED_META_TypeIdentifierTail = 18;
+  int IN_NESTED_META_ArgumentSignature = 18;
   /** Lexical state. */
-  int IN_META_Instructions = 19;
+  int IN_META_TypeIdentifierTail = 19;
   /** Lexical state. */
-  int IN_NESTED_META_Instructions = 20;
+  int IN_NESTED_META_TypeIdentifierTail = 20;
   /** Lexical state. */
-  int IN_META_Instruction = 21;
+  int IN_META_Instructions = 21;
   /** Lexical state. */
-  int IN_NESTED_META_Instruction = 22;
+  int IN_NESTED_META_Instructions = 22;
   /** Lexical state. */
-  int IN_META_Op = 23;
+  int IN_META_Instruction = 23;
   /** Lexical state. */
-  int IN_NESTED_META_Op = 24;
+  int IN_NESTED_META_Instruction = 24;
   /** Lexical state. */
-  int IN_META_Declarations = 25;
+  int IN_META_Identifiers = 25;
   /** Lexical state. */
-  int IN_NESTED_META_Declarations = 26;
+  int IN_NESTED_META_Identifiers = 26;
   /** Lexical state. */
-  int IN_META_Declaration = 27;
+  int IN_META_Op = 27;
   /** Lexical state. */
-  int IN_NESTED_META_Declaration = 28;
+  int IN_NESTED_META_Op = 28;
   /** Lexical state. */
-  int IN_META_Symbol = 29;
+  int IN_META_Declarations = 29;
   /** Lexical state. */
-  int IN_NESTED_META_Symbol = 30;
+  int IN_NESTED_META_Declarations = 30;
   /** Lexical state. */
-  int IN_META_IDENTIFIER = 31;
+  int IN_META_Declaration = 31;
   /** Lexical state. */
-  int IN_NESTED_META_IDENTIFIER = 32;
+  int IN_NESTED_META_Declaration = 32;
   /** Lexical state. */
-  int IN_META_IfTail = 33;
+  int IN_META_Symbol = 33;
   /** Lexical state. */
-  int IN_NESTED_META_IfTail = 34;
+  int IN_NESTED_META_Symbol = 34;
   /** Lexical state. */
-  int IN_META_Expression = 35;
+  int IN_META_IDENTIFIER = 35;
   /** Lexical state. */
-  int IN_NESTED_META_Expression = 36;
+  int IN_NESTED_META_IDENTIFIER = 36;
   /** Lexical state. */
-  int IN_META_Statements = 37;
+  int IN_META_IfTail = 37;
   /** Lexical state. */
-  int IN_NESTED_META_Statements = 38;
+  int IN_NESTED_META_IfTail = 38;
   /** Lexical state. */
-  int IN_META_Statement = 39;
+  int IN_META_Expression = 39;
   /** Lexical state. */
-  int IN_NESTED_META_Statement = 40;
+  int IN_NESTED_META_Expression = 40;
   /** Lexical state. */
-  int IN_META_Identifier = 41;
+  int IN_META_Statements = 41;
   /** Lexical state. */
-  int IN_NESTED_META_Identifier = 42;
+  int IN_NESTED_META_Statements = 42;
   /** Lexical state. */
-  int IN_META_INTEGER = 43;
+  int IN_META_Statement = 43;
   /** Lexical state. */
-  int IN_NESTED_META_INTEGER = 44;
+  int IN_NESTED_META_Statement = 44;
   /** Lexical state. */
-  int IN_META_Type = 45;
+  int IN_META_Identifier = 45;
   /** Lexical state. */
-  int IN_NESTED_META_Type = 46;
+  int IN_NESTED_META_Identifier = 46;
   /** Lexical state. */
-  int IN_META_Sign = 47;
+  int IN_META_INTEGER = 47;
   /** Lexical state. */
-  int IN_NESTED_META_Sign = 48;
+  int IN_NESTED_META_INTEGER = 48;
   /** Lexical state. */
-  int IN_META_Mem = 49;
+  int IN_META_Type = 49;
   /** Lexical state. */
-  int IN_NESTED_META_Mem = 50;
+  int IN_NESTED_META_Type = 50;
   /** Lexical state. */
-  int IN_META_Regs = 51;
+  int IN_META_Sign = 51;
   /** Lexical state. */
-  int IN_NESTED_META_Regs = 52;
+  int IN_NESTED_META_Sign = 52;
   /** Lexical state. */
-  int IN_META_Reg = 53;
+  int IN_META_Mem = 53;
   /** Lexical state. */
-  int IN_NESTED_META_Reg = 54;
+  int IN_NESTED_META_Mem = 54;
+  /** Lexical state. */
+  int IN_META_Regs = 55;
+  /** Lexical state. */
+  int IN_NESTED_META_Regs = 56;
+  /** Lexical state. */
+  int IN_META_Reg = 57;
+  /** Lexical state. */
+  int IN_NESTED_META_Reg = 58;
 
   /** Literal token values. */
   String[] tokenImage = {
@@ -240,34 +252,48 @@ public interface Pr3BaseEmbedConstants {
     "\"\\u27e9\"",
     "\"\\u27e9\"",
     "<token of kind 49>",
-    "\"(\"",
-    "\")\"",
+    "\"falseBool\"",
+    "\"trueBool\"",
     "<token of kind 52>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
     "<token of kind 57>",
-    "<token of kind 58>",
+    "\"(\"",
+    "\")\"",
+    "<token of kind 60>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 63>",
-    "<token of kind 64>",
+    "<token of kind 65>",
+    "<token of kind 66>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 69>",
-    "\"DCI\"",
-    "\"=\"",
+    "<token of kind 71>",
     "<token of kind 72>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
     "<token of kind 77>",
+    "\"DCI\"",
+    "\"=\"",
+    "<token of kind 80>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 85>",
+    "<token of kind 86>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 91>",
     "\"ADD\"",
     "\"AND\"",
     "\"B\"",
@@ -292,44 +318,44 @@ public interface Pr3BaseEmbedConstants {
     "\"STR\"",
     "\"STRB\"",
     "\"SUB\"",
-    "<token of kind 102>",
+    "<token of kind 116>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 107>",
-    "<token of kind 108>",
-    "\"\\u27e8\"",
-    "\"\\u27e8\"",
-    "\"\\u27e9\"",
-    "\"\\u27e9\"",
-    "<token of kind 113>",
-    "\"function\"",
-    "<token of kind 115>",
-    "\"\\u27e8\"",
-    "\"\\u27e8\"",
-    "\"\\u27e9\"",
-    "\"\\u27e9\"",
-    "<token of kind 120>",
     "<token of kind 121>",
+    "<token of kind 122>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 126>",
     "<token of kind 127>",
+    "\"function\"",
+    "<token of kind 129>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 132>",
-    "\"else\"",
     "<token of kind 134>",
+    "<token of kind 135>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 139>",
+    "<token of kind 140>",
+    "<token of kind 141>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 146>",
+    "\"else\"",
+    "<token of kind 148>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 153>",
     "\"||\"",
     "\"&&\"",
     "\"!=\"",
@@ -341,43 +367,29 @@ public interface Pr3BaseEmbedConstants {
     "\"+\"",
     "\"-\"",
     "\"*\"",
-    "<token of kind 151>",
+    "<token of kind 165>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 156>",
-    "<token of kind 157>",
+    "<token of kind 170>",
+    "<token of kind 171>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 162>",
+    "<token of kind 176>",
     "\";\"",
     "\"if\"",
     "\"return\"",
     "\"var\"",
     "\"while\"",
-    "<token of kind 168>",
+    "<token of kind 182>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 173>",
-    "<token of kind 174>",
-    "\"\\u27e8\"",
-    "\"\\u27e8\"",
-    "\"\\u27e9\"",
-    "\"\\u27e9\"",
-    "<token of kind 179>",
-    "<token of kind 180>",
-    "\"\\u27e8\"",
-    "\"\\u27e8\"",
-    "\"\\u27e9\"",
-    "\"\\u27e9\"",
-    "<token of kind 185>",
-    "\"boolean\"",
-    "\"int\"",
+    "<token of kind 187>",
     "<token of kind 188>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
@@ -390,8 +402,8 @@ public interface Pr3BaseEmbedConstants {
     "\"\\u27e9\"",
     "\"\\u27e9\"",
     "<token of kind 199>",
-    "\"[\"",
-    "\"]\"",
+    "\"boolean\"",
+    "\"int\"",
     "<token of kind 202>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
@@ -404,6 +416,20 @@ public interface Pr3BaseEmbedConstants {
     "\"\\u27e9\"",
     "\"\\u27e9\"",
     "<token of kind 213>",
+    "\"[\"",
+    "\"]\"",
+    "<token of kind 216>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 221>",
+    "<token of kind 222>",
+    "\"\\u27e8\"",
+    "\"\\u27e8\"",
+    "\"\\u27e9\"",
+    "\"\\u27e9\"",
+    "<token of kind 227>",
     "\"LR\"",
     "\"PC\"",
     "\"R0\"",
@@ -420,13 +446,13 @@ public interface Pr3BaseEmbedConstants {
     "\"R8\"",
     "\"R9\"",
     "\"SP\"",
-    "<token of kind 230>",
+    "<token of kind 244>",
     "\"\\u27e8\"",
     "\"\\u27e8\"",
     "\"\\u27e9\"",
     "\"\\u27e9\"",
-    "<token of kind 235>",
-    "<token of kind 236>",
+    "<token of kind 249>",
+    "<token of kind 250>",
     "<T_IDENTIFIER>",
     "<T_INTEGER>",
     "<T_Letter>",
