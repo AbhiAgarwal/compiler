@@ -234,6 +234,23 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 
 	attribute ↓e { Identifier : Reg } ;
 	attribute ↓r { Reg : Boolean } ;
+	attribute ↓nr {Sign : Reg} ;
+
+	sort Reg
+		| scheme NextRegister(Reg) ;
+
+	NextRegister(⟦R0⟧) → ⟦R1⟧;
+	NextRegister(⟦R1⟧) → ⟦R2⟧;
+	NextRegister(⟦R2⟧) → ⟦R3⟧;
+	NextRegister(⟦R3⟧) → ⟦R4⟧;
+	NextRegister(⟦R4⟧) → ⟦R5⟧;
+	NextRegister(⟦R5⟧) → ⟦R6⟧;
+	NextRegister(⟦R6⟧) → ⟦R7⟧;
+	NextRegister(⟦R7⟧) → ⟦R8⟧;
+	NextRegister(⟦R8⟧) → ⟦R9⟧;
+	NextRegister(⟦R9⟧) → ⟦R10⟧;
+	NextRegister(⟦R10⟧) → ⟦R11⟧;
+	NextRegister(⟦R11⟧) → ⟦R12⟧;
 
 	sort Instructions
 		|	scheme Compile(Program) ;
@@ -246,7 +263,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		⟧ ;
 
 	sort Instructions
-		|	scheme CompileDeclarations(Declarations) ↓e ↓regAval ;
+		|	scheme CompileDeclarations(Declarations) ↓e ↓nr;
 
 	CompileDeclarations( ⟦ ⟨Declaration#1⟩ ⟨Declarations#2⟩ ⟧ )
 		→	
@@ -259,7 +276,7 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 		→	⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme CompileDeclaration(Declaration) ↓e ↓r ;
+		|	scheme CompileDeclaration(Declaration) ↓e ↓r ↓nr;
 
 	CompileDeclaration( ⟦ function ⟨Type#1⟩ name2 ⟨ArgState#3⟩ ⟧ ) 
 		→	
@@ -272,24 +289,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{
 				LDMFD SP! , {R4, R5, R6, R7, R8, R9, R10, R11, PC}
 			}
-		⟧
-			↓r{⟦R0⟧: ⟦falseBool⟧} 
-			↓r{⟦R1⟧: ⟦falseBool⟧} 
-			↓r{⟦R2⟧: ⟦falseBool⟧}
-			↓r{⟦R3⟧: ⟦falseBool⟧}
-			↓r{⟦R4⟧: ⟦falseBool⟧}
-			↓r{⟦R5⟧: ⟦falseBool⟧}
-			↓r{⟦R6⟧: ⟦falseBool⟧}
-			↓r{⟦R7⟧: ⟦falseBool⟧}
-			↓r{⟦R8⟧: ⟦falseBool⟧}
-			↓r{⟦R9⟧: ⟦falseBool⟧}
-			↓r{⟦R10⟧: ⟦falseBool⟧}
-			↓r{⟦R11⟧: ⟦falseBool⟧}
-			↓r{⟦R12⟧: ⟦falseBool⟧} ;
+		⟧ ;
 
 	// HANDLING ARGUMENTS
 	sort Instructions
-		|	scheme Argument(ArgState) ↓e ↓r ;
+		|	scheme Argument(ArgState) ↓e ↓r ↓nr ;
 
 	// No Arguments Handling
 	Argument( ⟦ ( ) { ⟨Statements#1⟩ } ⟧ )
@@ -305,7 +309,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{⟨Instructions SingleStatement(#2)⟩}
 		⟧ 
 			↓e{name1: ⟦R0⟧} 
-			↓r{⟦R0⟧: ⟦trueBool⟧} ;
+			↓r{⟦R0⟧: ⟦trueBool⟧} 
+			↓nr{⟦+⟧: ⟦R1⟧} ;
 
 	// 2
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2 ) { ⟨Statements#3⟩ } ⟧ )
@@ -316,7 +321,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓e{name1: ⟦R0⟧} 
 			↓r{⟦R0⟧: ⟦trueBool⟧}
 			↓e{name2: ⟦R1⟧} 
-			↓r{⟦R1⟧: ⟦trueBool⟧} ;
+			↓r{⟦R1⟧: ⟦trueBool⟧} 
+			↓nr{⟦+⟧: ⟦R2⟧} ;
 
 	// 3
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3 ) { ⟨Statements#4⟩ } ⟧ )
@@ -329,7 +335,8 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓e{name2: ⟦R1⟧} 
 			↓r{⟦R1⟧: ⟦trueBool⟧}
 			↓e{name3: ⟦R2⟧} 
-			↓r{⟦R2⟧: ⟦trueBool⟧} ;
+			↓r{⟦R2⟧: ⟦trueBool⟧} 
+			↓nr{⟦+⟧:⟦R3⟧} ;
 
 	// 4
 	Argument( ⟦ ( ⟨Type#1⟩ name1, ⟨Type#2⟩ name2, ⟨Type#3⟩ name3, ⟨Type#4⟩ name4 ) { ⟨Statements#5⟩ } ⟧ )
@@ -344,10 +351,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			↓e{name3: ⟦R2⟧} 
 			↓r{⟦R2⟧: ⟦trueBool⟧}
 			↓e{name4: ⟦R3⟧}
-			↓r{⟦R3⟧: ⟦trueBool⟧} ;
+			↓r{⟦R3⟧: ⟦trueBool⟧} 
+			↓nr{⟦+⟧:⟦R4⟧} ;
 
 	sort Instructions
-		|	scheme SingleStatement(Statements) ↓e ↓r ;
+		|	scheme SingleStatement(Statements) ↓e ↓r ↓nr ;
 
 	SingleStatement(⟦ { ⟨Statements#1⟩ } ⟨Statements#2⟩ ⟧)
 		→ 
@@ -363,11 +371,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 			{⟨Instructions SingleStatement(#2)⟩}
 		⟧ ;
 
-	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟨Statements#3⟩ ⟧)
+	SingleStatement(⟦ var ⟨Type#1⟩ name2 ; ⟨Statements#3⟩ ⟧) ↓nr{⟦+⟧:#re}
 		→ 
 		⟦ 
 			⟨Instructions SingleStatement(#3)⟩
-		⟧ ↓e{name2: ⟦R1⟧} ;
+		⟧ ↓e{name2: 	#re} ↓nr{⟦+⟧:NextRegister(#re)} ↓r{#re: ⟦trueBool⟧} ;
 
 	SingleStatement(⟦ if ( ⟨Expression#1⟩ ) { ⟨Statements#2⟩ } else { ⟨Statements#3⟩ } ⟨Statements#4⟩ ⟧)
 		→ 
@@ -414,11 +422,11 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	SingleStatement(⟦ ; ⟧) 
 		→	⟦ ⟧ ;
 
-	SingleStatement(⟦ ⟧) 
+	SingleStatement(⟦ ⟧)
 		→	⟦ ⟧ ;
 
 	sort Instructions
-		|	scheme SingleExpression(Expression) ↓e ↓r ;
+		|	scheme SingleExpression(Expression) ↓e ↓r ↓nr ;
 
 	SingleExpression(⟦ ⟨Integer#i⟩ ⟧) 
 		→ 
