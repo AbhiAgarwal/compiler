@@ -235,6 +235,19 @@ module edu.nyu.csci.cc.fall14.Pr3Base {
 	attribute ↓e { Identifier : Reg } ;
 	attribute ↓r { Reg : Boolean } ;
 
+	// Helper Subst structure: lists of variable and NAT pairs.
+	sort Subste
+		|	MoreSubste(Identifier, Reg, Subste)
+		|	NoSubste ;
+
+	// Append operation for Subste structures.
+	| scheme SubsteAppend(Subste, Subste) ;
+	SubsteAppend(MoreSubste(#identifier, #reg, #subste1), #subste2) → MoreSubste(#identifier, #reg, SubsteAppend(#subste1, #subste2)) ;
+	SubsteAppend(NoSubste, #subste2) → #subste2 ;
+
+	// Attributes.
+	attribute ↑subste(Subste) ;        // collected Subste structure
+
 	sort Instructions
 		|	scheme Compile(Program) ;
 
